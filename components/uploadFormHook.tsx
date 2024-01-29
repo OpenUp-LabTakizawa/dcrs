@@ -2,6 +2,7 @@
 
 import type { FC } from 'react'
 import { type SubmitHandler, useForm } from 'react-hook-form'
+export let InputName: string
 
 // フォームの各要素と型
 type FormData = {
@@ -18,6 +19,7 @@ type FormData = {
 // 確定ボタンを押したときの処理
 const onSubmit: SubmitHandler<FormData> = (data) => {
   alert(JSON.stringify(data, null, 2))
+  InputName = data.name
 }
 
 export const UploadFormHook: FC = () => {
