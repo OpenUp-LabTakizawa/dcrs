@@ -83,7 +83,11 @@ export const UploadFormHook: FC = () => {
           <div className="mb-5">
             <p>個人情報提供に同意いただけますか?</p>
             <p>
-              <input type="radio" {...register('agreement')} required={true} />
+              <input
+                type="checkbox"
+                {...register('agreement')}
+                required={true}
+              />
               <label />
               同意する
             </p>
