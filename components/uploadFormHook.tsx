@@ -104,13 +104,46 @@ export const UploadFormHook: FC = () => {
           />
           <label />
         </div>
-        <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
-          type="submit"
-        >
-          確認画面へ
-        </button>
+        <div>
+          <button
+            onClick={handleConfirm}
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full mb-2"
+            type="submit"
+          >
+            確認画面へ
+          </button>
+        </div>
+        <div>
+          <button
+            onClick={handleMoveHome}
+            className="bg-yellow-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded-full mb-2"
+            type="submit"
+          >
+            ホーム画面へ
+          </button>
+        </div>
+        <div>
+          <button
+            onClick={handleBack}
+            className="bg-yellow-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded-full mb-2"
+            type="submit"
+          >
+            前の画面へ
+          </button>
+        </div>
       </form>
     </>
   )
+}
+
+function handleConfirm() {
+  window.location.href = '/upload/confirm'
+}
+
+function handleMoveHome() {
+  window.location.href = '/'
+}
+
+function handleBack() {
+  window.location.href = '../'
 }
