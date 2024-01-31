@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 export default function Home() {
   return (
     <main className="min-h-screen flex flex-col items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
@@ -11,20 +13,20 @@ export default function Home() {
           </p>
         </div>
         <div className="mt-8 space-y-6">
-          <a
+          <Link
             href="/upload"
             className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
             [派遣従業員向け]障がい者手帳画像をアップロードします。
-          </a>
+          </Link>
         </div>
         <div className="mt-8 space-y-6">
-          <a
+          <Link
             href="/download"
             className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
             [労務担当者向け]障がい者手帳画像をダウンロードします。
-          </a>
+          </Link>
         </div>
       </div>
     </main>
