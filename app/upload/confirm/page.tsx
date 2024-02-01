@@ -1,17 +1,27 @@
-import { InputName } from '@/components/uploadFormHook'
+'use client'
 
 export default function Upload() {
+  const localFormData = JSON.parse(localStorage.getItem('FormData') || '{}')
+
   return (
     <main className="min-h-screen flex flex-col items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <h2 className={'mb-3 text-2xl font-semibold'}>
         <div>↓入力事項を確認して下さい</div>
       </h2>
       <div className="mb-5">
-        <p>1.お名前：{InputName}</p>
-        <p>2.社員番号：□□□□□□</p>
-        <p>3.連絡可能な個人電話番号：□□□□□□</p>
-        <p>4.メールアドレス：□□□□□□</p>
-        <p>5.個人情報提供への同意：同意する</p>
+        <p>1.お名前：{localFormData.name}</p>
+        <p>2.所属会社{localFormData.company}</p>
+        <p>3.社員番号：{localFormData.employeeId}</p>
+        <p>4.連絡可能な個人電話番号：{localFormData.phone}</p>
+        <p>5.メールアドレス：{localFormData.mail}</p>
+        <p>
+          6.個人情報提供への同意：
+          {String(localFormData.agreement) === 'true'
+            ? '同意する'
+            : '同意しない'}{' '}
+          {/* state 変数の値に応じてテキストを表示する */}
+        </p>
+        <p>7.写真：</p>
       </div>
       <div className="mt-8 space-y-6">
         <a

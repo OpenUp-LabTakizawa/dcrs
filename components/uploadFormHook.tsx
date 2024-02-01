@@ -1,8 +1,10 @@
 'use client'
 
 import type { FC } from 'react'
+// import { ImageInput } from './imageInput'
+// import { ImagePreview } from './imagePreview'
+import { useState } from 'react'
 import { type SubmitHandler, useForm } from 'react-hook-form'
-export let InputName: string
 
 // フォームの各要素と型
 type FormData = {
@@ -12,18 +14,41 @@ type FormData = {
   phone: string
   mail: string
   agreement: boolean
-  photo: File
-  // photo: "file"
+  image: FileList
 }
 
 // 確定ボタンを押したときの処理
 const onSubmit: SubmitHandler<FormData> = (data) => {
   alert(JSON.stringify(data, null, 2))
-  InputName = data.name
+  // デモ版仮でlocalStorageに保存
+  // ホントはAPI送信してDBに投げたい。
+  if (typeof localStorage !== 'undefined') {
+    localStorage.setItem('FormData', JSON.stringify(data))
+    console.log('localStorageに保存しました')
+    console.log(data.image)
+  } else {
+    console.log('localStorageがありません')
+  }
+
+  if (!data.image) {
+    // console.log('画像が選択されていません')
+    return
+  }
 }
 
 export const UploadFormHook: FC = () => {
   const { handleSubmit, register } = useForm<FormData>()
+
+  // ファイルの情報を保存する state 変数
+  const [file, setFile] = useState<File>()
+
+  // ファイルが選択されたときに呼び出される関数
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      // 選択されたファイルを state 変数にセットする
+      setFile(e.target.files[0])
+    }
+  }
 
   return (
     <>
@@ -88,7 +113,7 @@ export const UploadFormHook: FC = () => {
               <input
                 type="checkbox"
                 {...register('agreement')}
-                required={true}
+                // required={true}
               />
               <label />
               同意する
@@ -105,8 +130,14 @@ export const UploadFormHook: FC = () => {
             type="file"
             accept="image/*"
             capture="environment"
-            {...register('photo')}
+            {...register('image')}
+            onChange={handleFileChange}
             required={true}
+          />
+          <p>ファイル名: {file && file.name}</p>
+          <img
+            src={file && URL.createObjectURL(file)}
+            alt="アップロードした画像"
           />
           <label />
         </div>
