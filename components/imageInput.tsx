@@ -12,7 +12,7 @@ type Props = ComponentPropsWithRef<'input'> & {
   >
 
 export const ImageInput: FC<Props> = forwardRef(
-  ({ onChange, id, fileInputRef }) => {
+  ({ onChange, id }, fileInputRef) => {
     return (
       <input
         ref={fileInputRef}
