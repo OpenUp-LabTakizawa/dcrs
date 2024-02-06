@@ -1,11 +1,10 @@
 // https://sailboatui.com/docs/components/table/
-'use client'
 
 import { useFormData } from '@/components/useFormData'
 
 // デバッグ用
 // localstrageをクリア
-const clearLocalstrange = () => {
+const clearLocalstrage = () => {
   localStorage.clear()
   console.log('localStorageをクリアしました')
 }
@@ -94,10 +93,10 @@ export default function Download() {
               <td className="flex justify-end gap-4 px-6 py-4 font-medium">
                 <button
                   type="button"
-                  onClick={() => clearLocalstrange()}
+                  onClick={() => clearLocalstrage()}
                   className="text-primary-700"
                 >
-                  clearLocalstrange
+                  clearLocalstrage
                 </button>
               </td>
             </tr>
