@@ -1,10 +1,18 @@
 'use client'
 
+import { useFormData } from '@/components/useFormData'
 import type { FC } from 'react'
 
 export const JsonView: FC = () => {
-  const localFormData = JSON.parse(localStorage.getItem('FormData') || '{}')
+  const { formdata, loading } = useFormData()
 
+  if (loading) {
+    return <p>Loading...</p>
+  }
+  const localFormData = formdata
+  if (localFormData === undefined) {
+    return <p>No Json Data</p>
+  }
   return (
     <div>
       <p>Json Data</p>
@@ -13,7 +21,7 @@ export const JsonView: FC = () => {
         <li>company: {localFormData.company}</li>
         <li>employeeId: {localFormData.employeeId}</li>
         <li>phone: {localFormData.phone}</li>
-        <li>image: {localFormData.image}</li>
+        {/* <li>image: {localFormData.image}</li> */}
       </ul>
     </div>
   )

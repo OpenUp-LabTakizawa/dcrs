@@ -24,10 +24,6 @@ const onSubmit: SubmitHandler<FormData> = (data) => {
   // ホントはAPI送信してDBに投げたい。
   if (typeof localStorage !== 'undefined') {
     localStorage.setItem('FormData', JSON.stringify(data))
-    console.log('localStorageに保存しました')
-    console.log(data.image)
-  } else {
-    console.log('localStorageがありません')
   }
 
   if (!data.image) {
