@@ -1,8 +1,33 @@
 // https://sailboatui.com/docs/components/table/
 'use client'
 
+import { useFormData } from '@/components/useFormData'
+
+// デバッグ用
+// localstrageをクリア
+const clearLocalstrange = () => {
+  localStorage.clear()
+  console.log('localStorageをクリアしました')
+}
+
 export default function Download() {
-  const localFormData = JSON.parse(localStorage.getItem('FormData') || '{}')
+  // const localFormData = JSON.parse(localStorage.getItem('FormData') || '{}')
+  const { formdata, loading } = useFormData()
+  if (loading) {
+    return (
+      <main className="flex min-h-screen flex-col items-center justify-between p-24">
+        <h1>読み込み中・・・</h1>
+      </main>
+    )
+  }
+  if (formdata === undefined) {
+    return (
+      <main className="flex min-h-screen flex-col items-center justify-between p-24">
+        <h1>FormDataはありません</h1>
+      </main>
+    )
+  }
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="hoge">
@@ -22,17 +47,40 @@ export default function Download() {
                 download
               </th>
               <th scope="col" className="px-6 py-4 font-medium text-gray-900">
-                {}
+                なんか入れられる
               </th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100 border-t border-gray-100">
             <tr className="hover:bg-gray-50">
-              <th className="px-6 py-4 font-medium text-gray-900">
-                {localFormData.agreement}
-              </th>
-              <td className="px-6 py-4">{localFormData.company}</td>
-              <td className="px-6 py-4">{localFormData.employeeId}</td>
+              {/* localFormDataなし */}
+              {formdata === undefined ? (
+                <th className="px-6 py-4 font-medium text-gray-900">
+                  localFormDataなし
+                </th>
+              ) : (
+                // localFormDataあり
+                <th className="px-6 py-4 font-medium text-gray-900">
+                  {formdata.name}
+                </th>
+              )}
+
+              {/* localFormDataなし */}
+              {formdata === undefined ? (
+                <td className="px-6 py-4 font-medium text-gray-900">
+                  localFormDataなし
+                </td>
+              ) : (
+                // localFormDataあり
+                <td className="px-6 py-4">{formdata.company}</td>
+              )}
+              {/* localFormDataなし */}
+              {formdata === undefined ? (
+                <td className="px-6 py-4">localFormDataなし</td>
+              ) : (
+                // localFormDataあり
+                <td className="px-6 py-4">{formdata.employeeId}</td>
+              )}
               <td className="px-6 py-4">
                 <div className="flex h-5 items-center">
                   <input
@@ -43,31 +91,14 @@ export default function Download() {
                   />
                 </div>
               </td>
-
-              {/* <td className="px-6 py-4">
-                <span className="inline-flex items-center gap-1 rounded-full bg-green-50 px-2 py-1 text-xs font-semibold text-green-600">
-                  <svg
-                    role="img"
-                    aria-label="title"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    className="h-3 w-3"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-                  Paid
-                </span>
-              </td> */}
               <td className="flex justify-end gap-4 px-6 py-4 font-medium">
-                <a href="hoge">Delete</a>
-                <a href="hoge" className="text-primary-700">
-                  Edit
-                </a>
+                <button
+                  type="button"
+                  onClick={() => clearLocalstrange()}
+                  className="text-primary-700"
+                >
+                  clearLocalstrange
+                </button>
               </td>
             </tr>
             <tr className="hover:bg-gray-50">
@@ -76,25 +107,6 @@ export default function Download() {
               </th>
               <td className="px-6 py-4">Nov.4 2022</td>
               <td className="px-6 py-4">helen@sailboatui.com</td>
-              <td className="px-6 py-4">
-                <span className="inline-flex items-center gap-1 rounded-full bg-green-50 px-2 py-1 text-xs font-semibold text-green-600">
-                  <svg
-                    role="img"
-                    aria-label="title"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    className="h-3 w-3"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-                  Paid
-                </span>
-              </td>
               <td className="flex justify-end gap-4 px-6 py-4 font-medium">
                 <a href="hoge">Delete</a>
                 <a href="hoge" className="text-primary-700">
