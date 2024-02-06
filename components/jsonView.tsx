@@ -1,6 +1,6 @@
 'use client'
 
-import { useFormData } from '@/components/readFormData'
+import { useFormData } from '@/components/useFormData'
 import type { FC } from 'react'
 
 export const JsonView: FC = () => {
