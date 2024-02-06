@@ -9,7 +9,7 @@ const clearLocalstrage = () => {
   console.log('localStorageをクリアしました')
 }
 
-export default function Download() {
+export function Download() {
   // const localFormData = JSON.parse(localStorage.getItem('FormData') || '{}')
   const { formdata, loading } = useFormData()
   if (loading) {
