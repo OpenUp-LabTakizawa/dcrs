@@ -20,13 +20,13 @@ export default function Download() {
       </main>
     )
   }
-  // if (formdata === undefined ) {
-  //   return (
-  //     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-  //       <h1>FormDataはありません</h1>
-  //     </main>
-  //   )
-  // }
+  if (formdata === undefined) {
+    return (
+      <main className="flex min-h-screen flex-col items-center justify-between p-24">
+        <h1>FormDataはありません</h1>
+      </main>
+    )
+  }
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
