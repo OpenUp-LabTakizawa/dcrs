@@ -13,17 +13,16 @@
     "next": "canary",
     "react": "canary",
     "react-dom": "canary",
-    "react-hook-form": "^7.50.0"
+    "react-hook-form": "^7.50.1"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.5.3",
     "@happy-dom/global-registrator": "^13.3.8",
     "@testing-library/react": "^14.2.1",
-    "@types/bun": "^1.0.4",
+    "@types/bun": "^1.0.5",
     "@types/node": "^20.11.16",
-    "@types/react": "^18.2.54",
+    "@types/react": "^18.2.55",
     "@types/react-dom": "^18.2.18",
-    "autoprefixer": "^10.4.17",
     "postcss": "^8.4.34",
     "tailwindcss": "^3.4.1",
     "typescript": "beta"
