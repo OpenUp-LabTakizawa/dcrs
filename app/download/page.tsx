@@ -53,7 +53,7 @@ export default function Download() {
           </thead>
           <tbody className="divide-y divide-gray-100 border-t border-gray-100">
             <tr className="hover:bg-gray-50">
-              localFormDataなし
+              {/* localFormDataなし */}
               {formdata === undefined ? (
                 <th className="px-6 py-4 font-medium text-gray-900">
                   localFormDataなし
