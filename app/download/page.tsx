@@ -1,4 +1,5 @@
 // https://sailboatui.com/docs/components/table/
+'use client'
 
 import { useFormData } from '@/components/useFormData'
 
@@ -9,7 +10,7 @@ const clearLocalstrage = () => {
   console.log('localStorageをクリアしました')
 }
 
-export function Download() {
+export default function Download() {
   // const localFormData = JSON.parse(localStorage.getItem('FormData') || '{}')
   const { formdata, loading } = useFormData()
   if (loading) {
@@ -19,13 +20,13 @@ export function Download() {
       </main>
     )
   }
-  if (formdata === undefined) {
-    return (
-      <main className="flex min-h-screen flex-col items-center justify-between p-24">
-        <h1>FormDataはありません</h1>
-      </main>
-    )
-  }
+  // if (formdata === undefined ) {
+  //   return (
+  //     <main className="flex min-h-screen flex-col items-center justify-between p-24">
+  //       <h1>FormDataはありません</h1>
+  //     </main>
+  //   )
+  // }
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
