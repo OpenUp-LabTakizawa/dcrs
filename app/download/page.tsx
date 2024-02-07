@@ -20,13 +20,13 @@ export default function Download() {
       </main>
     )
   }
-  if (formdata === undefined) {
-    return (
-      <main className="flex min-h-screen flex-col items-center justify-between p-24">
-        <h1>FormDataはありません</h1>
-      </main>
-    )
-  }
+  // if (formdata === undefined) {
+  //   return (
+  //     <main className="flex min-h-screen flex-col items-center justify-between p-24">
+  //       <h1>FormDataはありません</h1>
+  //     </main>
+  //   )
+  // }
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
@@ -53,7 +53,7 @@ export default function Download() {
           </thead>
           <tbody className="divide-y divide-gray-100 border-t border-gray-100">
             <tr className="hover:bg-gray-50">
-              {/* localFormDataなし */}
+              localFormDataなし
               {formdata === undefined ? (
                 <th className="px-6 py-4 font-medium text-gray-900">
                   localFormDataなし
@@ -64,7 +64,6 @@ export default function Download() {
                   {formdata.name}
                 </th>
               )}
-
               {/* localFormDataなし */}
               {formdata === undefined ? (
                 <td className="px-6 py-4 font-medium text-gray-900">
@@ -92,11 +91,7 @@ export default function Download() {
                 </div>
               </td>
               <td className="flex justify-end gap-4 px-6 py-4 font-medium">
-                <button
-                  type="button"
-                  // onClick={() => clearLocalstrage()}
-                  className="text-primary-700"
-                >
+                <button type="button" className="text-primary-700">
                   clearLocalstrage
                 </button>
               </td>
