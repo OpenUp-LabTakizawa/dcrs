@@ -3,6 +3,7 @@
 import type { FC } from 'react'
 // import { ImageInput } from './imageInput'
 // import { ImagePreview } from './imagePreview'
+import type React from 'react' // React をインポートする
 import { useState } from 'react'
 import { type SubmitHandler, useForm } from 'react-hook-form'
 
@@ -15,6 +16,7 @@ type FormData = {
   mail: string
   agreement: boolean
   image: FileList
+  imageName: string
 }
 
 // 確定ボタンを押したときの処理
@@ -43,7 +45,8 @@ export const UploadFormHook: FC = () => {
   const [file, setFile] = useState<File>()
 
   // ファイルが選択されたときに呼び出される関数
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //
     if (e.target.files) {
       // 選択されたファイルを state 変数にセットする
       setFile(e.target.files[0])

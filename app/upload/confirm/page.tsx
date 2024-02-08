@@ -10,15 +10,15 @@ export default function Upload() {
       </h2>
       <div className="mb-5">
         <p>1.お名前：{localFormData.name}</p>
-        <p>2.所属会社{localFormData.company}</p>
+        <p>2.所属会社：{localFormData.company}</p>
         <p>3.社員番号：{localFormData.employeeId}</p>
         <p>4.連絡可能な個人電話番号：{localFormData.phone}</p>
         <p>5.メールアドレス：{localFormData.mail}</p>
         <p>
           6.個人情報提供への同意：
           {String(localFormData.agreement) === 'true'
-            ? '同意する'
-            : '同意しない'}{' '}
+            ? '既に同意済み'
+            : '未だ同意していない'}{' '}
           {/* state 変数の値に応じてテキストを表示する */}
         </p>
         <p>7.写真：</p>
