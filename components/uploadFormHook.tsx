@@ -6,7 +6,7 @@ import { type SubmitHandler, useForm } from 'react-hook-form'
 import { ImageInput } from './imageInput'
 
 // フォームの各要素と型
-type FormData = {
+export type FormData = {
   name: string
   company: string
   employeeId: number
