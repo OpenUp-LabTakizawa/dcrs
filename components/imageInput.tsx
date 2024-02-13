@@ -1,27 +1,25 @@
 import type React from 'react'
-import { type ComponentPropsWithRef, forwardRef } from 'react'
-import type { FC, InputHTMLAttributes } from 'react'
+import type { ComponentPropsWithRef, FC, InputHTMLAttributes } from 'react'
 
 type Props = ComponentPropsWithRef<'input'> & {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
   id: InputHTMLAttributes<HTMLInputElement>['id']
-  fileInputRef: React.MutableRefObject<HTMLInputElement | null>
 } & React.DetailedHTMLProps<
     React.InputHTMLAttributes<HTMLInputElement>,
     HTMLInputElement
   >
 
-export const ImageInput: FC<Props> = forwardRef(
-  ({ onChange, id }, fileInputRef) => {
-    return (
-      <input
-        ref={fileInputRef}
-        id={id}
-        type="file"
-        accept="image/*"
-        onChange={onChange}
-        hidden={true}
-      />
-    )
-  },
-)
+// requiredを出したいのでhidden={false}にして、classNameで見えなくする。
+export const ImageInput: FC<Props> = ({ onChange, id }) => {
+  return (
+    <input
+      className="w-1, h-1 opacity-0"
+      id={id}
+      type="file"
+      accept="image/*"
+      onChange={onChange}
+      hidden={false}
+      required={true}
+    />
+  )
+}
