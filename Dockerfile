@@ -1,6 +1,6 @@
-FROM node:21.6.2 as base
+FROM oven/bun as base
 WORKDIR /app
-RUN npm install -g bun
+#RUN npm install -g bun
 
 FROM base AS deps
 COPY package.json bun.lockb ./
