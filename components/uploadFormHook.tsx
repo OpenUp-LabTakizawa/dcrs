@@ -6,6 +6,8 @@ import type { FC } from 'react'
 import type React from 'react' // React をインポートする
 import { useState } from 'react'
 import { type SubmitHandler, useForm } from 'react-hook-form'
+import { ImageInput } from './imageInput'
+import { ImagePreview } from './imagePreview'
 
 // フォームの各要素と型
 type FormData = {
@@ -16,20 +18,16 @@ type FormData = {
   mail: string
   agreement: boolean
   image: FileList
-  imageName: string
 }
 
-// 確定ボタンを押したときの処理
+// 「確認画面へ」ボタンを押したときの処理
+
 const onSubmit: SubmitHandler<FormData> = (data) => {
   alert(JSON.stringify(data, null, 2))
   // デモ版仮でlocalStorageに保存
   // ホントはAPI送信してDBに投げたい。
   if (typeof localStorage !== 'undefined') {
     localStorage.setItem('FormData', JSON.stringify(data))
-    console.log('localStorageに保存しました')
-    console.log(data.image)
-  } else {
-    console.log('localStorageがありません')
   }
 
   if (!data.image) {
@@ -55,120 +53,93 @@ export const UploadFormHook: FC = () => {
 
   return (
     <>
-      <p className="mb-3 text-2xl font-semibold">アップロードフォーム</p>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <div className="mb-5">
-            <p>お名前</p>
+        <div className="grid grid-cols-1 gap-6 [&>labe:input]:w-80">
+          <label className="group block">
+            <span className="after:content-['*'] after:ml-0.5 after:text-red-500">
+              お名前
+            </span>
             <input
+              className="block w-80"
               {...register('name')}
               placeholder="オープン太郎"
               required={true}
             />
-            <label />
-          </div>
-
-          <div className="mb-5">
-            <p>所属会社</p>
-            {/* フォームのサイズを調整すべき */}
-            {/* <input {...register('company')} placeholder="株式会社オープンアップグループ" required /> */}
-            <input
+          </label>
+          <label className="block">
+            <span className="after:content-['*'] after:ml-0.5 after:text-red-500">
+              所属会社
+            </span>
+            <select
+              className="block w-80"
+              defaultValue={''}
               {...register('company')}
-              placeholder="オープンアップグループ"
               required={true}
-            />
-            <label />
-          </div>
-
-          <div className="mb-5">
-            <p>社員番号</p>
+            >
+              <option value="" disabled>
+                以下から選択して下さい。
+              </option>
+              <option value="株式会社オープンアップグループ">
+                株式会社オープンアップグループ
+              </option>
+              <option value="株式会社ビーネックステクノロジーズ">
+                株式会社ビーネックステクノロジーズ
+              </option>
+            </select>
+          </label>
+          <label className="block">
+            <span className="after:content-['*'] after:ml-0.5 after:text-red-500">
+              社員番号
+            </span>
             <input
+              className="block w-80"
               {...register('employeeId')}
               placeholder="123456"
               required={true}
             />
-            <label />
-          </div>
-
-          <div className="mb-5">
-            <p>連絡可能な個人電話番号</p>
+          </label>
+          <label className="block">
+            <span className="after:content-['*'] after:ml-0.5 after:text-red-500">
+              連絡可能な個人電話番号
+            </span>
             <input
+              className="block w-80"
               {...register('phone')}
               placeholder="090-1234-5678"
               required={true}
             />
-            <label />
-          </div>
-
-          <div className="mb-5">
-            <p>メールアドレス</p>
+          </label>
+          <label className="block">
+            <span className="after:content-['*'] after:ml-0.5 after:text-red-500">
+              メールアドレス
+            </span>
             <input
+              className="block w-80"
               {...register('mail')}
               placeholder="example@mail.com"
               required={true}
             />
-            <label />
-          </div>
-
-          <div className="mb-5">
-            <p>個人情報提供に同意いただけますか?</p>
-            <p>
-              <input
-                type="checkbox"
-                {...register('agreement')}
-                // required={true}
-              />
-              <label />
-              同意する
-            </p>
-          </div>
-
-          <label className="mb-5" htmlFor="update">
-            写真を撮影してアップロードする
           </label>
-          <br />
-          <input
-            className="mb-5"
-            id="upload"
-            type="file"
-            accept="image/*"
-            capture="environment"
+          <label className="block">
+            <span className="after:content-['*'] after:ml-0.5 after:text-red-500">
+              個人情報提供への同意
+            </span>
+            <br />
+            同意する
+            <input type="checkbox" {...register('agreement')} required={true} />
+          </label>
+          <ImagePreview />
+          <ImageInput
+            id="image"
+            fileInputRef={{ current: null }}
             {...register('image')}
-            onChange={handleFileChange}
-            required={true}
           />
-          <p>ファイル名: {file && file.name}</p>
-          <img
-            src={file && URL.createObjectURL(file)}
-            alt="アップロードした画像"
-          />
-          <label />
-        </div>
-        <div>
+          <br />
           <button
-            onClick={handleConfirm}
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full mb-2"
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
             type="submit"
           >
             確認画面へ
-          </button>
-        </div>
-        <div>
-          <button
-            onClick={handleMoveHome}
-            className="bg-yellow-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded-full mb-2"
-            type="submit"
-          >
-            ホーム画面へ
-          </button>
-        </div>
-        <div>
-          <button
-            onClick={handleBack}
-            className="bg-yellow-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded-full mb-2"
-            type="submit"
-          >
-            前の画面へ
           </button>
         </div>
       </form>
