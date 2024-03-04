@@ -1,16 +1,12 @@
 'use client'
 
 import type { FC } from 'react'
-// import { ImageInput } from './imageInput'
-// import { ImagePreview } from './imagePreview'
-import type React from 'react' // React をインポートする
-import { useState } from 'react'
 import { type SubmitHandler, useForm } from 'react-hook-form'
 import { ImageInput } from './imageInput'
 import { ImagePreview } from './imagePreview'
 
 // フォームの各要素と型
-type FormData = {
+export type FormData = {
   name: string
   company: string
   employeeId: number
@@ -38,18 +34,6 @@ const onSubmit: SubmitHandler<FormData> = (data) => {
 
 export const UploadFormHook: FC = () => {
   const { handleSubmit, register } = useForm<FormData>()
-
-  // ファイルの情報を保存する state 変数
-  const [file, setFile] = useState<File>()
-
-  // ファイルが選択されたときに呼び出される関数
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    //
-    if (e.target.files) {
-      // 選択されたファイルを state 変数にセットする
-      setFile(e.target.files[0])
-    }
-  }
 
   return (
     <>
@@ -136,6 +120,7 @@ export const UploadFormHook: FC = () => {
           />
           <br />
           <button
+            onClick={handleConfirm}
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
             type="submit"
           >
@@ -149,12 +134,4 @@ export const UploadFormHook: FC = () => {
 
 function handleConfirm() {
   window.location.href = '/upload/confirm'
-}
-
-function handleMoveHome() {
-  window.location.href = '/'
-}
-
-function handleBack() {
-  window.location.href = '../'
 }

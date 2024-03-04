@@ -6,7 +6,7 @@ export default function Upload() {
   return (
     <main className="min-h-screen flex flex-col items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <h2 className={'mb-3 text-2xl font-semibold'}>
-        <div>↓入力事項を確認して下さい</div>
+        <div>↓入力項目を確認して下さい</div>
       </h2>
       <div className="mb-5">
         <p>1.お名前：{localFormData.name}</p>
@@ -19,9 +19,7 @@ export default function Upload() {
           {String(localFormData.agreement) === 'true'
             ? '既に同意済み'
             : '未だ同意していない'}{' '}
-          {/* state 変数の値に応じてテキストを表示する */}
         </p>
-        <p>7.写真：</p>
       </div>
       <div className="mt-8 space-y-6">
         <a
