@@ -113,11 +113,7 @@ export const UploadFormHook: FC = () => {
             <input type="checkbox" {...register('agreement')} required={true} />
           </label>
           <ImagePreview />
-          <ImageInput
-            id="image"
-            fileInputRef={{ current: null }}
-            {...register('image')}
-          />
+          <ImageInput {...register('image')} />
           <br />
           <button
             onClick={handleConfirm}

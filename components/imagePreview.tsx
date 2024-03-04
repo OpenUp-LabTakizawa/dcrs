@@ -84,7 +84,7 @@ export const ImagePreview: FC = () => {
           </span>
         )}
         <ImageInput
-          fileInputRef={fileInputRef}
+          ref={fileInputRef}
           onChange={handleFileChange}
           id={IMAGE_ID}
           required={true}
