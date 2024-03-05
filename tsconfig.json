@@ -1,6 +1,9 @@
 {
   "compilerOptions": {
+<<<<<<< HEAD
     "target": "ES2018", // "target": "esnext",
+=======
+>>>>>>> 24faae2d3f602ff23c2b91735fda034cb8d4d270
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,

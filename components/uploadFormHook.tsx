@@ -1,9 +1,9 @@
 'use client'
 
 import type { FC } from 'react'
+import React from 'react'
 import { type SubmitHandler, useForm } from 'react-hook-form'
 import { ImageInput } from './imageInput'
-import { ImagePreview } from './imagePreview'
 
 // フォームの各要素と型
 export type FormData = {
@@ -13,11 +13,10 @@ export type FormData = {
   phone: string
   mail: string
   agreement: boolean
-  image: FileList
+  image: FileList | null
 }
 
 // 「確認画面へ」ボタンを押したときの処理
-
 const onSubmit: SubmitHandler<FormData> = (data) => {
   alert(JSON.stringify(data, null, 2))
   // デモ版仮でlocalStorageに保存
@@ -25,15 +24,62 @@ const onSubmit: SubmitHandler<FormData> = (data) => {
   if (typeof localStorage !== 'undefined') {
     localStorage.setItem('FormData', JSON.stringify(data))
   }
-
-  if (!data.image) {
-    // console.log('画像が選択されていません')
-    return
-  }
 }
 
 export const UploadFormHook: FC = () => {
-  const { handleSubmit, register } = useForm<FormData>()
+  const { handleSubmit, register, setValue } = useForm<FormData>()
+
+  type ImageData = {
+    file: File
+    name: string
+    source: string
+  }
+
+  // 添付画像を状態管理
+  const [images, setImages] = React.useState<ImageData>({
+    file: new File([], ''),
+    name: '',
+    source: '',
+  })
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files
+
+    // ファイルが無い場合は何もしない
+    if (files === null) {
+      return
+    }
+    // FormDataにファイルを入れる
+    setValue('image', files)
+    // 画像データを抽出する処理
+    const file = files[0]
+    const fileReader = new FileReader()
+    fileReader.onload = () => {
+      setImages({
+        ...images,
+        file: file,
+        name: file.name,
+        source: fileReader.result as string,
+      })
+    }
+    fileReader.readAsDataURL(file)
+  }
+
+  // キャンセルボタンの処理
+  const handleClickCancelButton = () => {
+    setImages({
+      ...images,
+      file: new File([], ''),
+      name: '',
+      source: '',
+    })
+    setValue('image', null)
+    // ファイルinputフォームの初期化
+    const fileInput = document.getElementById('image') as HTMLInputElement
+    if (fileInput.value) {
+      fileInput.value = ''
+    }
+  }
 
   return (
     <>
@@ -112,8 +158,41 @@ export const UploadFormHook: FC = () => {
             同意する
             <input type="checkbox" {...register('agreement')} required={true} />
           </label>
-          <ImagePreview />
-          <ImageInput {...register('image')} />
+
+          <label
+            className="mb-5"
+            style={{
+              border: 'white 3px dotted',
+              display: 'flex',
+              borderRadius: 12,
+              justifyContent: 'center',
+              alignItems: 'center',
+              overflow: 'hidden',
+              cursor: 'pointer',
+            }}
+          >
+            {images.source && images.name ? (
+              <img src={images.source} alt={images.name} />
+            ) : (
+              <span className="after:content-['*'] after:ml-0.5 after:text-red-500">
+                画像をアップロードする
+              </span>
+            )}
+            <ImageInput
+              onChange={handleImageChange}
+              id="image"
+              required={true}
+            />
+          </label>
+          {images.source && images.name && (
+            <button
+              type="button"
+              onClick={handleClickCancelButton}
+              className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full mr-2"
+            >
+              × 画像アップロードキャンセル
+            </button>
+          )}
           <br />
           <button
             onClick={handleConfirm}
