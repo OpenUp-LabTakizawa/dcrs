@@ -2,7 +2,17 @@
 import Link from 'next/link'
 
 export default function Upload() {
-  const localFormData = JSON.parse(localStorage.getItem('FormData') || '{}')
+  let localFormData = {
+    name: 'initial value',
+    company: 'initial value',
+    employeeId: 'initial value',
+    phone: 'initial value',
+    mail: 'initial value',
+    agreement: 'initial value',
+  }
+  if (typeof localStorage !== 'undefined') {
+    localFormData = JSON.parse(localStorage.getItem('FormData') || '{}')
+  }
 
   return (
     <main className="min-h-screen flex flex-col items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
