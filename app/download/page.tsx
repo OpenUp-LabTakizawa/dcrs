@@ -15,7 +15,7 @@ export default function Download() {
 
     return (
       <main className="flex min-h-screen flex-col items-center justify-between p-24">
-        <table className="w-full border-collapse bg-white text-left text-sm text-gray-500">
+        <table className="w-full border-collapse bg-white text-left text-gray-500 text-sm">
           <thead className="bg-gray-50">
             <tr>
               <th scope="col" className="px-6 py-4 font-medium text-gray-900" />
@@ -39,14 +39,14 @@ export default function Download() {
               </th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-100 border-t border-gray-100">
+          <tbody className="divide-y divide-gray-100 border-gray-100 border-t">
             <tr className="hover:bg-gray-50">
               <th className="px-6 py-4">
                 <div className="flex h-5 items-center">
                   <input
                     type="checkbox"
                     name="checkGroup1"
-                    className="h-4 w-4 rounded border-gray-300 text-primary-600 shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 focus:ring-offset-0 disabled:cursor-not-allowed disabled:text-gray-400"
+                    className="h-4 w-4 rounded border-gray-300 text-primary-600 shadow-sm disabled:cursor-not-allowed focus:border-primary-300 disabled:text-gray-400 focus:ring focus:ring-primary-200 focus:ring-opacity-50 focus:ring-offset-0"
                   />
                 </div>
               </th>
@@ -105,7 +105,7 @@ export default function Download() {
                     type="checkbox"
                     id="example12"
                     name="checkGroup1"
-                    className="h-4 w-4 rounded border-gray-300 text-primary-600 shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 focus:ring-offset-0 disabled:cursor-not-allowed disabled:text-gray-400"
+                    className="h-4 w-4 rounded border-gray-300 text-primary-600 shadow-sm disabled:cursor-not-allowed focus:border-primary-300 disabled:text-gray-400 focus:ring focus:ring-primary-200 focus:ring-opacity-50 focus:ring-offset-0"
                   />
                 </div>
               </th>
@@ -125,7 +125,7 @@ export default function Download() {
         </table>
         <Link
           href="/"
-          className="group relative w-1/8 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          className="group relative flex w-1/8 justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 font-medium text-sm text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
         >
           ホームに戻る
         </Link>
