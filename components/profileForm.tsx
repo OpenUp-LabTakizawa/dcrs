@@ -1,6 +1,7 @@
 'use client'
 
-import { useEffect, useId, useState } from 'react'
+import { useId, useState } from 'react'
+import type React from 'react'
 import { type SubmitHandler, useForm } from 'react-hook-form'
 
 type Profile = {
@@ -9,22 +10,13 @@ type Profile = {
   employeeId: number
   phoneNumber: string
   mail: string
-  image: FileList | null
+  image: FileList
 }
 
 export function ProfileForm() {
   const imageInputId = useId()
   const [image, setImage] = useState<FileList | null>(null)
-  const [imageUrl, setImageUrl] = useState<string>('')
-
-  useEffect(() => {
-    if (image?.[0]) {
-      setImageUrl(URL.createObjectURL(image[0]))
-    }
-  }, [image?.[0]])
-
   const { register, handleSubmit } = useForm<Profile>()
-
   const onSubmit: SubmitHandler<Profile> = (data) => {
     alert(JSON.stringify(data, null, 2))
     // デモ版仮でlocalStorageに保存
@@ -34,18 +26,13 @@ export function ProfileForm() {
     }
   }
 
-  function handleClickCancel() {
-    setImage(null)
-    setImageUrl('')
-  }
-
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
       className="grid grid-cols-1 gap-6 [&>labe:input]:w-80"
     >
       <label className="block">
-        <span className="after:content-['*'] after:ml-0.5 after:text-red-500">
+        <span className="after:ml-0.5 after:text-red-500 after:content-['*']">
           お名前
         </span>
         <input
@@ -56,7 +43,7 @@ export function ProfileForm() {
         />
       </label>
       <label className="block">
-        <span className="after:content-['*'] after:ml-0.5 after:text-red-500">
+        <span className="after:ml-0.5 after:text-red-500 after:content-['*']">
           所属会社
         </span>
         <select
@@ -77,7 +64,7 @@ export function ProfileForm() {
         </select>
       </label>
       <label className="block">
-        <span className="after:content-['*'] after:ml-0.5 after:text-red-500">
+        <span className="after:ml-0.5 after:text-red-500 after:content-['*']">
           社員番号
         </span>
         <input
@@ -88,7 +75,7 @@ export function ProfileForm() {
         />
       </label>
       <label className="block">
-        <span className="after:content-['*'] after:ml-0.5 after:text-red-500">
+        <span className="after:ml-0.5 after:text-red-500 after:content-['*']">
           連絡可能な個人電話番号
         </span>
         <input
@@ -99,7 +86,7 @@ export function ProfileForm() {
         />
       </label>
       <label className="block">
-        <span className="after:content-['*'] after:ml-0.5 after:text-red-500">
+        <span className="after:ml-0.5 after:text-red-500 after:content-['*']">
           メールアドレス
         </span>
         <input
@@ -110,7 +97,7 @@ export function ProfileForm() {
         />
       </label>
       <label className="block">
-        <span className="after:content-['*'] after:ml-0.5 after:text-red-500">
+        <span className="after:ml-0.5 after:text-red-500 after:content-['*']">
           個人情報提供への同意
         </span>
         <br />
@@ -118,7 +105,7 @@ export function ProfileForm() {
         <input type="checkbox" required={true} />
       </label>
 
-      {!(imageUrl || image) ? (
+      {!image ? (
         <label
           className="mb-5"
           style={{
@@ -131,35 +118,33 @@ export function ProfileForm() {
             cursor: 'pointer',
           }}
         >
-          <span className="after:content-['*'] after:ml-0.5 after:text-red-500">
+          <span className="after:ml-0.5 after:text-red-500 after:content-['*']">
             画像をアップロードする
           </span>
           <input
-            className="w-1 h-1 opacity-0"
+            className="h-1 w-1 opacity-0"
             type="file"
             accept="image/*"
             id={imageInputId}
             {...register('image')}
             alt="Upload Image"
-            onChange={(e) => {
-              if (e.target.files) {
-                setImage(e.target.files)
-              }
-            }}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setImage(e.target.files)
+            }
             required={true}
           />
         </label>
       ) : (
         <>
           <img
-            src={imageUrl}
+            src={String(URL.createObjectURL(image[0]))}
             alt="Uploaded File"
-            className="object-scale-down h-64 w-96"
+            className="h-64 w-96 object-scale-down"
           />
           <button
             type="button"
-            onClick={handleClickCancel}
-            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full mr-2"
+            onClick={() => setImage(null)}
+            className="mr-2 rounded-full bg-red-500 px-4 py-2 font-bold text-white hover:bg-red-700"
           >
             × アップロードキャンセル
           </button>
@@ -167,7 +152,7 @@ export function ProfileForm() {
       )}
 
       <button
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+        className="rounded-full bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
         type="submit"
       >
         確認画面へ
