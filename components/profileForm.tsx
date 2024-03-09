@@ -120,22 +120,10 @@ export function ProfileForm() {
 function ImageUpload({ register }: { register: UseFormRegister<Profile> }) {
   const imageId = useId()
   const [image, setImage] = useState<FileList | null>(null)
-  const [imageSrc, setImageSrc] = useState<string>('')
-
-  function onImageChange(e: React.ChangeEvent<HTMLInputElement>) {
-    if (!e.target.files) return
-    setImage(e.target.files)
-    setImageSrc(`${URL.createObjectURL(e.target.files[0])}`)
-  }
-
-  function handleClickCancel() {
-    setImage(null)
-    setImageSrc('')
-  }
 
   return (
     <>
-      {!(image || imageSrc) ? (
+      {!image ? (
         <label
           className="mb-5"
           style={{
@@ -158,20 +146,22 @@ function ImageUpload({ register }: { register: UseFormRegister<Profile> }) {
             id={imageId}
             {...register('image')}
             alt="Upload Image"
-            onChange={onImageChange}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setImage(e.target.files)
+            }
             required={true}
           />
         </label>
       ) : (
         <>
           <img
-            src={imageSrc}
+            src={encodeURI(URL.createObjectURL(image[0]))}
             alt="Uploaded File"
             className="h-64 w-96 object-scale-down"
           />
           <button
             type="button"
-            onClick={handleClickCancel}
+            onClick={() => setImage(null)}
             className="mr-2 rounded-full bg-red-500 px-4 py-2 font-bold text-white hover:bg-red-700"
           >
             × アップロードキャンセル
