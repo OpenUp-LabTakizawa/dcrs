@@ -1,6 +1,5 @@
 import { Step } from '@/app/components/step'
 import type { Checklist } from '@/app/interfaces/checklist'
-import type { Profile } from '@/app/interfaces/profile'
 import {
   ArrowUturnLeftIcon,
   PaperAirplaneIcon,
@@ -8,19 +7,16 @@ import {
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import type React from 'react'
-import type { Path } from 'react-hook-form'
 import { STEP } from '../page'
 
 export function ConfirmDialog({
   checkList,
   dialog,
   image,
-  values,
 }: {
   checkList: Checklist[]
   dialog: React.RefObject<HTMLDialogElement>
   image: HTMLImageElement
-  values: Profile
 }) {
   const router = useRouter()
 
@@ -45,6 +41,7 @@ export function ConfirmDialog({
       })
       .catch((error) => {
         alert(error)
+        event.currentTarget.disabled = false
       })
   }
 
@@ -68,7 +65,7 @@ export function ConfirmDialog({
                       className="w-full"
                     />
                   ) : (
-                    (values[name as Path<Profile>] as string)
+                    ''
                   )}
                 </td>
               </tr>

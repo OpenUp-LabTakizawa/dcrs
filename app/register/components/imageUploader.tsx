@@ -1,28 +1,12 @@
 'use client'
-
-import type { Profile } from '@/app/interfaces/profile'
 import { PhotoIcon, XMarkIcon } from '@heroicons/react/24/solid'
 import Image from 'next/image'
 import { type DragEvent, useState } from 'react'
 import type React from 'react'
-import type {
-  Path,
-  UseFormRegister,
-  UseFormSetValue,
-  UseFormUnregister,
-} from 'react-hook-form'
 
 const MAX_UPLOAD_FILE_SIZE = 5 * 1024 * 1024
 
-export function ImageUploader({
-  register,
-  unregister,
-  setValue,
-}: {
-  register: UseFormRegister<Profile>
-  unregister: UseFormUnregister<Profile>
-  setValue: UseFormSetValue<Profile>
-}) {
+export function ImageUploader() {
   const [image, setImage] = useState<FileList | null>(null)
 
   function onClickUpload(e: React.ChangeEvent<HTMLInputElement>) {
@@ -34,7 +18,6 @@ export function ImageUploader({
 
   function onClickCancel() {
     setImage(null)
-    unregister('image' as Path<Profile>)
 
     const imageInput = document.querySelector(
       'input[type="file"]',
@@ -53,7 +36,7 @@ export function ImageUploader({
           className="w-full"
         />
       )}
-      <DropImageZone image={image} setImage={setImage} setValue={setValue}>
+      <DropImageZone image={image} setImage={setImage}>
         <PhotoIcon
           className="mx-auto size-12 text-gray-300"
           aria-hidden="true"
@@ -65,7 +48,6 @@ export function ImageUploader({
               type="file"
               className="sr-only"
               accept="image/*"
-              {...register('image' as Path<Profile>, { required: true })}
               alt="Upload Image"
               onChange={(e) => onClickUpload(e)}
               required={true}
@@ -94,12 +76,10 @@ function DropImageZone({
   children,
   image,
   setImage,
-  setValue,
 }: {
   children: React.ReactNode
   image: FileList | null
   setImage: React.Dispatch<React.SetStateAction<FileList | null>>
-  setValue: UseFormSetValue<Profile>
 }) {
   const [isHoverd, setIsHoverd] = useState<boolean>(false)
 
@@ -118,7 +98,6 @@ function DropImageZone({
     if (isFileTooLarge(e.dataTransfer.files[0].size)) {
       return
     }
-    setValue('image', e.dataTransfer.files)
     setImage(e.dataTransfer.files)
   }
 

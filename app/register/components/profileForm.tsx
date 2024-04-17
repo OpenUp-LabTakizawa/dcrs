@@ -1,7 +1,6 @@
 'use client'
 
 import type { Checklist } from '@/app/interfaces/checklist'
-import type { Profile } from '@/app/interfaces/profile'
 import {
   CheckIcon,
   EnvelopeIcon,
@@ -10,8 +9,8 @@ import {
   UserIcon,
 } from '@heroicons/react/24/solid'
 import type React from 'react'
-import { useRef, useState } from 'react'
-import { type Path, type UseFormRegister, useForm } from 'react-hook-form'
+import { useActionState, useRef, useState } from 'react'
+import { validate } from '../lib/validate'
 import { ConfirmDialog } from './confirmDialog'
 import { ImageUploader } from './imageUploader'
 
@@ -67,24 +66,19 @@ const COMPANIES = [
 ] as const
 
 export function ProfileForm() {
-  const { handleSubmit, register, unregister, getValues, setValue } =
-    useForm<Profile>()
+  const initialState = new FormData()
+  const [state, action] = useActionState<FormData>(validate, initialState)
   const dialog = useRef<HTMLDialogElement>(null)
   const [image, setImage] = useState<HTMLImageElement>()
-  const onSubmit = handleSubmit(() => {
-    setImage(document.getElementsByTagName('img')?.[0] as HTMLImageElement)
-    dialog.current?.showModal()
-  })
 
   return (
     <>
-      <form onSubmit={onSubmit} className="flex flex-col gap-6 max-w-xs">
+      <form action={action} className="flex flex-col gap-6 max-w-xs">
         <p className="text-center before:ml-0.5 before:text-red-500 before:content-['*']">
           は必須項目
         </p>
         <Input
           item={checklist.find((item) => item.name === 'name') as Checklist}
-          register={register}
         />
         <label className="form-control w-full">
           <div className="label">
@@ -94,7 +88,6 @@ export function ProfileForm() {
           </div>
           <select
             className="select select-bordered"
-            {...register('company', { required: true })}
             defaultValue={''}
             required={true}
           >
@@ -112,17 +105,14 @@ export function ProfileForm() {
           item={
             checklist.find((item) => item.name === 'employeeId') as Checklist
           }
-          register={register}
         />
         <Input
           item={
             checklist.find((item) => item.name === 'telephone') as Checklist
           }
-          register={register}
         />
         <Input
           item={checklist.find((item) => item.name === 'email') as Checklist}
-          register={register}
         />
         <div className="card bg-base-100 shadow-xl">
           <div className="card-body overflow-y-auto max-h-72">
@@ -152,11 +142,7 @@ export function ProfileForm() {
         <p className="after:ml-0.5 after:text-red-500 after:content-['*']">
           {checklist.find((item) => item.name === 'image')?.value}
         </p>
-        <ImageUploader
-          register={register}
-          unregister={unregister}
-          setValue={setValue}
-        />
+        <ImageUploader />
         <button
           className="btn btn-warning w-max place-self-center"
           type="submit"
@@ -169,7 +155,6 @@ export function ProfileForm() {
         dialog={dialog}
         checkList={checklist}
         image={image as HTMLImageElement}
-        values={getValues()}
       />
     </>
   )
@@ -177,10 +162,8 @@ export function ProfileForm() {
 
 function Input({
   item,
-  register,
 }: {
   item: Checklist
-  register: UseFormRegister<Profile>
 }): React.JSX.Element {
   const Icon = item.icon as React.ElementType
 
@@ -190,12 +173,7 @@ function Input({
         <Icon className="mr-2 size-4 opacity-70" />
         {item.value}
       </span>
-      <input
-        type={item.type}
-        {...register(item.name as Path<Profile>, { required: true })}
-        placeholder={item.placeholder}
-        required={true}
-      />
+      <input type={item.type} placeholder={item.placeholder} required={true} />
     </label>
   )
 }
