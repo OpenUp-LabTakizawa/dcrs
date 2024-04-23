@@ -1,7 +1,7 @@
 import { prisma } from '@/app/lib/prisma'
 import { client } from '@/app/lib/s3client'
 import { PutObjectCommand } from '@aws-sdk/client-s3'
-import { revalidatePath } from 'next/cache'
+import { revalidateTag } from 'next/cache'
 
 export const dynamic = 'force-dynamic'
 
@@ -29,7 +29,7 @@ export async function POST(request: Request) {
     },
   })
 
-  revalidatePath('/users')
+  revalidateTag('users')
   return Response.json({ user })
 }
 
