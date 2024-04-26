@@ -20,6 +20,14 @@ export function Modal({ children }: { children: React.ReactNode }) {
     router.back()
   }
 
+  function download() {
+    const image = document.getElementsByTagName('img')?.[0].src
+    const link = document.createElement('a')
+    link.href = image
+    link.download = '障がい者手帳画像.png'
+    link.click()
+  }
+
   return createPortal(
     <dialog ref={dialogRef} className="modal" onClose={onDismiss}>
       <div className="modal-box">
@@ -32,6 +40,13 @@ export function Modal({ children }: { children: React.ReactNode }) {
         </button>
         {children}
         <div className="modal-action">
+          <button
+            type="button"
+            onClick={download}
+            className="btn justify-self-end"
+          >
+            ダウンロード
+          </button>
           <button
             type="button"
             onClick={onDismiss}
