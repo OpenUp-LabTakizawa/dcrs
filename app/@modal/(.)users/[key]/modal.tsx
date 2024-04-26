@@ -1,5 +1,6 @@
 'use client'
 
+import { DownloadBtn } from '@/app/components/downloadBtn'
 import { XMarkIcon } from '@heroicons/react/24/solid'
 import { useRouter } from 'next/navigation'
 import { useEffect, useRef } from 'react'
@@ -20,14 +21,6 @@ export function Modal({ children }: { children: React.ReactNode }) {
     router.back()
   }
 
-  function download() {
-    const image = document.getElementsByTagName('img')?.[0].src
-    const link = document.createElement('a')
-    link.href = image
-    link.download = '障がい者手帳画像.png'
-    link.click()
-  }
-
   return createPortal(
     <dialog ref={dialogRef} className="modal" onClose={onDismiss}>
       <div className="modal-box">
@@ -35,18 +28,13 @@ export function Modal({ children }: { children: React.ReactNode }) {
           type="button"
           onClick={onDismiss}
           className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+          aria-label="閉じる"
         >
           <XMarkIcon />
         </button>
         {children}
         <div className="modal-action">
-          <button
-            type="button"
-            onClick={download}
-            className="btn justify-self-end"
-          >
-            ダウンロード
-          </button>
+          <DownloadBtn />
           <button
             type="button"
             onClick={onDismiss}
