@@ -9,7 +9,7 @@ import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import type React from 'react'
 import type { Path } from 'react-hook-form'
-import { STEP } from '../page'
+import { STEPS } from '../page'
 
 export function ConfirmDialog({
   checkList,
@@ -53,7 +53,7 @@ export function ConfirmDialog({
   return (
     <dialog ref={dialog} className="modal modal-bottom sm:modal-middle">
       <div className="grid gap-4 modal-box text-center">
-        <Step step={STEP} targetStep={1} />
+        <Step steps={[...STEPS]} targetStep={1} />
         <table className="table">
           <tbody>
             {checkList.map(({ name, value }) => (

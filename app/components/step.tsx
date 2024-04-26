@@ -1,13 +1,14 @@
 import type React from 'react'
+import type { Steps } from '../interfaces/steps'
 
 export function Step({
-  step,
+  steps,
   targetStep,
-}: { step: string[]; targetStep: number }): React.JSX.Element {
+}: { steps: Steps; targetStep: number }): React.JSX.Element {
   return (
     <>
       <ul className="steps">
-        {step.map((step, index) => (
+        {steps.map((step, index) => (
           <li
             key={step}
             className={`step${index <= targetStep ? ' step-primary' : ''}`}
@@ -16,7 +17,7 @@ export function Step({
           </li>
         ))}
       </ul>
-      <h1 className="font-semibold text-2xl">{step[targetStep]}</h1>
+      <h1 className="font-semibold text-2xl">{steps[targetStep]}</h1>
     </>
   )
 }
