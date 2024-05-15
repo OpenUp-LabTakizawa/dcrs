@@ -1,6 +1,5 @@
 import { Stepper } from '@/app/components/stepper'
 import type { FormItem } from '@/app/interfaces/formItem'
-import type { Profile } from '@/app/interfaces/profile'
 import {
   ArrowUturnLeftIcon,
   PaperAirplaneIcon,
@@ -8,19 +7,22 @@ import {
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import type React from 'react'
-import type { Path, UseFormWatch } from 'react-hook-form'
+import { useEffect, useRef } from 'react'
 import { STEPS } from '../page'
 
 export function ConfirmDialog({
   checkList,
-  dialog,
-  watch,
 }: {
   checkList: FormItem[]
-  dialog: React.RefObject<HTMLDialogElement>
-  watch: UseFormWatch<Profile>
 }): React.JSX.Element {
   const router = useRouter()
+  const dialogRef = useRef<HTMLDialogElement>(null)
+
+  useEffect(() => {
+    if (!dialogRef.current?.open) {
+      dialogRef.current?.showModal()
+    }
+  })
 
   async function onSubmit(
     event: React.MouseEvent<HTMLButtonElement>,
@@ -49,7 +51,7 @@ export function ConfirmDialog({
   }
 
   return (
-    <dialog ref={dialog} className="modal modal-bottom sm:modal-middle">
+    <dialog ref={dialogRef} className="modal modal-bottom sm:modal-middle">
       <div className="grid gap-4 modal-box text-center">
         <Stepper steps={[...STEPS]} targetStep={1} />
         <table className="table">
@@ -59,7 +61,7 @@ export function ConfirmDialog({
                 <th>{value}</th>
                 <td>
                   {name === 'agreement' && '同意する'}
-                  {name === 'image' && watch(name as Path<Profile>) ? (
+                  {name === 'image' ? (
                     <Image
                       src={document.getElementsByTagName('img')[0].src}
                       width={100}
@@ -68,7 +70,7 @@ export function ConfirmDialog({
                       className="w-full"
                     />
                   ) : (
-                    (watch(name as Path<Profile>) as string)
+                    'あり'
                   )}
                 </td>
               </tr>
@@ -83,7 +85,7 @@ export function ConfirmDialog({
           <button
             type="button"
             className="btn btn-error"
-            onClick={() => dialog.current?.close()}
+            onClick={() => dialogRef.current?.close()}
           >
             <ArrowUturnLeftIcon className="size-6" />
             戻る
@@ -91,7 +93,7 @@ export function ConfirmDialog({
         </div>
       </div>
       <div className="modal-backdrop">
-        <button type="button" onClick={() => dialog.current?.close()} />
+        <button type="button" onClick={() => dialogRef.current?.close()} />
       </div>
     </dialog>
   )
