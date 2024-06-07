@@ -33,6 +33,18 @@ transform: translatex(-50%) translatey(0);
 }
 }
 
+@keyframes go-down {
+  0% {
+  transform: translate(0);
+  }
+  20% {
+  transform: translatex(8px);
+  }
+  40% {
+  transform: translate(0);
+  }
+  }
+
 @keyframes move-right {
 0% {
 transform: translate(0);
