@@ -2,8 +2,16 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+.fade-out-alert {
+  animation: fade-out-alert 1.5s forwards;
+}
+
 .fade-in-alert {
   animation: fade-in-alert 1.5s;
+}
+
+.fade-out-down {
+  animation: fade-out-down 1.5s forwards;
 }
 
 .fade-in-up {
@@ -26,6 +34,17 @@
   animation: rotate-z 2s infinite;
 }
 
+@keyframes fade-out-alert {
+  from {
+    opacity: 1;
+    transform: translatex(-50%) translatey(0);
+  }
+  to {
+    opacity: 0;
+    transform: translatex(-50%) translatey(-20px);
+  }
+}
+
 @keyframes fade-in-alert {
   from {
     opacity: 0;
@@ -34,6 +53,17 @@
   to {
     opacity: 1;
     transform: translatex(-50%) translatey(0);
+  }
+}
+
+@keyframes fade-out-down {
+  from {
+    opacity: 1;
+    transform: translatey(0);
+  }
+  to {
+    opacity: 0;
+    transform: translatey(20px);
   }
 }
 
