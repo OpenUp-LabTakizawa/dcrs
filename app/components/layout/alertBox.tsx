@@ -51,7 +51,6 @@ export function AlertBox({
         }`}
       >
         <div
-          role="alert"
           className={`alert shadow-lg ${
             alert.eventType === "error" ? "alert-error" : "alert-info"
           }`}

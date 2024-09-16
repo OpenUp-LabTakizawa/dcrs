@@ -14,6 +14,7 @@ import {
   NAME,
   TELEPHONE,
 } from "@/app/lib/constant"
+import { ImageUploader } from "@/app/register/imageUploader"
 import {
   ArrowUturnLeftIcon,
   CheckIcon,
@@ -36,7 +37,6 @@ import {
   type UseFormWatch,
   useForm,
 } from "react-hook-form"
-import { ImageUploader } from "./imageUploader"
 
 export default function Register(): JSX.Element {
   const companies: string[] = [

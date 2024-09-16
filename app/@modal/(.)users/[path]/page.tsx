@@ -1,6 +1,6 @@
+import { Modal } from "@/app/@modal/(.)users/[path]/modal"
 import { ImagePreview } from "@/app/components/layout/imagePreview"
 import { type JSX, Suspense } from "react"
-import { Modal } from "./modal"
 
 export default function ImageModal({
   params: { path },
