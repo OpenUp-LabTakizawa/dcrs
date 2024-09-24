@@ -97,6 +97,7 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
           provenance: ${{ fromJSON(env.IS_PUSH) && 'mode=max' || false }}
+          sbom: ${{ fromJSON(env.IS_PUSH) && true || false }}
 
       - name: Attest
         if: fromJSON(env.IS_PUSH)
