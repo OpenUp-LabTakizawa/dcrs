@@ -23,7 +23,7 @@ export default function Home(): JSX.Element {
       <ul className="timeline timeline-vertical lg:timeline-horizontal">
         {STEPS.map((step, index) => (
           <li key={step.name}>
-            {0 < index && <hr />}
+            {index > 0 && <hr />}
             <div className="timeline-start">{index + 1}</div>
             <div className="timeline-middle">
               <step.icon className={`size-5 ${step.color}`} />

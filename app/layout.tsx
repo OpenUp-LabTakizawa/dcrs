@@ -17,7 +17,6 @@ const sawarabi: NextFont = Sawarabi_Gothic({
 export const metadata: Metadata = {
   title: "DCRS",
   description: SITE_TITLE,
-  metadataBase: new URL("https://openuplab-takizawa.com"),
 }
 
 export default function RootLayout({
@@ -28,7 +27,7 @@ export default function RootLayout({
     <html lang="ja">
       <body className={sawarabi.className}>
         <Header />
-        <main className="bg-gray-50 grid gap-6 items-center justify-center px-4 py-6 sm:px-6 lg:px-8">
+        <main className="bg-gray-50 gap-6 grid items-center justify-center px-4 py-6 sm:px-6 lg:px-8">
           <AlertBox>
             {children}
             {modal}
