@@ -7,11 +7,12 @@ import { ArrowUturnLeftIcon } from "@heroicons/react/24/solid"
 import Link from "next/link"
 import { type JSX, Suspense } from "react"
 
-export default function ImagePage({
-  params: { path },
-}: Readonly<{ params: { path: string } }>): JSX.Element {
+export default async function ImagePage({
+  params,
+}: Readonly<{ params: Promise<{ path: string }> }>): Promise<JSX.Element> {
+  const syncPath: string = (await params).path
   const imageCrumb: Index = {
-    name: path,
+    name: syncPath,
     icon: INDEX_LIST[7].icon,
     color: INDEX_LIST[7].color,
   }
@@ -20,7 +21,7 @@ export default function ImagePage({
     <>
       <Breadcrumb crumbs={[USERS_LINK, imageCrumb]} />
       <Suspense fallback={<Skelton />}>
-        <ImagePreview path={path} />
+        <ImagePreview path={syncPath} />
       </Suspense>
       <DownloadBtn />
       <Link href="/users" className="btn max-w-fit mx-auto">

@@ -2,13 +2,13 @@ import { Modal } from "@/app/@modal/(.)users/[path]/modal"
 import { ImagePreview } from "@/app/components/layout/imagePreview"
 import { type JSX, Suspense } from "react"
 
-export default function ImageModal({
-  params: { path },
-}: Readonly<{ params: { path: string } }>): JSX.Element {
+export default async function ImageModal({
+  params,
+}: Readonly<{ params: Promise<{ path: string }> }>): Promise<JSX.Element> {
   return (
     <Modal>
       <Suspense fallback={<Skelton />}>
-        <ImagePreview path={path} />
+        <ImagePreview path={(await params).path} />
       </Suspense>
     </Modal>
   )

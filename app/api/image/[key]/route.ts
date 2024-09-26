@@ -7,11 +7,11 @@ import {
 
 export async function GET(
   _request: Request,
-  { params }: Readonly<{ params: { key: string } }>,
+  { params }: Readonly<{ params: Promise<{ key: string }> }>,
 ): Promise<Response> {
   const command: GetObjectCommand = new GetObjectCommand({
     Bucket: process.env.S3_BUCKET || TEST_BUCKET,
-    Key: params.key,
+    Key: (await params).key,
   })
   const response: GetObjectCommandOutput = await client.send(command)
   const contentType: string = response.ContentType as string
