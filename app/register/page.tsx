@@ -250,7 +250,6 @@ function ConfirmDialog({
           type="button"
           onClick={() => ref.current?.close()}
           className="absolute btn btn-circle btn-ghost btn-sm right-2 top-2"
-          aria-label="閉じる"
         >
           <XMarkIcon />
         </button>
@@ -299,13 +298,11 @@ function ConfirmDialog({
           </button>
         </div>
       </div>
-      <div className="modal-backdrop">
-        <button
-          type="button"
-          onClick={() => ref.current?.close()}
-          aria-label="戻る"
-        />
-      </div>
+      <button
+        type="button"
+        onClick={() => ref.current?.close()}
+        className="modal-backdrop"
+      />
     </dialog>
   )
 }
