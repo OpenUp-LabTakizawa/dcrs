@@ -2,6 +2,8 @@ import { TEST_BUCKET } from "@/app/lib/constant"
 import { client } from "@/app/lib/s3client"
 import { type NewUser, type User, db, users } from "@/app/lib/schema"
 import {
+  DeleteObjectCommand,
+  type DeleteObjectCommandOutput,
   PutObjectCommand,
   type PutObjectCommandOutput,
 } from "@aws-sdk/client-s3"
@@ -27,7 +29,17 @@ export async function POST(request: Readonly<Request>): Promise<Response> {
     email: body.get("email") as string,
     image: `${body.get("employeeId")}.${image.name.split(".").pop()}`,
   }
-  const insertUser: User[] = await db.insert(users).values(newUser).returning()
+  const insertUser: User[] = await db
+    .insert(users)
+    .values(newUser)
+    .returning()
+    .then((users) => users)
+    .catch((error) => error)
+
+  if (insertUser instanceof Error) {
+    await deleteImage(newUser.image)
+    return Response.json({ error: insertUser.message }, { status: 500 })
+  }
   return Response.json({ insertUser })
 }
 
@@ -44,5 +56,14 @@ async function postImage(body: Readonly<FormData>): Promise<Response> {
     Body: buffer,
   })
   const response: PutObjectCommandOutput = await client.send(command)
+  return Response.json({ response })
+}
+
+async function deleteImage(key: string): Promise<Response> {
+  const command: DeleteObjectCommand = new DeleteObjectCommand({
+    Bucket: process.env.S3_BUCKET || TEST_BUCKET,
+    Key: key,
+  })
+  const response: DeleteObjectCommandOutput = await client.send(command)
   return Response.json({ response })
 }

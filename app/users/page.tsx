@@ -1,6 +1,6 @@
 import { Pagination } from "@/app/components/button/pagination"
-import { ScrollRightHint } from "@/app/components/layout/ScrollHint"
 import { Breadcrumb } from "@/app/components/layout/breadcrumb"
+import { ScrollRightHint } from "@/app/components/layout/scrollHint"
 import { INDEX_LIST, USERS_LINK } from "@/app/lib/constant"
 import { getUsers } from "@/app/lib/getUsers"
 import type { User } from "@/app/lib/schema"

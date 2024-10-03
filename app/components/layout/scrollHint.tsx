@@ -33,7 +33,7 @@ export function ScrollRightHint(): JSX.Element {
   return (
     <div
       ref={ref}
-      className="absolute bg-black/60 left-1/2 pt-20 text-white top-1/2 -translate-x-1/2 -translate-y-1/2 z-10"
+      className="absolute bg-black/60 left-1/2 pt-20 text-white top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 lg:hidden"
     >
       <ChevronRightIcon className="scroll-right size-20" />
       <ChevronRightIcon className="scroll-right size-20" />
