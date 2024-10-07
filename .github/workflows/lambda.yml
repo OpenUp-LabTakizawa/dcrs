@@ -73,6 +73,7 @@ jobs:
         context: .
         no-cache: ${{ inputs.no-cache == true }}
         platforms: linux/arm64
+        provenance: false
         push: true
         tags: ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ github.sha }}
 
