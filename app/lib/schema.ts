@@ -1,6 +1,5 @@
 import { integer, pgTable, text, timestamp } from "drizzle-orm/pg-core"
 import { type PostgresJsDatabase, drizzle } from "drizzle-orm/postgres-js"
-import postgres from "postgres"
 
 export const users = pgTable("users", {
   id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
@@ -17,5 +16,6 @@ export const users = pgTable("users", {
 export type User = typeof users.$inferSelect
 export type NewUser = typeof users.$inferInsert
 
-const client: postgres.Sql = postgres(process.env.POSTGRES_URL as string)
-export const db: PostgresJsDatabase<Record<string, never>> = drizzle(client)
+export const db: PostgresJsDatabase<Record<string, never>> = drizzle(
+  process.env.POSTGRES_URL as string,
+)

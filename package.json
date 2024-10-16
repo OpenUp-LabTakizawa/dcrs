@@ -13,11 +13,10 @@
     "studio": "drizzle-kit studio"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.669.0",
+    "@aws-sdk/client-s3": "^3.670.0",
     "@heroicons/react": "^2.1.5",
-    "drizzle-orm": "^0.34.1",
+    "drizzle-orm": "^0.35.0",
     "next": "canary",
-    "postgres": "^3.4.4",
     "react": "canary",
     "react-dom": "canary",
     "react-hook-form": "^7.53.0",
@@ -30,11 +29,11 @@
     "@testing-library/react": "^16.0.1",
     "@types/bun": "^1.1.11",
     "@types/react": "^18.3.11",
-    "@types/react-dom": "^18.3.0",
+    "@types/react-dom": "^18.3.1",
     "daisyui": "^4.12.13",
-    "drizzle-kit": "^0.25.0",
+    "drizzle-kit": "^0.26.1",
     "postcss": "^8.4.47",
-    "tailwindcss": "^3.4.13",
+    "tailwindcss": "^3.4.14",
     "typescript": "^5.6.3"
   },
   "trustedDependencies": ["@biomejs/biome", "esbuild", "sharp"]
