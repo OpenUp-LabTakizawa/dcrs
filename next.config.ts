@@ -2,8 +2,7 @@ import type { NextConfig } from "next"
 
 const nextConfig: NextConfig = {
   experimental: {
-    ppr: "incremental",
-    pprFallbacks: true,
+    ppr: true,
   },
   output: "standalone",
 }
