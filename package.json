@@ -13,18 +13,18 @@
     "studio": "drizzle-kit studio"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.673.0",
+    "@aws-sdk/client-s3": "^3.675.0",
     "@heroicons/react": "^2.1.5",
-    "drizzle-orm": "^0.35.1",
+    "drizzle-orm": "^0.35.2",
     "next": "canary",
     "postgres": "^3.4.4",
     "react": "canary",
     "react-dom": "canary",
-    "react-hook-form": "^7.53.0",
+    "react-hook-form": "^7.53.1",
     "theme-change": "^2.5.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.9.3",
+    "@biomejs/biome": "^1.9.4",
     "@happy-dom/global-registrator": "^15.7.4",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/react": "^16.0.1",
