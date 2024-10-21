@@ -17,5 +17,5 @@ export type User = typeof users.$inferSelect
 export type NewUser = typeof users.$inferInsert
 
 export const db: PostgresJsDatabase<Record<string, never>> = drizzle(
-  process.env.POSTGRES_URL as string,
+  process.env.POSTGRES_URL || "",
 )
