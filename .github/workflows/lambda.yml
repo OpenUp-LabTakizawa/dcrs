@@ -29,8 +29,8 @@ permissions:
 
 env:
   AWS_REGION: ap-northeast-1
-  ECR_REPOSITORY: dcrs
-  LAMBDA_FUNCTION_NAME: dcrs
+  ECR_REPOSITORY: ${{ github.event.repository.name }}
+  LAMBDA_FUNCTION_NAME: ${{ github.event.repository.name }}
 
 jobs:
   lambda:

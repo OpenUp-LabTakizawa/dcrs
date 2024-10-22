@@ -24,9 +24,8 @@ on:
       - "Dockerfile"
       - "package.json"
       - "*config.*"
-  release:
-    types:
-      - published
+    tags:
+      - "v*.*.*"
   workflow_dispatch:
     inputs:
       no-cache:
@@ -52,7 +51,7 @@ env:
   GHCR_REGISTRY: ghcr.io
   GHCR_REPOSITORY: openup-labtakizawa/dcrs
   SHA: ${{ github.event.pull_request.head.sha || github.sha }}
-  IS_PUSH: ${{ github.event_name == 'push' || github.ref_type == 'tag' || inputs.push == true }}
+  IS_PUSH: ${{ github.event_name == 'push' || inputs.push == true }}
 
 jobs:
   build:
@@ -95,7 +94,9 @@ jobs:
             name=${{ env.GHCR_REGISTRY }}/${{ env.GHCR_REPOSITORY }},enable=${{ fromJSON(env.IS_PUSH) }}
           labels: org.opencontainers.image.revision=${{ env.SHA }}
           tags: |
-            type=ref,event=tag
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}},enable=${{ !startsWith(github.ref, 'refs/tags/v0.') }}
             type=ref,event=pr,prefix=pr-
             type=raw,value=canary,enable=${{ github.event_name != 'pull_request_target' }}
         env:
