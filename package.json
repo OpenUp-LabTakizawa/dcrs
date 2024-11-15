@@ -16,7 +16,7 @@
     "studio": "drizzle-kit studio"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.691.0",
+    "@aws-sdk/client-s3": "^3.692.0",
     "@heroicons/react": "^2.1.5",
     "drizzle-orm": "^0.35.3",
     "next": "canary",
@@ -39,7 +39,7 @@
     "daisyui": "^4.12.14",
     "drizzle-kit": "^0.26.2",
     "postcss": "^8.4.49",
-    "tailwindcss": "^3.4.14",
+    "tailwindcss": "^3.4.15",
     "typescript": "^5.6.3"
   },
   "trustedDependencies": ["@biomejs/biome", "esbuild", "sharp"]
