@@ -39,7 +39,7 @@ export function ImageUploader({
   const setAlert: Dispatch<SetStateAction<Alert>> = useContext(AlertContext)
   const inputRef: RefObject<HTMLInputElement | null> =
     useRef<HTMLInputElement | null>(null) as RefObject<HTMLInputElement | null>
-  const input: HTMLInputElement = inputRef.current as HTMLInputElement
+  let input: HTMLInputElement = inputRef.current as HTMLInputElement
   const [image, setImage] = useState<FileList>()
 
   function validateFile(file: Readonly<File>): string {
@@ -102,7 +102,7 @@ export function ImageUploader({
               }}
               ref={(element) => {
                 ref(element)
-                inputRef.current = element as HTMLInputElement
+                input = element as HTMLInputElement
               }}
               {...rest}
               alt="Upload Image"

@@ -7,6 +7,7 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline"
 import {
+  type Context,
   type Dispatch,
   type JSX,
   type ReactNode,
@@ -17,11 +18,10 @@ import {
   useState,
 } from "react"
 
-export const AlertContext = createContext<Dispatch<SetStateAction<Alert>>>(
-  () => {
+export const AlertContext: Context<Dispatch<SetStateAction<Alert>>> =
+  createContext<Dispatch<SetStateAction<Alert>>>(() => {
     return
-  },
-)
+  })
 
 export function AlertBox({
   children,
@@ -35,13 +35,13 @@ export function AlertBox({
     message: "",
   })
 
-  function CloseAlert(): void {
+  function CloseAlert() {
     const timeout = setTimeout(() => {
       setAlert({ eventType: "", message: "" })
-    }, 1500)
+    }, 1000)
     alertBox.classList.remove("fade-in-alert")
     alertBox.classList.add("fade-out-alert")
-    window.clearTimeout(timeout)
+    return () => window.clearTimeout(timeout)
   }
 
   return (
