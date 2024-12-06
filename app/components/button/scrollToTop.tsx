@@ -4,37 +4,27 @@ import { ChevronDoubleUpIcon } from "@heroicons/react/24/solid"
 import { type JSX, type RefObject, useEffect, useRef, useState } from "react"
 
 export function ScrollToTop(): JSX.Element {
-  const ref: RefObject<HTMLButtonElement> = useRef<HTMLButtonElement>(null)
-  const scrollBtn: HTMLButtonElement = ref.current as HTMLButtonElement
+  const ref: RefObject<HTMLButtonElement | null> =
+    useRef<HTMLButtonElement | null>(null)
   const [scrollY, setScrollY] = useState<number>(0)
   const [isScrollDown, setIsScrollDown] = useState<boolean>(false)
   const scrollPoint: number = 200
 
   useEffect(() => {
-    window.addEventListener("scroll", () => setScrollY(window.scrollY))
-    if (
-      scrollPoint < scrollY &&
-      !scrollBtn.classList.contains("scroll-to-top")
-    ) {
-      scrollBtn.classList.remove("hidden")
-      scrollBtn.classList.remove("fade-out-down")
-      scrollBtn.classList.add("fade-in-up")
+    if (scrollPoint < scrollY) {
       setIsScrollDown(true)
     }
-    if (scrollY < scrollPoint && isScrollDown) {
-      scrollBtn.classList.remove("fade-in-up")
-      scrollBtn.classList.remove("scroll-to-top")
-      scrollBtn.classList.add("fade-out-down")
-    }
+
+    window.addEventListener("scroll", () => setScrollY(window.scrollY))
     return () => {
       window.removeEventListener("scroll", () => setScrollY(window.scrollY))
     }
   })
 
   function scrollToTop(): void {
+    const scrollBtn: HTMLButtonElement = ref.current as HTMLButtonElement
+    // restart animation unless remove the animation class
     scrollBtn.classList.remove("fade-in-up")
-    scrollBtn.classList.add("fade-out-down")
-    scrollBtn.classList.add("scroll-to-top")
     window.scrollTo({ top: 0, behavior: "smooth" })
   }
 
@@ -42,10 +32,10 @@ export function ScrollToTop(): JSX.Element {
     <button
       type="button"
       ref={ref}
-      className="bottom-5 btn btn-square btn-primary fixed gap-0 hidden right-5"
       onClick={scrollToTop}
+      className={`bg-sky-400 border-sky-400 bottom-2 button-pop fixed font-bold leading-4 right-2 rounded-lg shadow-lg size-12 text-sm z-10 hover:bg-sky-500 sm:bottom-4 sm:right-4${scrollY < scrollPoint && !isScrollDown ? " hidden" : ""} ${scrollY < scrollPoint ? "fade-out-down" : "fade-in-up"}`}
     >
-      <ChevronDoubleUpIcon className="size-8 scroll-up" />
+      <ChevronDoubleUpIcon className="arrow-up mx-auto size-8" />
       TOP
     </button>
   )

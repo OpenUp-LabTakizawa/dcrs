@@ -49,8 +49,8 @@ export default function Register(): JSX.Element {
     unregister,
     watch,
   } = useForm<ProfileForm>()
-  const dialogRef: RefObject<HTMLDialogElement> =
-    useRef<HTMLDialogElement>(null)
+  const dialogRef: RefObject<HTMLDialogElement | null> =
+    useRef<HTMLDialogElement | null>(null)
   const setAlert: Dispatch<SetStateAction<Alert>> = useContext(AlertContext)
   const router = useRouter()
   const [_state, formAction, isPending] = useActionState(
@@ -229,7 +229,7 @@ function ConfirmDialog({
   watch,
   isPending,
 }: Readonly<{
-  ref: RefObject<HTMLDialogElement>
+  ref: RefObject<HTMLDialogElement | null>
   watch: UseFormWatch<ProfileForm>
   isPending: boolean
 }>): JSX.Element {

@@ -26,7 +26,9 @@ export const AlertContext = createContext<Dispatch<SetStateAction<Alert>>>(
 export function AlertBox({
   children,
 }: Readonly<{ children: ReactNode }>): JSX.Element {
-  const ref: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null)
+  const ref: RefObject<HTMLDivElement | null> = useRef<HTMLDivElement | null>(
+    null,
+  )
   const alertBox: HTMLDivElement = ref.current as HTMLDivElement
   const [alert, setAlert] = useState<Alert>({
     eventType: "",

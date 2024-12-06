@@ -10,8 +10,8 @@ import {
   type Dispatch,
   type DragEvent,
   type JSX,
-  type MutableRefObject,
   type ReactNode,
+  type RefObject,
   type SetStateAction,
   useContext,
   useRef,
@@ -37,8 +37,9 @@ export function ImageUploader({
     { name: "WEBP", mimeType: "image/webp" },
   ] as const
   const setAlert: Dispatch<SetStateAction<Alert>> = useContext(AlertContext)
-  const inputRef: MutableRefObject<HTMLInputElement> =
-    useRef<HTMLInputElement>() as MutableRefObject<HTMLInputElement>
+  const inputRef: RefObject<HTMLInputElement | null> =
+    useRef<HTMLInputElement | null>(null) as RefObject<HTMLInputElement | null>
+  const input: HTMLInputElement = inputRef.current as HTMLInputElement
   const [image, setImage] = useState<FileList>()
 
   function validateFile(file: Readonly<File>): string {
@@ -61,7 +62,7 @@ export function ImageUploader({
   }
 
   function onUploadCancel(eventType: string, message: string): void {
-    inputRef.current.value = ""
+    input.value = ""
     setImage(undefined)
     unregister("image")
     setAlert({
@@ -81,7 +82,7 @@ export function ImageUploader({
           className="w-full"
         />
       )}
-      <DropImageZone image={image as FileList} inputRef={inputRef}>
+      <DropImageZone image={image as FileList} input={input}>
         <PhotoIcon
           className="mx-auto size-12 text-gray-300"
           aria-hidden="true"
@@ -131,11 +132,11 @@ export function ImageUploader({
 function DropImageZone({
   children,
   image,
-  inputRef,
+  input,
 }: Readonly<{
   children: ReactNode
   image: FileList
-  inputRef: MutableRefObject<HTMLInputElement>
+  input: HTMLInputElement
 }>): JSX.Element {
   const [isHoverd, setIsHoverd] = useState<boolean>(false)
 
@@ -151,8 +152,8 @@ function DropImageZone({
     e.preventDefault()
     setIsHoverd(false)
 
-    inputRef.current.files = e.dataTransfer.files
-    inputRef.current.dispatchEvent(new Event("change", { bubbles: true }))
+    input.files = e.dataTransfer.files
+    input.dispatchEvent(new Event("change", { bubbles: true }))
   }
 
   return (
