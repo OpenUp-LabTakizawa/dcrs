@@ -16,14 +16,14 @@
     "studio": "drizzle-kit studio"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.716.0",
+    "@aws-sdk/client-s3": "^3.717.0",
     "@heroicons/react": "^2.2.0",
     "drizzle-orm": "^0.35.3",
     "next": "canary",
     "postgres": "^3.4.5",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-hook-form": "^7.54.1",
+    "react-hook-form": "^7.54.2",
     "theme-change": "^2.5.0"
   },
   "devDependencies": {
