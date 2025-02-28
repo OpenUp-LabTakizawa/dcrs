@@ -6,7 +6,10 @@ export function Footer(): JSX.Element {
   return (
     <footer className="bg-base-300 flex flex-row footer items-center justify-center p-4 text-base-content">
       <aside>
-        <p>Copyright © Open Up Group Inc. All rights reserved.</p>
+        <p>
+          Copyright © {new Date().getFullYear()} Open Up Group Inc. All rights
+          reserved.
+        </p>
       </aside>
       <nav>
         <Link href="https://github.com/OpenUp-LabTakizawa/dcrs" target="_blank">
