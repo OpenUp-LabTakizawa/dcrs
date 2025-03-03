@@ -88,7 +88,7 @@ export function ImageUploader({
           aria-hidden="true"
         />
         <div className="flex leading-6 mt-4 text-sm text-gray-600">
-          <label className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2">
+          <label className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 hover:text-indigo-500 focus-within:outline-hidden focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2">
             <span>アップロード</span>
             <input
               type="file"

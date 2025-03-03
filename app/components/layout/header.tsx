@@ -52,7 +52,7 @@ export function Header(): JSX.Element {
       <Link href="/" className="btn btn-ghost h-fit text-xl">
         {SITE_TITLE}
       </Link>
-      <div className="gap-4">
+      <div className="flex gap-4">
         <Link
           href="/login"
           className="btn btn-ghost btn-square gap-0 h-fit text-nowrap"
