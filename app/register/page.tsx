@@ -68,12 +68,12 @@ export default function Register(): JSX.Element {
     })
       .then((res) => {
         dialogRef.current?.close()
-        if (!res.ok) {
+        if (res.ok) {
+          setAlert({ eventType: "success", message: "送信に成功しました" })
+          router.push("/register/success")
+        } else {
           setAlert({ eventType: "error", message: res.statusText })
-          return formData
         }
-        setAlert({ eventType: "success", message: "送信に成功しました" })
-        router.push("/register/success")
       })
       .catch((error) => {
         dialogRef.current?.close()
@@ -195,7 +195,7 @@ export default function Register(): JSX.Element {
           <CheckIcon className="size-6" />
           確認画面へ
         </button>
-        <ConfirmDialog ref={dialogRef} watch={watch} isPending={isPending} />
+        <ConfirmDialog isPending={isPending} ref={dialogRef} watch={watch} />
       </form>
     </>
   )
@@ -225,13 +225,13 @@ function Input({
 }
 
 function ConfirmDialog({
+  isPending,
   ref,
   watch,
-  isPending,
 }: Readonly<{
+  isPending: boolean
   ref: RefObject<HTMLDialogElement | null>
   watch: UseFormWatch<ProfileForm>
-  isPending: boolean
 }>): JSX.Element {
   const form: ProfileFormItem[] = [
     NAME,

@@ -4,7 +4,8 @@ const nextConfig: NextConfig = {
   experimental: {
     inlineCss: true,
     ppr: true,
-    reactCompiler: true,
+    // Disable react compiler due to react hook form
+    // reactCompiler: true,
     viewTransition: true,
   },
   output: "standalone",
