@@ -29,27 +29,17 @@ export function AlertBox({
   const ref: RefObject<HTMLDivElement | null> = useRef<HTMLDivElement | null>(
     null,
   )
-  const alertBox: HTMLDivElement = ref.current as HTMLDivElement
   const [alert, setAlert] = useState<Alert>({
     eventType: "",
     message: "",
   })
-
-  function CloseAlert() {
-    const timeout = setTimeout(() => {
-      setAlert({ eventType: "", message: "" })
-    }, 1000)
-    alertBox.classList.remove("fade-in-alert")
-    alertBox.classList.add("fade-out-alert")
-    return () => window.clearTimeout(timeout)
-  }
 
   return (
     <AlertContext.Provider value={setAlert}>
       <div
         ref={ref}
         className={`toast toast-center toast-top z-10 ${
-          alert.eventType && alert.message ? "fade-in-alert" : "hidden"
+          alert.eventType && alert.message ? "" : "hidden"
         }`}
       >
         <div
@@ -66,7 +56,7 @@ export function AlertBox({
           <button
             type="button"
             className="btn btn-sm flex-nowrap"
-            onClick={CloseAlert}
+            onClick={() => setAlert({ eventType: "", message: "" })}
           >
             <XMarkIcon className="size-6" />
             閉じる

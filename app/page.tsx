@@ -56,7 +56,7 @@ async function Badge(): Promise<JSX.Element> {
   return (
     <>
       {userData && userData.getUsers.length > 0 && (
-        <div className="badge badge-warning indicator-item">
+        <div className="badge badge-warning gap-0 indicator-item">
           <PlusIcon className="size-4" />
           {userData.getUsers.length}件
         </div>

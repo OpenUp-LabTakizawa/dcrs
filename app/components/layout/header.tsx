@@ -12,20 +12,8 @@ import { themeChange } from "theme-change"
 
 export function Header(): JSX.Element {
   const [theme, setTheme] = useState<"light" | "dark">("light")
-  const [scrollY, setScrollY] = useState<{
-    scrollY: number
-    isScrollDown: boolean
-  }>({ scrollY: 0, isScrollDown: false })
+  const [scrollY, setScrollY] = useState<number>(0)
   const headerHeight: number = 100
-
-  if (typeof window !== "undefined") {
-    window.addEventListener("scroll", () => {
-      setScrollY({
-        scrollY: window.scrollY,
-        isScrollDown: scrollY.scrollY < window.scrollY,
-      })
-    })
-  }
 
   useEffect(() => {
     if (
@@ -39,12 +27,16 @@ export function Header(): JSX.Element {
     if (localStorage.getItem("theme") === "dark") {
       setTheme("dark")
     }
+
+    window.addEventListener("scroll", () => {
+      setScrollY(window.scrollY)
+    })
   })
 
   return (
     <header
       className={`bg-base-100 duration-400 ease justify-between navbar sticky top-0 transition z-10 ${
-        headerHeight < scrollY.scrollY && scrollY.isScrollDown
+        scrollY !== 0 && headerHeight < scrollY
           ? "-translate-y-20"
           : "translate-y-0"
       }`}
@@ -52,10 +44,10 @@ export function Header(): JSX.Element {
       <Link href="/" className="btn btn-ghost h-fit text-xl">
         {SITE_TITLE}
       </Link>
-      <div className="flex gap-4">
+      <div className="flex gap-4 text-nowrap">
         <Link
           href="/login"
-          className="btn btn-ghost btn-square gap-0 h-fit text-nowrap"
+          className="btn btn-ghost flex flex-col gap-0 items-center h-fit p-0 text-nowrap"
         >
           <ArrowRightEndOnRectangleIcon className="rotate-y size-10 text-primary" />
           ログイン

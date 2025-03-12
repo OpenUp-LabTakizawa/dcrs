@@ -7,10 +7,6 @@
   animation: fade-out-alert 1.5s forwards;
 }
 
-.fade-in-alert {
-  animation: fade-in-alert 1.5s;
-}
-
 .fade-out-down {
   animation: fade-out-down 1.5s forwards;
 }
@@ -58,17 +54,6 @@ a:is(:hover) .rotate-y {
   100% {
     opacity: 0;
     transform: translatex(-50%) translatey(-20px);
-  }
-}
-
-@keyframes fade-in-alert {
-  0% {
-    opacity: 0;
-    transform: translatex(-50%) translatey(-20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translatex(-50%) translatey(0);
   }
 }
 
