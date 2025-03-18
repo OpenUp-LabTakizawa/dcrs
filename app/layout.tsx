@@ -7,7 +7,11 @@ import type { Metadata } from "next"
 import type { NextFont } from "next/dist/compiled/@next/font"
 import { Sawarabi_Gothic } from "next/font/google"
 import "./globals.css"
-import type { JSX, ReactNode } from "react"
+import {
+  type JSX,
+  type ReactNode,
+  unstable_ViewTransition as ViewTransition,
+} from "react"
 
 const sawarabi: NextFont = Sawarabi_Gothic({
   subsets: ["latin"],
@@ -26,15 +30,17 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body className={sawarabi.className}>
-        <Header />
-        <main className="bg-gray-50 gap-6 grid items-center justify-center px-4 py-6 sm:px-6 lg:px-8">
-          <AlertBox>
-            {children}
-            {modal}
-          </AlertBox>
-          <ScrollToTop />
-        </main>
-        <Footer />
+        <ViewTransition>
+          <Header />
+          <main className="bg-gray-50 gap-6 grid items-center justify-center px-4 py-6 sm:px-6 lg:px-8">
+            <AlertBox>
+              {children}
+              {modal}
+            </AlertBox>
+            <ScrollToTop />
+          </main>
+          <Footer />
+        </ViewTransition>
       </body>
     </html>
   )
