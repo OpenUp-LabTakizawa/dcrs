@@ -22,8 +22,8 @@
     "drizzle-orm": "^0.40.1",
     "next": "canary",
     "postgres": "^3.4.5",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
     "react-hook-form": "next",
     "theme-change": "^2.5.0"
   },
