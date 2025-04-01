@@ -16,7 +16,7 @@
     "studio": "drizzle-kit studio"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.777.0",
+    "@aws-sdk/client-s3": "^3.779.0",
     "@heroicons/react": "^2.2.0",
     "@next/plugin-rspack": "canary",
     "drizzle-orm": "^0.40.1",
