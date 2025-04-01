@@ -38,8 +38,8 @@ export function AlertBox({
     <AlertContext.Provider value={setAlert}>
       <div
         ref={ref}
-        className={`toast toast-center toast-top z-10 ${
-          alert.eventType && alert.message ? "" : "hidden"
+        className={`duration-1000 toast toast-center toast-top transition-discrete z-10${
+          alert.eventType && alert.message ? "" : " hidden opacity-0"
         }`}
       >
         <div
