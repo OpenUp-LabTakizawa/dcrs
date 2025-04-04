@@ -1,5 +1,6 @@
 "use client"
 
+import { BlockerLink } from "@/app/components/button/blockerLink"
 import { SITE_TITLE } from "@/app/lib/constant"
 import {
   ArrowRightEndOnRectangleIcon,
@@ -41,9 +42,9 @@ export function Header(): JSX.Element {
           : "translate-y-0"
       }`}
     >
-      <Link href="/" className="btn btn-ghost h-fit text-xl">
+      <BlockerLink href="/" className="btn btn-ghost h-fit text-xl">
         {SITE_TITLE}
-      </Link>
+      </BlockerLink>
       <div className="flex gap-4 text-nowrap">
         <Link
           href="/login"

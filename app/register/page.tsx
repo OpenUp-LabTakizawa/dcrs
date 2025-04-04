@@ -2,6 +2,7 @@
 
 import { PingAnimation } from "@/app/components/animation/pingAnimation"
 import { AlertContext } from "@/app/components/layout/alertBox"
+import { useNavigationBlocker } from "@/app/components/layout/navigationBlocker"
 import { Stepper } from "@/app/components/layout/stepper"
 import type { Alert } from "@/app/interfaces/alert"
 import type { ProfileForm, ProfileFormItem } from "@/app/interfaces/form"
@@ -30,6 +31,7 @@ import {
   type SetStateAction,
   useActionState,
   useContext,
+  useEffect,
   useRef,
 } from "react"
 import {
@@ -52,6 +54,7 @@ export default function Register(): JSX.Element {
   const dialogRef: RefObject<HTMLDialogElement | null> =
     useRef<HTMLDialogElement | null>(null)
   const setAlert: Dispatch<SetStateAction<Alert>> = useContext(AlertContext)
+  const { isBlocked, setIsBlocked } = useNavigationBlocker()
   const router = useRouter()
   const [_state, formAction, isPending] = useActionState(
     sendData,
@@ -82,10 +85,29 @@ export default function Register(): JSX.Element {
     return formData
   }
 
+  useEffect(() => {
+    function beforeUnloadhandler(e: BeforeUnloadEvent): void {
+      if (isBlocked) {
+        e.preventDefault()
+      } else {
+        setIsBlocked(false)
+      }
+    }
+
+    window.addEventListener("beforeunload", beforeUnloadhandler)
+    return () => {
+      window.removeEventListener("beforeunload", beforeUnloadhandler)
+    }
+  }, [isBlocked, setIsBlocked])
+
   return (
     <>
       <Stepper targetStep={0} />
-      <form action={formAction} className="flex flex-col gap-6 max-w-xs">
+      <form
+        action={formAction}
+        onChange={() => setIsBlocked(true)}
+        className="flex flex-col gap-6 max-w-xs"
+      >
         <p className="text-center before:ml-0.5 before:text-red-500 before:content-['*']">
           は必須項目
         </p>

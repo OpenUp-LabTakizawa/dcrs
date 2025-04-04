@@ -152,6 +152,9 @@ function DropImageZone({
     e.preventDefault()
     setIsHoverd(false)
 
+    if (e.dataTransfer.files.length === 0) {
+      return
+    }
     input.files = e.dataTransfer.files
     input.dispatchEvent(new Event("change", { bubbles: true }))
   }

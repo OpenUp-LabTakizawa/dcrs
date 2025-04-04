@@ -2,6 +2,7 @@ import { ScrollToTop } from "@/app/components/button/scrollToTop"
 import { AlertBox } from "@/app/components/layout/alertBox"
 import { Footer } from "@/app/components/layout/footer"
 import { Header } from "@/app/components/layout/header"
+import { NavigationBlockerProvider } from "@/app/components/layout/navigationBlocker"
 import { SITE_TITLE } from "@/app/lib/constant"
 import type { Metadata } from "next"
 import type { NextFont } from "next/dist/compiled/@next/font"
@@ -31,15 +32,17 @@ export default function RootLayout({
     <html lang="ja">
       <body className={sawarabi.className}>
         <ViewTransition>
-          <Header />
-          <main className="bg-gray-50 gap-6 grid items-center justify-center px-4 py-6 sm:px-6 lg:px-8">
-            <AlertBox>
-              {children}
-              {modal}
-            </AlertBox>
-            <ScrollToTop />
-          </main>
-          <Footer />
+          <NavigationBlockerProvider>
+            <Header />
+            <main className="bg-gray-50 gap-6 grid items-center justify-center px-4 py-6 sm:px-6 lg:px-8">
+              <AlertBox>
+                {children}
+                {modal}
+              </AlertBox>
+              <ScrollToTop />
+            </main>
+            <Footer />
+          </NavigationBlockerProvider>
         </ViewTransition>
       </body>
     </html>
