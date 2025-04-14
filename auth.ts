@@ -1,6 +1,7 @@
 import { db } from "@/app/lib/schema"
 import { DrizzleAdapter } from "@auth/drizzle-adapter"
 import NextAuth from "next-auth"
+import ForwardEmail from "next-auth/providers/forwardemail"
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: DrizzleAdapter(db),
@@ -12,5 +13,5 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       return profile.email.endsWith("@bnt.benextgroup.jp")
     },
   },
-  providers: [],
+  providers: [ForwardEmail],
 })

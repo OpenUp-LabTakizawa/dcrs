@@ -49,7 +49,6 @@ function TableIndex(): JSX.Element {
           {index.name}
         </td>
       ))}
-      <Checkbox />
     </tr>
   )
 }
@@ -73,7 +72,6 @@ function Skeleton(): JSX.Element {
           <p className="h-4 skeleton text-transparent w-full" />
         </td>
       ))}
-      <Checkbox />
     </tr>
   )
 }
@@ -83,7 +81,7 @@ async function Tbody(): Promise<JSX.Element> {
 
   return (
     <>
-      {userData ? (
+      {userData?.getUsers?.length > 0 ? (
         userData.getUsers.map((user: User) => (
           <tr key={user.id} className="hover">
             <Checkbox />
@@ -111,7 +109,6 @@ async function Tbody(): Promise<JSX.Element> {
                 <ArrowTopRightOnSquareIcon className="inline ml-1 size-4" />
               </Link>
             </td>
-            <Checkbox />
           </tr>
         ))
       ) : (

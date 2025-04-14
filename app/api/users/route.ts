@@ -1,6 +1,6 @@
 import { TEST_BUCKET } from "@/app/lib/constant"
 import { client } from "@/app/lib/s3client"
-import { type NewUser, type User, db, users } from "@/app/lib/schema"
+import { type NewUser, type User, db, handicap } from "@/app/lib/schema"
 import {
   DeleteObjectCommand,
   type DeleteObjectCommandOutput,
@@ -9,7 +9,7 @@ import {
 } from "@aws-sdk/client-s3"
 
 export async function GET(): Promise<Response> {
-  const getUsers: User[] = await db.select().from(users)
+  const getUsers: User[] = await db.select().from(handicap)
   return Response.json({ getUsers })
 }
 
@@ -30,7 +30,7 @@ export async function POST(request: Readonly<Request>): Promise<Response> {
     image: `${body.get("employeeId")}.${image.name.split(".").pop()}`,
   }
   const insertUser: User[] = await db
-    .insert(users)
+    .insert(handicap)
     .values(newUser)
     .returning()
     .then((users) => users)
