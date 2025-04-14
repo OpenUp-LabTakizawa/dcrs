@@ -5,8 +5,8 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "dev-win": "WATCHPACK_POLLING=true next dev --turbopack",
-    "build": "next build",
-    "start": "next start",
+    "build": "next build --turbopack",
+    "start": "next start --turbopack",
     "lint": "bunx biome check --write",
     "test:app": "bun test test/app",
     "test:e2e": "bun playwright test",
@@ -16,11 +16,12 @@
     "studio": "drizzle-kit studio"
   },
   "dependencies": {
+    "@auth/drizzle-adapter": "^1.8.0",
     "@aws-sdk/client-s3": "^3.787.0",
     "@heroicons/react": "^2.2.0",
     "drizzle-orm": "^0.40.1",
     "next": "canary",
-    "next-rspack": "canary",
+    "next-auth": "beta",
     "postgres": "^3.4.5",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",

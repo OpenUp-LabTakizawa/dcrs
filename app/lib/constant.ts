@@ -15,7 +15,7 @@ import {
   UserIcon,
 } from "@heroicons/react/24/solid"
 
-export const SITE_TITLE: string = "障がい者手帳登録システム"
+export const SITE_TITLE: string = "障がい者手帳\n登録システム"
 export const TEST_BUCKET: string = "dcrs-test"
 export const USERS_LINK: Index = {
   name: "登録データ一覧",
