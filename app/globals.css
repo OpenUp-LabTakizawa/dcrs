@@ -3,6 +3,10 @@
 
 @custom-variant dark (&:is([data-theme="dark"] *));
 
+@theme {
+  --font-sawarabi: "Sawarabi Gothic", sans-serif;
+}
+
 .fade-out-alert {
   animation: fade-out-alert 1.5s forwards;
 }
