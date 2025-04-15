@@ -4,14 +4,17 @@ import { BlockerLink } from "@/app/components/button/blockerLink"
 import { SignInModal } from "@/app/components/layout/signInModal"
 import { SITE_TITLE } from "@/app/lib/constant"
 import {
+  ArrowLeftStartOnRectangleIcon,
   ArrowRightEndOnRectangleIcon,
   MoonIcon,
   SunIcon,
 } from "@heroicons/react/24/outline"
+import { signOut, useSession } from "next-auth/react"
 import { type JSX, useEffect, useRef, useState } from "react"
 import { themeChange } from "theme-change"
 
 export function Header(): JSX.Element {
+  const { data: session } = useSession()
   const [theme, setTheme] = useState<"light" | "dark">("light")
   const dialogRef = useRef<HTMLDialogElement | null>(null)
   const [scrollY, setScrollY] = useState<number>(0)
@@ -54,10 +57,22 @@ export function Header(): JSX.Element {
           <button
             type="button"
             onClick={() => dialogRef.current?.showModal()}
-            className="btn btn-ghost flex flex-col gap-0 items-center h-fit p-0 text-nowrap"
+            className={`btn btn-ghost flex flex-col gap-0 items-center h-fit p-0 text-nowrap${
+              session ? " hidden" : ""
+            }`}
           >
             <ArrowRightEndOnRectangleIcon className="rotate-y size-10 text-primary" />
             ログイン
+          </button>
+          <button
+            type="button"
+            onClick={() => signOut()}
+            className={`btn btn-ghost flex flex-col gap-0 items-center h-fit p-0 text-nowrap${
+              session ? "" : " hidden"
+            }`}
+          >
+            <ArrowLeftStartOnRectangleIcon className="rotate-y size-10 text-accent" />
+            ログアウト
           </button>
           <label className="btn btn-ghost btn-square h-fit swap swap-rotate">
             <input type="checkbox" />
@@ -78,7 +93,7 @@ export function Header(): JSX.Element {
           </label>
         </div>
       </header>
-      <SignInModal ref={dialogRef} />
+      <SignInModal dialogRef={dialogRef} />
     </>
   )
 }

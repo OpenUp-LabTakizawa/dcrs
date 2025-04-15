@@ -8,6 +8,7 @@ import type { Metadata } from "next"
 import type { NextFont } from "next/dist/compiled/@next/font"
 import { Sawarabi_Gothic } from "next/font/google"
 import "./globals.css"
+import { SessionProvider } from "next-auth/react"
 import {
   type JSX,
   type ReactNode,
@@ -32,17 +33,19 @@ export default function RootLayout({
     <html lang="ja">
       <body className={sawarabi.className}>
         <ViewTransition>
-          <NavigationBlockerProvider>
-            <Header />
-            <main className="bg-gray-50 gap-6 grid items-center justify-center px-4 py-6 sm:px-6 lg:px-8">
-              <AlertBox>
-                {children}
-                {modal}
-              </AlertBox>
-              <ScrollToTop />
-            </main>
-            <Footer />
-          </NavigationBlockerProvider>
+          <SessionProvider>
+            <NavigationBlockerProvider>
+              <Header />
+              <main className="bg-gray-50 gap-6 grid items-center justify-center px-4 py-6 sm:px-6 lg:px-8">
+                <AlertBox>
+                  {children}
+                  {modal}
+                </AlertBox>
+                <ScrollToTop />
+              </main>
+              <Footer />
+            </NavigationBlockerProvider>
+          </SessionProvider>
         </ViewTransition>
       </body>
     </html>

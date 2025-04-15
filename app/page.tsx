@@ -1,6 +1,7 @@
 import { STEPS } from "@/app/lib/constant"
 import { getUsers } from "@/app/lib/getUsers"
 import type { User } from "@/app/lib/schema"
+import { auth } from "@/auth"
 import {
   CameraIcon,
   ForwardIcon,
@@ -12,7 +13,9 @@ import { type JSX, Suspense } from "react"
 
 export const dynamic = "force-dynamic"
 
-export default function Home(): JSX.Element {
+export default async function Home(): Promise<JSX.Element> {
+  const session = await auth()
+
   return (
     <>
       <h1 className="flex font-semibold items-center mx-auto text-center text-2xl w-fit">
@@ -37,7 +40,10 @@ export default function Home(): JSX.Element {
         <CameraIcon className="size-6" />
         障がい者手帳画像を提出
       </Link>
-      <Link href="/users" className="btn btn-secondary indicator mx-auto">
+      <Link
+        href="/users"
+        className={`btn btn-secondary indicator mx-auto${session?.user ? "" : " hidden"}`}
+      >
         <TableCellsIcon className="size-6" />
         登録データ一覧
         <Suspense
