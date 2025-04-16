@@ -38,7 +38,7 @@
     "@types/bun": "^1.2.9",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
-    "daisyui": "^5.0.19",
+    "daisyui": "^5.0.20",
     "drizzle-kit": "^0.30.6",
     "postcss": "^8.5.3",
     "tailwindcss": "^4.1.4",
