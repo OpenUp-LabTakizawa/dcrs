@@ -9,6 +9,7 @@ export default {
       return profile.user.email.endsWith("@bnt.benextgroup.jp")
     },
   },
-  session: { strategy: "jwt" },
   providers: [],
+  session: { strategy: "jwt" },
+  trustHost: true,
 } satisfies NextAuthConfig
