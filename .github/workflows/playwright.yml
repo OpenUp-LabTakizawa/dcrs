@@ -48,14 +48,17 @@ jobs:
       - name: 📦 Install dependencies
         run: bun i
 
+      - name: 🔑 Generate Auth.js Secret
+        run: bunx auth secret
+
       - name: 🧩 Build app
         run: bun run build
 
       - name: 🎭 Install Playwright Browsers
-        run: bunx playwright install --with-deps
+        run: bun playwright install --with-deps
 
       - name: 🧪 Run Playwright tests
-        run: bunx playwright test
+        run: bun playwright test
 
       - name: 🆙 Upload Test Report
         uses: actions/upload-artifact@v4
