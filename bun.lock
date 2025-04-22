@@ -10,7 +10,6 @@
         "drizzle-orm": "^0.40.1",
         "next": "canary",
         "next-auth": "beta",
-        "postgres": "^3.4.5",
         "react": "^19.1.0",
         "react-dom": "^19.1.0",
         "react-hook-form": "next",
