@@ -1,3 +1,4 @@
+import { drizzle } from "drizzle-orm/neon-http"
 import {
   boolean,
   integer,
@@ -6,10 +7,9 @@ import {
   text,
   timestamp,
 } from "drizzle-orm/pg-core"
-import { drizzle } from "drizzle-orm/postgres-js"
 import type { AdapterAccountType } from "next-auth/adapters"
 
-export const db = drizzle({ connection: process.env.DATABASE_URL || "" })
+export const db = drizzle(process.env.DATABASE_URL || "")
 
 export const handicap = pgTable("handicap", {
   id: integer("id").primaryKey().generatedAlwaysAsIdentity(),

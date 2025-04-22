@@ -119,6 +119,7 @@ jobs:
           provenance: ${{ fromJSON(env.IS_PUSH) && 'mode=max' }}
           push: ${{ fromJSON(env.IS_PUSH) }}
           sbom: ${{ fromJSON(env.IS_PUSH) }}
+          secrets: database=${{ secrets.DATABASE_URL }}
           tags: ${{ steps.meta.outputs.tags }}
 
       - name: 🪪 Attest

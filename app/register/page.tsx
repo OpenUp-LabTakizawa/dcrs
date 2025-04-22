@@ -73,6 +73,7 @@ export default function Register(): JSX.Element {
         dialogRef.current?.close()
         if (res.ok) {
           setAlert({ eventType: "success", message: "送信に成功しました" })
+          setIsBlocked(false)
           router.push("/register/success")
         } else {
           setAlert({ eventType: "error", message: res.statusText })

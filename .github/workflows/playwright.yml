@@ -53,6 +53,8 @@ jobs:
 
       - name: 🧩 Build app
         run: bun run build
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
       - name: 🎭 Install Playwright Browsers
         run: bun playwright install --with-deps

@@ -66,7 +66,7 @@ export function Header(): JSX.Element {
           </button>
           <button
             type="button"
-            onClick={() => signOut()}
+            onClick={() => signOut({ redirectTo: "/" })}
             className={`btn btn-ghost flex flex-col gap-0 items-center h-fit p-0 text-nowrap${
               session ? "" : " hidden"
             }`}

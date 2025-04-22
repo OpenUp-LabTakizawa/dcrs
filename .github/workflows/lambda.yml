@@ -75,6 +75,7 @@ jobs:
         platforms: linux/arm64
         provenance: false
         push: true
+        secrets: database=${{ secrets.DATABASE_URL }}
         tags: ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ github.sha }}
 
     - name: 🥩 Update Lambda Function
