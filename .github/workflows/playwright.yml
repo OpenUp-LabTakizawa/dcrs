@@ -31,6 +31,8 @@ jobs:
   test:
     timeout-minutes: 30
     runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
     steps:
       - name: 📥 Checkout
@@ -53,8 +55,6 @@ jobs:
 
       - name: 🧩 Build app
         run: bun run build
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
       - name: 🎭 Install Playwright Browsers
         run: bun playwright install --with-deps
