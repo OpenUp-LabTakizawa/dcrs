@@ -64,7 +64,7 @@ jobs:
 
       - name: 🧪 Test app
         env:
-          DATABASE_URL: postgres://postgres:postgres@localhost:5433/postgres
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
         run: |
           bun test:app &> >(tee -p test.log) || echo STATUS=$? >> $GITHUB_ENV
           {
