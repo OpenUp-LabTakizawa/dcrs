@@ -17,9 +17,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       if (isOnUserTable) {
         return isLoggedIn
       }
-      if (isLoggedIn) {
-        return Response.redirect(new URL("/users", nextUrl))
-      }
       return true
     },
     signIn(profile) {
