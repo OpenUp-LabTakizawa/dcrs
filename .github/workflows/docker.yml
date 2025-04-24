@@ -133,7 +133,7 @@ jobs:
           provenance: ${{ fromJSON(env.IS_PUSH) && 'mode=max' }}
           push: ${{ fromJSON(env.IS_PUSH) }}
           sbom: ${{ fromJSON(env.IS_PUSH) }}
-          secrets: database=postgres://postgres:postgres@localhost:5433/postgres
+          secrets: database=postgres://postgres:postgres@postgres:5433/postgres
           tags: ${{ steps.meta.outputs.tags }}
 
       - name: 🪪 Attest
