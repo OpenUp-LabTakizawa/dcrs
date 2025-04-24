@@ -64,6 +64,16 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     if: github.repository_owner == 'openup-labtakizawa'
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     steps:
       - name: 📥 Checkout
@@ -123,7 +133,7 @@ jobs:
           provenance: ${{ fromJSON(env.IS_PUSH) && 'mode=max' }}
           push: ${{ fromJSON(env.IS_PUSH) }}
           sbom: ${{ fromJSON(env.IS_PUSH) }}
-          secrets: database=${{ secrets.DATABASE_URL }}
+          secrets: database=postgres://postgres:postgres@localhost:5433/postgres
           tags: ${{ steps.meta.outputs.tags }}
 
       - name: 🪪 Attest

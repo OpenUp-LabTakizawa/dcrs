@@ -40,6 +40,16 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     if: github.repository_owner == 'openup-labtakizawa'
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     steps:
     - name: 📥 Checkout
@@ -77,7 +87,7 @@ jobs:
         platforms: linux/arm64
         provenance: false
         push: true
-        secrets: database=${{ secrets.DATABASE_URL }}
+        secrets: database=database=postgres://postgres:postgres@localhost:5433/postgres
         tags: ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ github.sha }}
 
     - name: 🥩 Update Lambda Function
