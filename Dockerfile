@@ -12,7 +12,7 @@ RUN --mount=type=secret,id=database,env=DATABASE_URL \
 RUN --mount=type=secret,id=database,env=DATABASE_URL \
   bun run build
 
-FROM gcr.io/distroless/nodejs22-debian12:nonroot
+FROM gcr.io/distroless/nodejs24-debian12:nonroot
 WORKDIR /app
 COPY --from=public.ecr.aws/awsguru/aws-lambda-adapter:0.9.1 /lambda-adapter /opt/extensions/lambda-adapter
 
