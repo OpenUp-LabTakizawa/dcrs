@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@auth/drizzle-adapter": "^1.9.1",
-    "@aws-sdk/client-s3": "^3.815.0",
+    "@aws-sdk/client-s3": "^3.816.0",
     "@heroicons/react": "^2.2.0",
     "drizzle-orm": "^0.40.1",
     "next": "canary",
@@ -37,7 +37,7 @@
     "@types/bun": "^1.2.14",
     "@types/react": "^19.1.5",
     "@types/react-dom": "^19.1.5",
-    "daisyui": "^5.0.35",
+    "daisyui": "^5.0.37",
     "drizzle-kit": "^0.30.6",
     "postcss": "^8.5.3",
     "tailwindcss": "^4.1.7",
