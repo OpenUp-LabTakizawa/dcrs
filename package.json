@@ -20,7 +20,7 @@
     "@aws-sdk/client-s3": "^3.823.0",
     "@neondatabase/serverless": "^1.0.0",
     "@heroicons/react": "^2.2.0",
-    "drizzle-orm": "^0.44.1",
+    "drizzle-orm": "^0.44.2",
     "next": "canary",
     "next-auth": "beta",
     "react": "^19.1.0",
@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
-    "@happy-dom/global-registrator": "^17.6.2",
+    "@happy-dom/global-registrator": "^17.6.3",
     "@playwright/test": "next",
     "@tailwindcss/postcss": "^4.1.8",
     "@testing-library/dom": "^10.4.0",
