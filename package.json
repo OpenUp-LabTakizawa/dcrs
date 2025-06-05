@@ -7,10 +7,10 @@
     "dev-win": "WATCHPACK_POLLING=true next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
-    "lint": "bun biome check --write",
+    "lint": "biome check --write",
     "test:app": "bun test test/app",
-    "test:e2e": "bun playwright test",
-    "test:report": "bun playwright show-report",
+    "test:e2e": "playwright test",
+    "test:report": "playwright show-report",
     "generate": "drizzle-kit generate",
     "migrate": "drizzle-kit migrate",
     "studio": "drizzle-kit studio"
