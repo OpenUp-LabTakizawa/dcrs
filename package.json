@@ -36,7 +36,7 @@
     "@testing-library/dom": "^10.4.0",
     "@testing-library/react": "^16.3.0",
     "@types/bun": "^1.2.15",
-    "@types/react": "^19.1.6",
+    "@types/react": "^19.1.7",
     "@types/react-dom": "^19.1.6",
     "daisyui": "^5.0.43",
     "drizzle-kit": "^0.31.1",
