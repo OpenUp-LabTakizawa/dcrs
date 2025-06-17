@@ -25,11 +25,11 @@
     "next-auth": "beta",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "react-hook-form": "^7.58.0",
+    "react-hook-form": "^7.58.1",
     "theme-change": "^2.5.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.9.4",
+    "@biomejs/biome": "^2.0.0",
     "@happy-dom/global-registrator": "^18.0.1",
     "@playwright/test": "next",
     "@tailwindcss/postcss": "^4.1.10",
