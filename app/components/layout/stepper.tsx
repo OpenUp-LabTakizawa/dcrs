@@ -1,5 +1,5 @@
-import { STEPS } from "@/app/lib/constant"
 import type { JSX } from "react"
+import { STEPS } from "@/app/lib/constant"
 
 export function Stepper({
   targetStep,

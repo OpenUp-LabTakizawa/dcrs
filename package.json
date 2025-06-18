@@ -44,5 +44,9 @@
     "tailwindcss": "^4.1.10",
     "typescript": "^5.8.3"
   },
-  "trustedDependencies": ["@biomejs/biome", "esbuild", "sharp"]
+  "trustedDependencies": [
+    "@biomejs/biome",
+    "esbuild",
+    "sharp"
+  ]
 }

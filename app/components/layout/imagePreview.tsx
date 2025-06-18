@@ -1,7 +1,7 @@
-import { getImage } from "@/app/lib/getImage"
 import { PhotoIcon } from "@heroicons/react/24/solid"
 import Image from "next/image"
 import type { JSX } from "react"
+import { getImage } from "@/app/lib/getImage"
 
 export async function ImagePreview({
   path,

@@ -1,21 +1,5 @@
 "use client"
 
-import { PingAnimation } from "@/app/components/animation/pingAnimation"
-import { AlertContext } from "@/app/components/layout/alertBox"
-import { useNavigationBlocker } from "@/app/components/layout/navigationBlocker"
-import { Stepper } from "@/app/components/layout/stepper"
-import type { Alert } from "@/app/interfaces/alert"
-import type { ProfileForm, ProfileFormItem } from "@/app/interfaces/form"
-import {
-  AGREEMENT,
-  COMPANY,
-  EMAIL,
-  EMPLOYEE_ID,
-  IMAGE,
-  NAME,
-  TELEPHONE,
-} from "@/app/lib/constant"
-import { ImageUploader } from "@/app/register/imageUploader"
 import {
   ArrowUturnLeftIcon,
   CheckIcon,
@@ -39,6 +23,22 @@ import {
   type UseFormWatch,
   useForm,
 } from "react-hook-form"
+import { PingAnimation } from "@/app/components/animation/pingAnimation"
+import { AlertContext } from "@/app/components/layout/alertBox"
+import { useNavigationBlocker } from "@/app/components/layout/navigationBlocker"
+import { Stepper } from "@/app/components/layout/stepper"
+import type { Alert } from "@/app/interfaces/alert"
+import type { ProfileForm, ProfileFormItem } from "@/app/interfaces/form"
+import {
+  AGREEMENT,
+  COMPANY,
+  EMAIL,
+  EMPLOYEE_ID,
+  IMAGE,
+  NAME,
+  TELEPHONE,
+} from "@/app/lib/constant"
+import { ImageUploader } from "@/app/register/imageUploader"
 
 export default function Register(): JSX.Element {
   const companies: string[] = [

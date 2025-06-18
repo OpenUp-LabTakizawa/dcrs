@@ -1,11 +1,11 @@
+import type { Metadata } from "next"
+import { Sawarabi_Gothic } from "next/font/google"
 import { ScrollToTop } from "@/app/components/button/scrollToTop"
 import { AlertBox } from "@/app/components/layout/alertBox"
 import { Footer } from "@/app/components/layout/footer"
 import { Header } from "@/app/components/layout/header"
 import { NavigationBlockerProvider } from "@/app/components/layout/navigationBlocker"
 import { SITE_TITLE } from "@/app/lib/constant"
-import type { Metadata } from "next"
-import { Sawarabi_Gothic } from "next/font/google"
 import "./globals.css"
 import { SessionProvider } from "next-auth/react"
 import {

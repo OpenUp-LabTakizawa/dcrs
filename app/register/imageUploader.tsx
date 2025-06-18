@@ -1,8 +1,5 @@
 "use client"
 
-import { AlertContext } from "@/app/components/layout/alertBox"
-import type { Alert } from "@/app/interfaces/alert"
-import type { ProfileForm } from "@/app/interfaces/form"
 import { PhotoIcon, XMarkIcon } from "@heroicons/react/24/solid"
 import Image from "next/image"
 import {
@@ -18,6 +15,9 @@ import {
   useState,
 } from "react"
 import type { UseFormRegister, UseFormUnregister } from "react-hook-form"
+import { AlertContext } from "@/app/components/layout/alertBox"
+import type { Alert } from "@/app/interfaces/alert"
+import type { ProfileForm } from "@/app/interfaces/form"
 
 export function ImageUploader({
   register,
@@ -161,6 +161,7 @@ function DropImageZone({
 
   return (
     <div
+      role="img"
       onDragEnter={() => setIsHoverd(true)}
       onDragLeave={(e) => onDragLeave(e)}
       onDragOver={(e) => e.preventDefault()}

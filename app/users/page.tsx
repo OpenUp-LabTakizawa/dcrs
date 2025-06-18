@@ -1,12 +1,12 @@
+import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/solid"
+import Link from "next/link"
+import { type JSX, Suspense } from "react"
 import { Pagination } from "@/app/components/button/pagination"
 import { Breadcrumb } from "@/app/components/layout/breadcrumb"
 import { ScrollRightHint } from "@/app/components/layout/scrollHint"
 import { INDEX_LIST, USERS_LINK } from "@/app/lib/constant"
 import { getUsers } from "@/app/lib/getUsers"
 import type { User } from "@/app/lib/schema"
-import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/solid"
-import Link from "next/link"
-import { type JSX, Suspense } from "react"
 
 export const dynamic = "force-dynamic"
 

@@ -1,7 +1,7 @@
-import type { Index } from "@/app/interfaces/index"
 import { HomeIcon } from "@heroicons/react/24/solid"
 import Link from "next/link"
 import type { JSX } from "react"
+import type { Index } from "@/app/interfaces/index"
 
 export function Breadcrumb({
   crumbs,

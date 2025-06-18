@@ -1,6 +1,5 @@
 "use client"
 
-import type { Alert } from "@/app/interfaces/alert"
 import {
   CheckCircleIcon,
   ExclamationCircleIcon,
@@ -8,15 +7,16 @@ import {
 } from "@heroicons/react/24/outline"
 import {
   type Context,
+  createContext,
   type Dispatch,
   type JSX,
   type ReactNode,
   type RefObject,
   type SetStateAction,
-  createContext,
   useRef,
   useState,
 } from "react"
+import type { Alert } from "@/app/interfaces/alert"
 
 export const AlertContext: Context<Dispatch<SetStateAction<Alert>>> =
   createContext<Dispatch<SetStateAction<Alert>>>(() => {

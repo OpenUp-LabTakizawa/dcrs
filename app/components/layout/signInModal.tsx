@@ -1,11 +1,11 @@
 "use client"
 
-import { signInAction } from "@/app/lib/signIn"
 import {
   ArrowRightEndOnRectangleIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline"
 import { type JSX, type RefObject, useState } from "react"
+import { signInAction } from "@/app/lib/signIn"
 
 const emailRegex = /\S+@\S+\.\S+/
 

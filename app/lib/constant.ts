@@ -1,5 +1,3 @@
-import type { ProfileFormItem } from "@/app/interfaces/form"
-import type { Index } from "@/app/interfaces/index"
 import {
   BuildingOffice2Icon,
   CheckCircleIcon,
@@ -14,6 +12,8 @@ import {
   TagIcon,
   UserIcon,
 } from "@heroicons/react/24/solid"
+import type { ProfileFormItem } from "@/app/interfaces/form"
+import type { Index } from "@/app/interfaces/index"
 
 export const SITE_TITLE: string = "障がい者手帳\n登録システム"
 export const TEST_BUCKET: string = "dcrs-test"

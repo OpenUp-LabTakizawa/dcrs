@@ -1,8 +1,8 @@
 "use client"
 
-import { useNavigationBlocker } from "@/app/components/layout/navigationBlocker"
 import Link from "next/link"
 import type { ComponentProps, ReactNode } from "react"
+import { useNavigationBlocker } from "@/app/components/layout/navigationBlocker"
 
 interface BlockerLinkProps extends ComponentProps<typeof Link> {
   children: ReactNode

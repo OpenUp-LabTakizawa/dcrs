@@ -1,12 +1,12 @@
-import { TEST_BUCKET } from "@/app/lib/constant"
-import { client } from "@/app/lib/s3client"
-import { type NewUser, type User, db, handicap } from "@/app/lib/schema"
 import {
   DeleteObjectCommand,
   type DeleteObjectCommandOutput,
   PutObjectCommand,
   type PutObjectCommandOutput,
 } from "@aws-sdk/client-s3"
+import { TEST_BUCKET } from "@/app/lib/constant"
+import { client } from "@/app/lib/s3client"
+import { db, handicap, type NewUser, type User } from "@/app/lib/schema"
 
 export async function GET(): Promise<Response> {
   const getUsers: User[] = await db.select().from(handicap)

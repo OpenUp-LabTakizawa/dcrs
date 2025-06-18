@@ -1,6 +1,5 @@
 "use client"
 
-import { DownloadBtn } from "@/app/components/button/downloadBtn"
 import { XMarkIcon } from "@heroicons/react/24/solid"
 import { useRouter } from "next/navigation"
 import {
@@ -10,6 +9,7 @@ import {
   useEffect,
   useRef,
 } from "react"
+import { DownloadBtn } from "@/app/components/button/downloadBtn"
 
 export function Modal({
   children,

@@ -1,9 +1,9 @@
-import { TEST_BUCKET } from "@/app/lib/constant"
-import { client } from "@/app/lib/s3client"
 import {
   GetObjectCommand,
   type GetObjectCommandOutput,
 } from "@aws-sdk/client-s3"
+import { TEST_BUCKET } from "@/app/lib/constant"
+import { client } from "@/app/lib/s3client"
 
 export async function GET(
   _request: Request,

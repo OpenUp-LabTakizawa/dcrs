@@ -1,11 +1,11 @@
+import { ArrowUturnLeftIcon } from "@heroicons/react/24/solid"
+import Link from "next/link"
+import { type JSX, Suspense } from "react"
 import { DownloadBtn } from "@/app/components/button/downloadBtn"
 import { Breadcrumb } from "@/app/components/layout/breadcrumb"
 import { ImagePreview } from "@/app/components/layout/imagePreview"
 import type { Index } from "@/app/interfaces/index"
 import { INDEX_LIST, USERS_LINK } from "@/app/lib/constant"
-import { ArrowUturnLeftIcon } from "@heroicons/react/24/solid"
-import Link from "next/link"
-import { type JSX, Suspense } from "react"
 
 export default async function ImagePage({
   params,

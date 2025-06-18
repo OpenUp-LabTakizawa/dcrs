@@ -14,7 +14,6 @@ export function Footer(): JSX.Element {
       <nav>
         <Link href="https://github.com/OpenUp-LabTakizawa/dcrs" target="_blank">
           <Image
-            id="github-mark"
             src="/github-mark.svg"
             alt="GitHub"
             width={24}

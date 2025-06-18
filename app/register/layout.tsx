@@ -1,5 +1,5 @@
-import { HomeBtn } from "@/app/components/button/homeBtn"
 import type { JSX, ReactNode } from "react"
+import { HomeBtn } from "@/app/components/button/homeBtn"
 
 export default function RegisterLayout({
   children,

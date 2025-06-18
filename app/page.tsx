@@ -1,7 +1,3 @@
-import { STEPS } from "@/app/lib/constant"
-import { getUsers } from "@/app/lib/getUsers"
-import type { User } from "@/app/lib/schema"
-import { auth } from "@/auth"
 import {
   CameraIcon,
   ForwardIcon,
@@ -10,6 +6,10 @@ import {
 } from "@heroicons/react/24/solid"
 import Link from "next/link"
 import { type JSX, Suspense } from "react"
+import { STEPS } from "@/app/lib/constant"
+import { getUsers } from "@/app/lib/getUsers"
+import type { User } from "@/app/lib/schema"
+import { auth } from "@/auth"
 
 export const dynamic = "force-dynamic"
 

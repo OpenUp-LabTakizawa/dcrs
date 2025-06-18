@@ -1,8 +1,5 @@
 "use client"
 
-import { BlockerLink } from "@/app/components/button/blockerLink"
-import { SignInModal } from "@/app/components/layout/signInModal"
-import { SITE_TITLE } from "@/app/lib/constant"
 import {
   ArrowLeftStartOnRectangleIcon,
   ArrowRightEndOnRectangleIcon,
@@ -12,6 +9,9 @@ import {
 import { signOut, useSession } from "next-auth/react"
 import { type JSX, useEffect, useRef, useState } from "react"
 import { themeChange } from "theme-change"
+import { BlockerLink } from "@/app/components/button/blockerLink"
+import { SignInModal } from "@/app/components/layout/signInModal"
+import { SITE_TITLE } from "@/app/lib/constant"
 
 export function Header(): JSX.Element {
   const { data: session } = useSession()
