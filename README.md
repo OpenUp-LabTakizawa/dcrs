@@ -9,7 +9,6 @@
   <a href="https://react-hook-form.com/"><img src="https://img.shields.io/badge/react%20hook%20form-EC5990?labelColor=000000&logo=reacthookform&style=for-the-badge" alt="React Hook Form"></a>
   <a href="https://tailwindcss.com/"><img src="https://img.shields.io/badge/tailwind%20css-06B6D4?labelColor=000000&logo=tailwindcss&style=for-the-badge" alt="Tailwind CSS"></a>
   <a href="https://www.typescriptlang.org/"><img src="https://img.shields.io/badge/TypeScript-3178C6?labelColor=000000&logo=typescript&style=for-the-badge" alt="TypeScript"></a>
-  <a href="https://code.visualstudio.com/"><img src="https://img.shields.io/badge/visual%20studio%20code-007ACC?labelColor=000000&style=for-the-badge" alt="VSCode"></a>
   <a href="https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/OpenUp-LabTakizawa/dcrs"><img src="https://img.shields.io/badge/open-007ACC?label=dev%20containers&labelColor=000000&style=for-the-badge" alt="Dev Container"></a>
   <a href="https://github.com/OpenUp-LabTakizawa/dcrs/blob/main/LICENSE"><img src="https://img.shields.io/github/license/OpenUp-LabTakizawa/dcrs?labelColor=000000&style=for-the-badge" alt="License"></a>
 
