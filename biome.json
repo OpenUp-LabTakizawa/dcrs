@@ -11,9 +11,6 @@
       "correctness": {
         "noUnusedImports": "error"
       },
-      "nursery": {
-        "useSortedClasses": "error"
-      },
       "style": {
         "noUselessElse": "error",
         "useBlockStatements": "error"
