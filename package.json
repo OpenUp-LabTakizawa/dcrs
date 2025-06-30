@@ -2,6 +2,21 @@
   "name": "dcrs",
   "version": "0.9.1",
   "private": true,
+  "description": "DCRS - Disability Certificate Register System📇",
+  "keywords": [
+    "biome",
+    "bun",
+    "nextjs",
+    "react",
+    "tailwindcss",
+    "typescript"
+  ],
+  "author": "Marukome <akio.muto@bnt.benextgroup.jp> (https://github.com/Marukome0743)",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OpenUp-LabTakizawa/dcrs"
+  },
   "scripts": {
     "dev": "next dev --turbopack",
     "dev-win": "WATCHPACK_POLLING=true next dev --turbopack",
@@ -25,7 +40,7 @@
     "next-auth": "beta",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "react-hook-form": "^7.58.1",
+    "react-hook-form": "^7.59.0",
     "theme-change": "^2.5.0"
   },
   "devDependencies": {
@@ -45,7 +60,6 @@
     "typescript": "^5.8.3"
   },
   "trustedDependencies": [
-    "@biomejs/biome",
     "esbuild",
     "sharp"
   ]
