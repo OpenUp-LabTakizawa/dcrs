@@ -27,7 +27,6 @@ on:
         type: boolean
 
 permissions:
-  contents: read
   id-token: write
 
 env:
@@ -54,9 +53,6 @@ jobs:
           - 5432:5432
 
     steps:
-    - name: 📥 Checkout
-      uses: actions/checkout@v4
-
     - name: 🐦‍⬛ Set up QEMU
       uses: docker/setup-qemu-action@v3
 
@@ -84,7 +80,6 @@ jobs:
       with:
         cache-from: type=gha
         cache-to: type=gha,mode=max
-        context: .
         no-cache: ${{ inputs.no-cache == true }}
         platforms: linux/arm64
         provenance: false
