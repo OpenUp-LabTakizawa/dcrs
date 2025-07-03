@@ -4,9 +4,13 @@
   "private": true,
   "description": "DCRS - Disability Certificate Register System📇",
   "keywords": [
+    "auth.js",
     "biome",
     "bun",
+    "drizzle",
+    "drizzle-kit",
     "nextjs",
+    "playwright",
     "react",
     "tailwindcss",
     "typescript"
@@ -16,6 +20,9 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/OpenUp-LabTakizawa/dcrs"
+  },
+  "bugs": {
+    "url": "https://github.com/OpenUp-LabTakizawa/dcrs/issues"
   },
   "scripts": {
     "dev": "next dev --turbopack",
