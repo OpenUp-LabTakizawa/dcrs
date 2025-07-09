@@ -7,7 +7,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: DrizzleAdapter(db),
   providers: [
     Resend({
-      from: "lab.takizawa@openuplab-takizawa.com",
+      from: "akio.muto@bnt.benextgroup.jp",
     }),
   ],
   callbacks: {
