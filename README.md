@@ -20,7 +20,7 @@
 
 ## 📄 Usage
 
-To clone and run this application, you'll need [Git](https://git-scm.com) and [Bun](https://bun.sh/) installed on your computer.  
+To clone and run this application, you'll need [Git](https://git-scm.com/) and [Bun](https://bun.sh/) installed on your computer.  
 From your command line:
 
 ### 1. Clone this repository
