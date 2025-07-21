@@ -1,17 +1,17 @@
-// import { expect, test } from "bun:test"
+import { expect, test } from "bun:test"
 
 import { render } from "@testing-library/react"
 import Home from "@/app/page"
 
 render(<Home />)
 
-// test("h1 test", () => {
-//   const h1 = document.querySelector("h1")
-//   expect(h1?.getAttribute("class")).toEqual(
-//     "flex font-semibold items-center mx-auto text-center text-2xl w-fit",
-//   )
-//   expect(h1?.textContent).toEqual("登録手順")
-// })
+test("h1 test", () => {
+  const h1 = document.querySelector("h1")
+  expect(h1?.getAttribute("class")).toEqual(
+    "flex font-semibold items-center mx-auto text-center text-2xl w-fit",
+  )
+  expect(h1?.textContent).toEqual("登録手順")
+})
 
 // test("Link test", () => {
 //   const link1 = document.querySelectorAll("a")[0]
