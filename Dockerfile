@@ -1,6 +1,6 @@
 # syntax=docker.io/docker/dockerfile-upstream:1.17.1-labs
 # check=error=true
-FROM oven/bun:canary AS builder
+FROM oven/bun:1.2.19 AS builder
 WORKDIR /usr/src/app
 RUN --mount=type=bind,source=package.json,target=package.json \
   --mount=type=bind,source=bun.lock,target=bun.lock \
