@@ -10,7 +10,7 @@
   <a href="https://tailwindcss.com/"><img src="https://img.shields.io/badge/tailwind%20css-06B6D4?labelColor=000000&logo=tailwindcss&style=for-the-badge" alt="Tailwind CSS" /></a>
   <a href="https://www.typescriptlang.org/"><img src="https://img.shields.io/badge/TypeScript-3178C6?labelColor=000000&logo=typescript&style=for-the-badge" alt="TypeScript" /></a>
   <a href="https://pr.new/github.com/OpenUp-LabTakizawa/dcrs"><img src="https://img.shields.io/badge/stackblitz-207BEA?labelColor=000000&logo=stackblitz&style=for-the-badge" alt="StackBlitz" /></a>
-  <a href="https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/OpenUp-LabTakizawa/dcrs"><img src="https://img.shields.io/badge/open-007ACC?label=dev%20containers&labelColor=000000&style=for-the-badge" alt="Dev Container" /></a>
+  <a href="https://github.com/codespaces/new/?repo=OpenUp-LabTakizawa/dcrs"><img src="https://img.shields.io/badge/open-007ACC?label=github%20codespaces&labelColor=000000&style=for-the-badge" alt="GitHub Codespaces" /></a>
   <a href="https://github.com/OpenUp-LabTakizawa/dcrs/blob/main/LICENSE"><img src="https://img.shields.io/github/license/OpenUp-LabTakizawa/dcrs?labelColor=000000&style=for-the-badge" alt="License" /></a>
 
   <p>
@@ -86,7 +86,11 @@ You can try out dev containers with **[GitHub Codespaces](https://github.com/fea
 
 <details>
 <summary>GitHub Codespaces</summary>
-  
+
+[![GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new/?repo=OpenUp-LabTakizawa/dcrs)  
+GitHub Codespaces is a cloud-based development environment that allows you to work on this project directly in your browser.  
+You can click the badge above or [here](https://github.com/codespaces/new/?repo=OpenUp-LabTakizawa/dcrs) to get started.
+
 Follow these steps to open this project in a Codespace:  
 1. Click the **Code** drop-down menu.  
 2. Click on the **Codespaces** tab.  
@@ -98,9 +102,6 @@ For more info, check out the [GitHub documentation](https://docs.github.com/en/c
 
 <details>
 <summary>VSCode Dev Containers</summary>
-  
-If you already have VSCode and [Docker](https://www.docker.com/) installed, you can click the badge above or [here](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/OpenUp-LabTakizawa/dcrs) to get started.  
-Clicking these links will cause VSCode to automatically install the Dev Containers extension if needed, clone the source code into a container volume, and spin up a dev container for use.
 
 Follow these steps to open this project in a container using the VSCode Dev Containers extension:
 
