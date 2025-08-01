@@ -41,7 +41,7 @@
   },
   "dependencies": {
     "@auth/drizzle-adapter": "^1.10.0",
-    "@aws-sdk/client-s3": "^3.857.0",
+    "@aws-sdk/client-s3": "^3.858.0",
     "@neondatabase/serverless": "^1.0.1",
     "@heroicons/react": "^2.2.0",
     "drizzle-orm": "^0.44.4",
@@ -66,7 +66,7 @@
     "drizzle-kit": "^0.31.4",
     "postcss": "^8.5.6",
     "tailwindcss": "^4.1.11",
-    "typescript": "^5.8.3"
+    "typescript": "^5.9.2"
   },
   "trustedDependencies": [
     "esbuild",
