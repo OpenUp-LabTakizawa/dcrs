@@ -81,7 +81,7 @@ async function Tbody(): Promise<JSX.Element> {
 
   return (
     <>
-      {userData?.getUsers?.length > 0 ? (
+      {userData.getUsers.length > 0 ? (
         userData.getUsers.map((user: User) => (
           <tr key={user.id} className="hover">
             <Checkbox />

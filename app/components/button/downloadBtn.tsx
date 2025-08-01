@@ -9,7 +9,7 @@ export function DownloadBtn(): JSX.Element {
   const setAlert: Dispatch<SetStateAction<Alert>> = useContext(AlertContext)
 
   function download(): void {
-    const image: HTMLImageElement = document.getElementsByTagName("img")?.[0]
+    const image: HTMLImageElement = document.getElementsByTagName("img")[0]
     const link: HTMLAnchorElement = document.createElement("a")
     link.href = image.src
     link.download = image.id

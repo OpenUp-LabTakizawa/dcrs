@@ -40,7 +40,7 @@ export function ImageUploader({
   const inputRef: RefObject<HTMLInputElement | null> =
     useRef<HTMLInputElement | null>(null) as RefObject<HTMLInputElement | null>
   let input: HTMLInputElement = inputRef.current as HTMLInputElement
-  const [image, setImage] = useState<FileList>()
+  const [image, setImage] = useState<FileList | undefined>()
 
   function validateFile(file: Readonly<File>): string {
     if (file.size > maxUploadSize) {
@@ -53,12 +53,15 @@ export function ImageUploader({
   }
 
   function onUpload(e: ChangeEvent<HTMLInputElement>): void {
-    const result = validateFile(e.target.files?.[0] as File)
+    if (!e.target.files) {
+      return
+    }
+    const result = validateFile(e.target.files[0])
     if (result) {
       onUploadCancel("error", result)
       return
     }
-    setImage(e.target.files as FileList)
+    setImage(e.target.files)
   }
 
   function onUploadCancel(eventType: string, message: string): void {
@@ -82,7 +85,7 @@ export function ImageUploader({
           className="w-full"
         />
       )}
-      <DropImageZone image={image as FileList} input={input}>
+      <DropImageZone image={image} input={input}>
         <PhotoIcon
           className="mx-auto size-12 text-gray-300"
           aria-hidden="true"
@@ -135,7 +138,7 @@ function DropImageZone({
   input,
 }: Readonly<{
   children: ReactNode
-  image: FileList
+  image: FileList | undefined
   input: HTMLInputElement
 }>): JSX.Element {
   const [isHoverd, setIsHoverd] = useState<boolean>(false)
@@ -152,7 +155,7 @@ function DropImageZone({
     e.preventDefault()
     setIsHoverd(false)
 
-    if (e.dataTransfer.files.length === 0) {
+    if (e.dataTransfer.files.length === 0 || e.dataTransfer.files.length > 1) {
       return
     }
     input.files = e.dataTransfer.files
