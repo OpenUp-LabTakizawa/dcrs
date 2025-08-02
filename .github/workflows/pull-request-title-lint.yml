@@ -16,6 +16,7 @@ jobs:
     outputs:
       is_success: ${{ steps.commitlint.outputs.is_success }}
       commitlint_log: ${{ steps.commitlint.outputs.commitlint_log }}
+
     steps:
       - name: 📥 Checkout
         uses: actions/checkout@v4

@@ -32,7 +32,7 @@ docker:
   - any-glob-to-any-file: ['app/lib/schema.ts', 'drizzle.config.ts']
 ✅test:
 - changed-files:
-  - any-glob-to-any-file: ['happydom.ts', 'test/**']
+  - any-glob-to-any-file: ['happydom.tsx', 'test/**']
 🆚vscode:
 - changed-files:
   - any-glob-to-any-file: '.vscode/*'
