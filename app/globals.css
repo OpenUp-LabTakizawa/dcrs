@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/suspicious/noUnknownAtRules: DaisyUI and Tailwind CSS rules */
 @import "tailwindcss";
 @plugin "daisyui";
 
