@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
   modal,
-}: Readonly<{ children: ReactNode; modal: JSX.Element }>): JSX.Element {
+}: Readonly<{ children: ReactNode; modal: ReactNode }>): JSX.Element {
   return (
     <html lang="ja" className={sawarabi.variable}>
       <body className="font-sawarabi">
