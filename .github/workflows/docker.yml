@@ -82,6 +82,7 @@ jobs:
       - name: 📥 Checkout
         uses: actions/checkout@v5
         with:
+          persist-credentials: false
           ref: ${{ env.SHA }}
 
       - name: 🐋 Login to Docker Hub
