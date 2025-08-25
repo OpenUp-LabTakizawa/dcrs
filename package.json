@@ -44,7 +44,7 @@
     "@aws-sdk/client-s3": "^3.873.0",
     "@neondatabase/serverless": "^1.0.1",
     "@heroicons/react": "^2.2.0",
-    "drizzle-orm": "^0.44.4",
+    "drizzle-orm": "^0.44.5",
     "next": "canary",
     "next-auth": "beta",
     "react": "^19.1.1",
