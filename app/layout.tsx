@@ -8,11 +8,7 @@ import { NavigationBlockerProvider } from "@/app/components/layout/navigationBlo
 import { SITE_TITLE } from "@/app/lib/constant"
 import "./globals.css"
 import { SessionProvider } from "next-auth/react"
-import {
-  type JSX,
-  type ReactNode,
-  unstable_ViewTransition as ViewTransition,
-} from "react"
+import { type JSX, unstable_ViewTransition as ViewTransition } from "react"
 
 const sawarabi = Sawarabi_Gothic({
   subsets: ["latin"],
@@ -25,10 +21,7 @@ export const metadata: Metadata = {
   description: SITE_TITLE,
 }
 
-export default function RootLayout({
-  children,
-  modal,
-}: Readonly<{ children: ReactNode; modal: ReactNode }>): JSX.Element {
+export default function RootLayout(props: LayoutProps<"/">): JSX.Element {
   return (
     <html lang="ja" className={sawarabi.variable}>
       <body className="font-sawarabi">
@@ -38,8 +31,8 @@ export default function RootLayout({
               <Header />
               <main className="bg-gray-50 gap-6 grid items-center justify-center px-4 py-6 sm:px-6 lg:px-8">
                 <AlertBox>
-                  {children}
-                  {modal}
+                  {props.children}
+                  {props.modal}
                 </AlertBox>
                 <ScrollToTop />
               </main>
