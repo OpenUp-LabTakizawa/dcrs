@@ -17,10 +17,17 @@ export function Breadcrumb({
         </li>
         {crumbs.map((crumb) => (
           <li key={crumb.name}>
-            <Link href={crumb.href || ""}>
-              <crumb.icon className={`mr-1 size-4 ${crumb.color}`} />
-              {crumb.name}
-            </Link>
+            {crumb.href ? (
+              <Link href={crumb.href}>
+                <crumb.icon className={`mr-1 size-4 ${crumb.color}`} />
+                {crumb.name}
+              </Link>
+            ) : (
+              <>
+                <crumb.icon className={`mr-1 size-4 ${crumb.color}`} />
+                {crumb.name}
+              </>
+            )}
           </li>
         ))}
       </ul>
