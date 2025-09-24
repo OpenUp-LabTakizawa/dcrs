@@ -41,7 +41,7 @@
   },
   "dependencies": {
     "@auth/drizzle-adapter": "^1.10.0",
-    "@aws-sdk/client-s3": "^3.895.0",
+    "@aws-sdk/client-s3": "^3.896.0",
     "@neondatabase/serverless": "^1.0.1",
     "@heroicons/react": "^2.2.0",
     "drizzle-orm": "^0.44.5",
@@ -62,7 +62,7 @@
     "@types/bun": "^1.2.22",
     "@types/react": "^19.1.13",
     "@types/react-dom": "^19.1.9",
-    "daisyui": "^5.1.14",
+    "daisyui": "^5.1.18",
     "drizzle-kit": "^0.31.4",
     "postcss": "^8.5.6",
     "tailwindcss": "^4.1.13",
