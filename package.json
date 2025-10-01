@@ -2,6 +2,7 @@
   "name": "dcrs",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "description": "DCRS - Disability Certificate Register System📇",
   "keywords": [
     "auth.js",
