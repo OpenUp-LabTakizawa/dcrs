@@ -8,7 +8,7 @@ import { NavigationBlockerProvider } from "@/app/components/layout/navigationBlo
 import { SITE_TITLE } from "@/app/lib/constant"
 import "./globals.css"
 import { SessionProvider } from "next-auth/react"
-import { type JSX, unstable_ViewTransition as ViewTransition } from "react"
+import { type JSX, ViewTransition } from "react"
 
 const sawarabi = Sawarabi_Gothic({
   subsets: ["latin"],
