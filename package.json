@@ -42,7 +42,7 @@
   },
   "dependencies": {
     "@auth/drizzle-adapter": "^1.11.0",
-    "@aws-sdk/client-s3": "^3.906.0",
+    "@aws-sdk/client-s3": "^3.907.0",
     "@neondatabase/serverless": "^1.0.2",
     "@heroicons/react": "^2.2.0",
     "drizzle-orm": "^0.44.6",
@@ -55,7 +55,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^2.2.5",
-    "@happy-dom/global-registrator": "^19.0.2",
+    "@happy-dom/global-registrator": "^20.0.0",
     "@playwright/test": "next",
     "@tailwindcss/postcss": "^4.1.14",
     "@testing-library/dom": "^10.4.1",
@@ -63,7 +63,7 @@
     "@types/bun": "^1.2.23",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.1",
-    "daisyui": "^5.1.29",
+    "daisyui": "^5.1.30",
     "drizzle-kit": "^0.31.5",
     "postcss": "^8.5.6",
     "tailwindcss": "^4.1.14",
