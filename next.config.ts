@@ -2,9 +2,9 @@ import type { NextConfig } from "next"
 
 const nextConfig: NextConfig = {
   experimental: {
+    cacheComponents: true,
     inlineCss: true,
     isrFlushToDisk: false,
-    ppr: true,
     // Disable react compiler due to react hook form
     // reactCompiler: true,
     viewTransition: true,
