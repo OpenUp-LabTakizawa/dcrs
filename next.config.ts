@@ -8,6 +8,7 @@ const nextConfig: NextConfig = {
     // reactCompiler: true,
     viewTransition: true,
   },
+  cacheComponents: true,
   output: "standalone",
   typedRoutes: true,
 }

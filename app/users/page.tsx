@@ -8,8 +8,6 @@ import { INDEX_LIST, USERS_LINK } from "@/app/lib/constant"
 import { getUsers } from "@/app/lib/getUsers"
 import type { User } from "@/app/lib/schema"
 
-export const dynamic = "force-dynamic"
-
 export default function Users(): JSX.Element {
   return (
     <>

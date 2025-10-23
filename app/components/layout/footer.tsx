@@ -3,6 +3,7 @@ import Link from "next/link"
 import type { JSX } from "react"
 
 export function Footer(): JSX.Element {
+  "use cache"
   return (
     <footer className="bg-base-300 flex flex-row footer items-center justify-center p-4 text-base-content">
       <aside>

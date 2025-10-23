@@ -11,8 +11,6 @@ import { getUsers } from "@/app/lib/getUsers"
 import type { User } from "@/app/lib/schema"
 import { auth } from "@/auth"
 
-export const dynamic = "force-dynamic"
-
 export default async function Home(): Promise<JSX.Element> {
   const session = await auth()
 
