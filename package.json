@@ -42,7 +42,7 @@
   },
   "dependencies": {
     "@auth/drizzle-adapter": "^1.11.1",
-    "@aws-sdk/client-s3": "^3.921.0",
+    "@aws-sdk/client-s3": "^3.922.0",
     "@neondatabase/serverless": "^1.0.2",
     "@heroicons/react": "^2.2.0",
     "drizzle-orm": "^0.44.7",
@@ -50,7 +50,7 @@
     "next-auth": "beta",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "react-hook-form": "^7.65.0",
+    "react-hook-form": "^7.66.0",
     "theme-change": "^2.5.0"
   },
   "devDependencies": {
