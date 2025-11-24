@@ -29,7 +29,7 @@ From your command line:
 git clone https://github.com/OpenUp-LabTakizawa/dcrs
 ```
 
-### 2. Install dependencies with bun
+### 2. Install dependencies using Bun
 
 ```bash
 cd dcrs && bun i
