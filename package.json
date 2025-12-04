@@ -45,7 +45,7 @@
     "@aws-sdk/client-s3": "^3.943.0",
     "@neondatabase/serverless": "^1.0.2",
     "@heroicons/react": "^2.2.0",
-    "drizzle-orm": "^0.44.7",
+    "drizzle-orm": "^0.45.0",
     "next": "canary",
     "next-auth": "beta",
     "react": "^19.2.1",
@@ -64,7 +64,7 @@
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "daisyui": "^5.5.8",
-    "drizzle-kit": "^0.31.7",
+    "drizzle-kit": "^0.31.8",
     "postcss": "^8.5.6",
     "tailwindcss": "^4.1.17",
     "typescript": "^5.9.3"
