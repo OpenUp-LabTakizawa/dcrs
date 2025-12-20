@@ -50,7 +50,7 @@
     "next-auth": "beta",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
-    "react-hook-form": "^7.68.0",
+    "react-hook-form": "^7.69.0",
     "theme-change": "^2.5.0"
   },
   "devDependencies": {
