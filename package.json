@@ -50,11 +50,11 @@
     "next-auth": "beta",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
-    "react-hook-form": "^7.69.0",
+    "react-hook-form": "^7.70.0",
     "theme-change": "^2.5.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.3.10",
+    "@biomejs/biome": "^2.3.11",
     "@happy-dom/global-registrator": "^20.0.11",
     "@playwright/test": "next",
     "@tailwindcss/postcss": "^4.1.18",
