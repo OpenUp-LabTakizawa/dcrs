@@ -1,4 +1,4 @@
-# syntax=docker.io/docker/dockerfile-upstream:1.20.0-labs
+# syntax=docker.io/docker/dockerfile-upstream:1.21.0-rc1-labs
 # check=error=true
 FROM oven/bun:canary AS builder
 WORKDIR /usr/src/app
@@ -12,7 +12,7 @@ RUN --mount=type=secret,id=database,env=DATABASE_URL \
 RUN --mount=type=secret,id=database,env=DATABASE_URL \
   bun run build
 
-FROM gcr.io/distroless/nodejs24-debian12:nonroot
+FROM gcr.io/distroless/nodejs24-debian13:nonroot
 WORKDIR /app
 COPY --from=public.ecr.aws/awsguru/aws-lambda-adapter:0.9.1 /lambda-adapter /opt/extensions/lambda-adapter
 
