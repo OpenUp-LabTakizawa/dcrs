@@ -48,13 +48,13 @@
     "drizzle-orm": "^0.45.1",
     "next": "canary",
     "next-auth": "beta",
-    "react": "^19.2.3",
-    "react-dom": "^19.2.3",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
     "react-hook-form": "^7.71.1",
     "theme-change": "^2.5.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.3.12",
+    "@biomejs/biome": "^2.3.13",
     "@happy-dom/global-registrator": "^20.3.9",
     "@playwright/test": "next",
     "@tailwindcss/postcss": "^4.1.18",
