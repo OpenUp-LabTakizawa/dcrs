@@ -36,6 +36,6 @@ jobs:
 
       - name: 💾 Commit
         if: success() || failure()
-        uses: autofix-ci/action@v1.3.2
+        uses: autofix-ci/action@v1.3.3
         with:
           commit-message: "fix(autofix.ci): apply automated fixes"
