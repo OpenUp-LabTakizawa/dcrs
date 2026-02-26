@@ -47,7 +47,6 @@ on:
 
 permissions:
   attestations: write
-  artifact-metadata: write
   contents: read
   id-token: write
   packages: write
@@ -147,7 +146,6 @@ jobs:
         with:
           subject-name: ${{ env.GHCR_REGISTRY }}/${{ env.GHCR_REPOSITORY }}
           subject-digest: ${{ steps.push.outputs.digest }}
-          push-to-registry: true
 
       - name: 🔎 Docker Scout
         if: github.event_name == 'pull_request_target'
