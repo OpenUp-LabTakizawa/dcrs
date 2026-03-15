@@ -7,7 +7,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: DrizzleAdapter(db),
   providers: [
     Resend({
-      from: "akio.muto@bnt.benextgroup.jp",
+      from: "jambalaya.pyoncafe@gmail.com",
     }),
   ],
   callbacks: {
@@ -23,7 +23,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       if (!profile?.user?.email) {
         return false
       }
-      return profile.user.email.endsWith("@bnt.benextgroup.jp")
+      return true
     },
   },
   trustHost: true,
