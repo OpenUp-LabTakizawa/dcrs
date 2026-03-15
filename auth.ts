@@ -7,7 +7,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: DrizzleAdapter(db),
   providers: [
     Resend({
-      from: "onboarding@resend.dev",
+      from: "jambalaya.pyoncafe@gmail.com",
     }),
   ],
   callbacks: {
