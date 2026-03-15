@@ -23,6 +23,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       if (!profile?.user?.email) {
         return false
       }
+      return true
     },
   },
   trustHost: true,
