@@ -23,7 +23,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       if (!profile?.user?.email) {
         return false
       }
-      return profile.user.email.endsWith("@bnt.benextgroup.jp")
     },
   },
   trustHost: true,
