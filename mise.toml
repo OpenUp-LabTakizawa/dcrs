@@ -1,0 +1,11 @@
+[tools]
+bun = "latest"
+
+[hooks]
+enter = "mise install -q"
+
+[prepare.bun]
+auto = true
+
+[settings]
+experimental = true
