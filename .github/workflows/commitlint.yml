@@ -80,6 +80,7 @@ jobs:
           REPO: ${{ github.repository }}
           RUN_ID: ${{ github.run_id }}
           SHA: ${{ github.event.pull_request.head.sha }}
+          WORKFLOW_NAME: ${{ github.workflow.name }}
         run: |
           UUID=$(uuidgen)
           cat <<EOF_$UUID > comment.txt
@@ -97,7 +98,7 @@ jobs:
 
           Please update the commit message to follow the [Conventional Commits specification](https://www.conventionalcommits.org/en/v1.0.0/).
           👀[View in Actions](https://github.com/$REPO/actions/runs/$RUN_ID)
-          <!-- generated-comment [Commitlint](https://github.com/$REPO/.github/workflows/commitlint.yml) -->
+          <!-- generated-comment [$WORKFLOW_NAME](https://github.com/$REPO/.github/workflows/commitlint.yml) -->
           EOF_$UUID
 
       - name: ✅ Create test success comment
@@ -109,7 +110,7 @@ jobs:
           cat <<EOF_$UUID > comment.txt
           # ✅ Commitlint Passed
           Thank you for updating the commit message to follow the [Conventional Commits specification](https://www.conventionalcommits.org/en/v1.0.0/).
-          <!-- generated-comment [Commitlint](https://github.com/$REPO/.github/workflows/commitlint.yml) -->
+          <!-- generated-comment [$WORKFLOW_NAME](https://github.com/$REPO/.github/workflows/commitlint.yml) -->
           EOF_$UUID
 
       - name: 🔢 Create pull request number and title
