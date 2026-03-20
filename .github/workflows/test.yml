@@ -103,6 +103,7 @@ jobs:
           RUN_ID: ${{ github.run_id }}
           SHA: ${{ github.event.pull_request.head.sha }}
           TEST_LOG: ${{ needs.test.outputs.test_log }}
+          WORKFLOW_NAME: ${{ github.workflow }}
         run: |
           UUID=$(uuidgen)
           cat <<EOF_$UUID > comment.txt
@@ -119,40 +120,36 @@ jobs:
           </details>
 
           👀[View in Actions](https://github.com/$REPO/actions/runs/$RUN_ID)
-          <!-- generated-comment [Test](https://github.com/$REPO/.github/workflows/test.yml) -->
+          <!-- generated-comment [$WORKFLOW_NAME](https://github.com/$REPO/.github/workflows/test.yml) -->
           EOF_$UUID
 
       - name: ✅ Create test success comment
         if: needs.test.outputs.is_success == 'true'
         env:
           REPO: ${{ github.repository }}
+          WORKFLOW_NAME: ${{ github.workflow }}
         run: |
           UUID=$(uuidgen)
           cat <<EOF_$UUID > comment.txt
           # ✅ Test Passed
           Failed tests were fixed.
-          <!-- generated-comment [Test](https://github.com/$REPO/.github/workflows/test.yml) -->
+          <!-- generated-comment [$WORKFLOW_NAME](https://github.com/$REPO/.github/workflows/test.yml) -->
           EOF_$UUID
 
-      - name: 🔢 Create pull request number and title
+      - name: 🔢 Create pull request number
         env:
           PR_NUMBER: ${{ github.event.pull_request.number }}
         run: |
           echo "$PR_NUMBER" > pr_number.txt
-          echo "# ❌ Test Failed" > title.txt
 
       - name: 🆙 Upload test comment
         uses: actions/upload-artifact@v7
         with:
           name: comment
           path: comment.txt
+
       - name: 🆙 Upload pull request number
         uses: actions/upload-artifact@v7
         with:
           name: pr_number
           path: pr_number.txt
-      - name: 🆙 Upload title
-        uses: actions/upload-artifact@v7
-        with:
-          name: title
-          path: title.txt
