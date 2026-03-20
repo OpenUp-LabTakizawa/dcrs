@@ -1,8 +1,9 @@
 [tools]
 bun = "latest"
+pitchfork = "latest"
 
 [tasks.update]
-description = ""
+description = "Update bun dependencies and reinstall with isolated linker"
 run = ["bun update", "bun i --linker=isolated", "mise prep"]
 
 [hooks]
