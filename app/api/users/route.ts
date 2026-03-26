@@ -1,5 +1,5 @@
-import { storageClient } from "@/app/lib/storage"
 import { db, handicap, type NewUser, type User } from "@/app/lib/schema"
+import { storageClient } from "@/app/lib/storage"
 
 export async function GET(): Promise<Response> {
   const getUsers: User[] = await db.select().from(handicap)

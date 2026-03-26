@@ -5,7 +5,7 @@ export interface UploadParams {
 }
 
 export interface GetResult {
-  body: ReadableStream | Buffer
+  body: ReadableStream
   contentType: string
 }
 

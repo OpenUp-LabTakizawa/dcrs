@@ -76,7 +76,9 @@ describe("Feature: vercel-blob-storage, Property 1: Non-empty token selects Verc
           .map((arr) => arr.join("")),
         (whitespace) => {
           process.env.BLOB_READ_WRITE_TOKEN = whitespace
-          const { createStorageClient: create } = require("@/app/lib/storage/index")
+          const {
+            createStorageClient: create,
+          } = require("@/app/lib/storage/index")
           const client = create()
           expect(client._type).toBe("S3Backend")
         },
