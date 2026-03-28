@@ -7,7 +7,6 @@ import { Header } from "@/app/components/layout/header"
 import { NavigationBlockerProvider } from "@/app/components/layout/navigationBlocker"
 import { SITE_TITLE } from "@/app/lib/constant"
 import "./globals.css"
-import { SessionProvider } from "next-auth/react"
 import { type JSX, ViewTransition } from "react"
 
 const sawarabi = Sawarabi_Gothic({
@@ -26,19 +25,17 @@ export default function RootLayout(props: LayoutProps<"/">): JSX.Element {
     <html lang="ja" className={sawarabi.variable}>
       <body className="font-sawarabi">
         <ViewTransition>
-          <SessionProvider>
-            <NavigationBlockerProvider>
-              <Header />
-              <main className="bg-gray-50 gap-6 grid items-center justify-center px-4 py-6 sm:px-6 lg:px-8">
-                <AlertBox>
-                  {props.children}
-                  {props.modal}
-                </AlertBox>
-                <ScrollToTop />
-              </main>
-              <Footer />
-            </NavigationBlockerProvider>
-          </SessionProvider>
+          <NavigationBlockerProvider>
+            <Header />
+            <main className="bg-gray-50 gap-6 grid items-center justify-center px-4 py-6 sm:px-6 lg:px-8">
+              <AlertBox>
+                {props.children}
+                {props.modal}
+              </AlertBox>
+              <ScrollToTop />
+            </main>
+            <Footer />
+          </NavigationBlockerProvider>
         </ViewTransition>
       </body>
     </html>
