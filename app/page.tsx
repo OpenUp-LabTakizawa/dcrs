@@ -4,17 +4,18 @@ import {
   PlusIcon,
   TableCellsIcon,
 } from "@heroicons/react/24/solid"
+import { headers } from "next/headers"
 import Link from "next/link"
 import { type JSX, Suspense } from "react"
+import { auth } from "@/app/lib/auth"
 import { STEPS } from "@/app/lib/constant"
 import { getUsers } from "@/app/lib/getUsers"
 import type { User } from "@/app/lib/schema"
-import { auth } from "@/auth"
 
 export const dynamic = "force-dynamic"
 
 export default async function Home(): Promise<JSX.Element> {
-  const session = await auth()
+  const session = await auth.api.getSession({ headers: await headers() })
 
   return (
     <>

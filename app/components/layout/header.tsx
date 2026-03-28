@@ -6,11 +6,11 @@ import {
   MoonIcon,
   SunIcon,
 } from "@heroicons/react/24/outline"
-import { signOut, useSession } from "next-auth/react"
 import { type JSX, useEffect, useRef, useState } from "react"
 import { themeChange } from "theme-change"
 import { BlockerLink } from "@/app/components/button/blockerLink"
 import { SignInModal } from "@/app/components/layout/signInModal"
+import { signOut, useSession } from "@/app/lib/auth-client"
 import { SITE_TITLE } from "@/app/lib/constant"
 
 export function Header(): JSX.Element {
@@ -66,7 +66,15 @@ export function Header(): JSX.Element {
           </button>
           <button
             type="button"
-            onClick={() => signOut({ redirectTo: "/" })}
+            onClick={() =>
+              signOut({
+                fetchOptions: {
+                  onSuccess: () => {
+                    window.location.href = "/"
+                  },
+                },
+              })
+            }
             className={`btn btn-ghost flex flex-col gap-0 items-center h-fit p-0 text-nowrap${
               session ? "" : " hidden"
             }`}
