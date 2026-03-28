@@ -4,11 +4,10 @@ const nextConfig: NextConfig = {
   experimental: {
     inlineCss: true,
     isrFlushToDisk: false,
-    // Disable react compiler due to react hook form
-    // reactCompiler: true,
     viewTransition: true,
   },
   output: "standalone",
+  reactCompiler: true,
   typedRoutes: true,
 }
 
