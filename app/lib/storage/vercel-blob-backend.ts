@@ -1,10 +1,10 @@
-import { del, head, put } from "@vercel/blob"
+import { del, get, put } from "@vercel/blob"
 import type { GetResult, StorageClient, UploadParams } from "./index"
 
 export class VercelBlobBackend implements StorageClient {
   async upload(params: UploadParams): Promise<{ url: string }> {
     const blob = await put(params.key, params.body, {
-      access: "public",
+      access: "private",
       contentType: params.contentType,
       addRandomSuffix: false,
     })
@@ -12,14 +12,13 @@ export class VercelBlobBackend implements StorageClient {
   }
 
   async get(key: string): Promise<GetResult> {
-    const blobInfo = await head(key)
-    const response = await fetch(blobInfo.url)
-    if (!response.ok || !response.body) {
+    const result = await get(key, { access: "private" })
+    if (!result || result.statusCode !== 200 || !result.stream) {
       throw new Error(`Failed to fetch blob: ${key}`)
     }
     return {
-      body: response.body,
-      contentType: blobInfo.contentType,
+      body: result.stream,
+      contentType: result.blob.contentType ?? "application/octet-stream",
     }
   }
 

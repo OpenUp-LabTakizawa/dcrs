@@ -1,18 +1,17 @@
 import type { ElementType } from "react"
-import type { Path } from "react-hook-form"
 
 export type ProfileForm = {
   agreement: boolean
   company: string
   email: string
   employeeId: string
-  image: FileList
+  image: FileList | undefined
   name: string
   telephone: string
 }
 
 export type ProfileFormItem = {
-  name: Path<ProfileForm>
+  name: keyof ProfileForm
   label: string
   type: string
   icon: ElementType

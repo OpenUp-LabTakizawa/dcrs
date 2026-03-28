@@ -71,8 +71,8 @@ jobs:
       - name: 📦 Install dependencies
         run: bun i
 
-      - name: 🔑 Generate Auth.js Secret
-        run: bunx auth secret
+      - name: 🔑 Generate Better Auth Secret
+        run: echo "BETTER_AUTH_SECRET=$(openssl rand -base64 32)" >> "$GITHUB_ENV"
 
       - name: 🧩 Build app
         run: bun run build
@@ -82,8 +82,6 @@ jobs:
 
       - name: 🧪 Run Playwright tests
         run: bun playwright test
-        env:
-          BETTER_AUTH_SECRET: ${{ secrets.BETTER_AUTH_SECRET }}
 
 
       - name: 🆙 Upload Test Report

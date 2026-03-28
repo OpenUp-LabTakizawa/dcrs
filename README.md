@@ -6,7 +6,7 @@
   <a href="https://orm.drizzle.team/"><img src="https://img.shields.io/badge/drizzle-C5F74F?labelColor=000000&logo=drizzle&style=for-the-badge" alt="Drizzle" /></a>
   <a href="https://nextjs.org/"><img src="https://img.shields.io/badge/next.js-000000?labelColor=000000&logo=next.js&style=for-the-badge" alt="Next.js" /></a>
   <a href="https://react.dev/"><img src="https://img.shields.io/badge/react-61DAFB?labelColor=000000&logo=react&style=for-the-badge" alt="React" /></a>
-  <a href="https://react-hook-form.com/"><img src="https://img.shields.io/badge/react%20hook%20form-EC5990?labelColor=000000&logo=reacthookform&style=for-the-badge" alt="React Hook Form" /></a>
+  <a href="https://tanstack.com/form/"><img src="https://img.shields.io/badge/tanstack%20form-000000?labelColor=000000&logo=tanstack&style=for-the-badge" alt="TanStack Form" /></a>
   <a href="https://tailwindcss.com/"><img src="https://img.shields.io/badge/tailwind%20css-06B6D4?labelColor=000000&logo=tailwindcss&style=for-the-badge" alt="Tailwind CSS" /></a>
   <a href="https://www.typescriptlang.org/"><img src="https://img.shields.io/badge/TypeScript-3178C6?labelColor=000000&logo=typescript&style=for-the-badge" alt="TypeScript" /></a>
   <a href="https://pr.new/github.com/OpenUp-LabTakizawa/dcrs"><img src="https://img.shields.io/badge/stackblitz-207BEA?labelColor=000000&logo=stackblitz&style=for-the-badge" alt="StackBlitz" /></a>
@@ -146,14 +146,12 @@ This software uses the following open source packages:
 - [Node.js](https://nodejs.org/)
 - [Playwright](https://playwright.dev/)
 - [React](https://react.dev/)
-- [React Hook Form](https://react-hook-form.com/)
+- [TanStack Form](https://tanstack.com/form/)
 - [StackBlitz Codeflow](https://stackblitz.com/codeflow/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [TypeScript](https://www.typescriptlang.org/)
 
 ## ⚖️ License
-
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FOpenUp-LabTakizawa%2Fdcrs.svg?type=large&issueType=license)](https://app.fossa.com/projects/git%2Bgithub.com%2FOpenUp-LabTakizawa%2Fdcrs?ref=badge_large&issueType=license)
 
 The Apache License Version 2.0 (2026) - [OpenUp-LabTakizawa](https://github.com/OpenUp-LabTakizawa).
 Please have a look at the [LICENSE](https://github.com/OpenUp-LabTakizawa/dcrs/blob/main/LICENSE) for more details.

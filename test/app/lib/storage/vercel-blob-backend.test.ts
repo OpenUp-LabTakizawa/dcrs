@@ -17,6 +17,25 @@ mock.module("@vercel/blob", () => ({
     })
     return { url }
   },
+  get: async (key: string) => {
+    const entry = blobStore.get(key)
+    if (!entry) {
+      return null
+    }
+    return {
+      statusCode: 200,
+      stream: new ReadableStream({
+        start(controller) {
+          controller.enqueue(new Uint8Array(entry.data))
+          controller.close()
+        },
+      }),
+      blob: {
+        url: entry.url,
+        contentType: entry.contentType,
+      },
+    }
+  },
   head: async (key: string) => {
     const entry = blobStore.get(key)
     if (!entry) {

@@ -8,27 +8,23 @@ import {
   type DragEvent,
   type JSX,
   type ReactNode,
-  type RefObject,
   type SetStateAction,
   useContext,
+  useEffect,
   useRef,
   useState,
 } from "react"
-import type { UseFormRegister, UseFormUnregister } from "react-hook-form"
 import { AlertContext } from "@/app/components/layout/alertBox"
 import type { Alert } from "@/app/interfaces/alert"
-import type { ProfileForm } from "@/app/interfaces/form"
+import type { RegisterFormApi } from "@/app/register/page"
 
 export function ImageUploader({
-  register,
-  unregister,
+  form,
+  onPreviewChange,
 }: Readonly<{
-  register: UseFormRegister<ProfileForm>
-  unregister: UseFormUnregister<ProfileForm>
+  form: RegisterFormApi
+  onPreviewChange: (url: string) => void
 }>): JSX.Element {
-  const { ref, onChange, ...rest } = register("image", {
-    required: true,
-  })
   const maxUploadSize: number = 5 * 1024 * 1024
   const acceptedImages: { name: string; mimeType: string }[] = [
     { name: "AVIF", mimeType: "image/avif" },
@@ -37,10 +33,18 @@ export function ImageUploader({
     { name: "WEBP", mimeType: "image/webp" },
   ] as const
   const setAlert: Dispatch<SetStateAction<Alert>> = useContext(AlertContext)
-  const inputRef: RefObject<HTMLInputElement | null> =
-    useRef<HTMLInputElement | null>(null) as RefObject<HTMLInputElement | null>
-  let input: HTMLInputElement = inputRef.current as HTMLInputElement
+  const inputRef = useRef<HTMLInputElement | null>(null)
   const [image, setImage] = useState<FileList | undefined>()
+  const [previewUrl, setPreviewUrl] = useState<string>("")
+
+  // Revoke the previous object URL when it changes or on unmount
+  useEffect(() => {
+    return () => {
+      if (previewUrl) {
+        URL.revokeObjectURL(previewUrl)
+      }
+    }
+  }, [previewUrl])
 
   function validateFile(file: Readonly<File>): string {
     if (file.size > maxUploadSize) {
@@ -52,22 +56,40 @@ export function ImageUploader({
     return ""
   }
 
-  function onUpload(e: ChangeEvent<HTMLInputElement>): void {
-    if (!e.target.files) {
-      return
-    }
-    const result = validateFile(e.target.files[0])
+  function handleFiles(files: FileList): void {
+    const result = validateFile(files[0])
     if (result) {
       onUploadCancel("error", result)
       return
     }
-    setImage(e.target.files)
+    if (previewUrl) {
+      URL.revokeObjectURL(previewUrl)
+    }
+    const newUrl = URL.createObjectURL(files[0])
+    setImage(files)
+    setPreviewUrl(newUrl)
+    form.setFieldValue("image", files)
+    onPreviewChange(newUrl)
+  }
+
+  function onInputChange(e: ChangeEvent<HTMLInputElement>): void {
+    if (!e.target.files?.[0]) {
+      return
+    }
+    handleFiles(e.target.files)
   }
 
   function onUploadCancel(eventType: string, message: string): void {
-    input.value = ""
+    if (inputRef.current) {
+      inputRef.current.value = ""
+    }
+    if (previewUrl) {
+      URL.revokeObjectURL(previewUrl)
+    }
     setImage(undefined)
-    unregister("image")
+    setPreviewUrl("")
+    form.setFieldValue("image", undefined)
+    onPreviewChange("")
     setAlert({
       eventType: eventType,
       message: message,
@@ -76,16 +98,16 @@ export function ImageUploader({
 
   return (
     <>
-      {image?.[0] && (
+      {image?.[0] && previewUrl && (
         <Image
-          src={encodeURI(URL.createObjectURL(image[0]))}
+          src={previewUrl}
           width={100}
           height={100}
           alt="Uploaded File"
           className="w-full"
         />
       )}
-      <DropImageZone image={image} input={input}>
+      <DropImageZone image={image} onDropFiles={handleFiles}>
         <PhotoIcon
           className="mx-auto size-12 text-gray-300"
           aria-hidden="true"
@@ -97,17 +119,9 @@ export function ImageUploader({
               type="file"
               className="sr-only"
               accept="image/*"
-              onChange={(e) => {
-                if (e.target.files?.[0]) {
-                  onChange(e)
-                  onUpload(e)
-                }
-              }}
-              ref={(element) => {
-                ref(element)
-                input = element as HTMLInputElement
-              }}
-              {...rest}
+              name="image"
+              onChange={onInputChange}
+              ref={inputRef}
               alt="Upload Image"
               required={true}
             />
@@ -135,11 +149,11 @@ export function ImageUploader({
 function DropImageZone({
   children,
   image,
-  input,
+  onDropFiles,
 }: Readonly<{
   children: ReactNode
   image: FileList | undefined
-  input: HTMLInputElement
+  onDropFiles: (files: FileList) => void
 }>): JSX.Element {
   const [isHoverd, setIsHoverd] = useState<boolean>(false)
 
@@ -158,8 +172,7 @@ function DropImageZone({
     if (e.dataTransfer.files.length === 0 || e.dataTransfer.files.length > 1) {
       return
     }
-    input.files = e.dataTransfer.files
-    input.dispatchEvent(new Event("change", { bubbles: true }))
+    onDropFiles(e.dataTransfer.files)
   }
 
   return (

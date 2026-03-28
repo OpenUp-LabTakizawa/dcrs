@@ -6,6 +6,7 @@ import {
   PaperAirplaneIcon,
   XMarkIcon,
 } from "@heroicons/react/24/solid"
+import { useForm, useStore } from "@tanstack/react-form"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 import {
@@ -17,12 +18,8 @@ import {
   useContext,
   useEffect,
   useRef,
+  useState,
 } from "react"
-import {
-  type UseFormRegister,
-  type UseFormWatch,
-  useForm,
-} from "react-hook-form"
 import { PingAnimation } from "@/app/components/animation/pingAnimation"
 import { AlertContext } from "@/app/components/layout/alertBox"
 import { useNavigationBlocker } from "@/app/components/layout/navigationBlocker"
@@ -40,26 +37,59 @@ import {
 } from "@/app/lib/constant"
 import { ImageUploader } from "@/app/register/imageUploader"
 
+// Type helper: extracts the form API type (never called at runtime)
+// eslint-disable-next-line
+function useFormTypeHelper() {
+  const defaultValues: ProfileForm = {
+    agreement: false,
+    company: "",
+    email: "",
+    employeeId: "",
+    image: undefined,
+    name: "",
+    telephone: "",
+  }
+  return useForm({ defaultValues })
+}
+export type RegisterFormApi = ReturnType<typeof useFormTypeHelper>
+
 export default function Register(): JSX.Element {
   const companies: string[] = [
     "オープンアップグループ",
     "ビーネックステクノロジーズ",
   ] as const
-  const {
-    formState: { isValid },
-    register,
-    unregister,
-    watch,
-  } = useForm<ProfileForm>()
+  const defaultValues: ProfileForm = {
+    agreement: false,
+    company: "",
+    email: "",
+    employeeId: "",
+    image: undefined,
+    name: "",
+    telephone: "",
+  }
+  const form = useForm({ defaultValues })
   const dialogRef: RefObject<HTMLDialogElement | null> =
     useRef<HTMLDialogElement | null>(null)
   const setAlert: Dispatch<SetStateAction<Alert>> = useContext(AlertContext)
   const { isBlocked, setIsBlocked } = useNavigationBlocker()
   const router = useRouter()
+  const [imagePreviewUrl, setImagePreviewUrl] = useState<string>("")
   const [_state, formAction, isPending] = useActionState(
     sendData,
     new FormData(),
   )
+  const isValid = useStore(form.store, (state) => {
+    const v = state.values
+    return (
+      Boolean(v.name) &&
+      Boolean(v.company) &&
+      Boolean(v.employeeId) &&
+      Boolean(v.telephone) &&
+      Boolean(v.email) &&
+      Boolean(v.agreement) &&
+      Boolean(v.image)
+    )
+  })
 
   async function sendData(
     _prevState: FormData,
@@ -112,32 +142,38 @@ export default function Register(): JSX.Element {
         <p className="text-center before:ml-0.5 before:text-red-500 before:content-['*']">
           は必須項目
         </p>
-        <Input item={NAME} register={register} />
-        <label className="form-control w-full">
-          <div className="label">
-            <p className="label-text after:ml-0.5 after:text-red-500 after:content-['*']">
-              {COMPANY.label}
-            </p>
-          </div>
-          <select
-            className="select select-bordered"
-            {...register("company", { required: true })}
-            defaultValue=""
-            required={true}
-          >
-            <option value="" disabled={true}>
-              以下から１つ選択
-            </option>
-            {companies.map((company) => (
-              <option key={company} value={company}>
-                {company}
-              </option>
-            ))}
-          </select>
-        </label>
-        <Input item={EMPLOYEE_ID} register={register} />
-        <Input item={TELEPHONE} register={register} />
-        <Input item={EMAIL} register={register} />
+        <Input item={NAME} form={form} />
+        <form.Field name="company">
+          {(field) => (
+            <label className="form-control w-full">
+              <div className="label">
+                <p className="label-text after:ml-0.5 after:text-red-500 after:content-['*']">
+                  {COMPANY.label}
+                </p>
+              </div>
+              <select
+                className="select select-bordered"
+                name={field.name}
+                value={field.state.value}
+                onChange={(e) => field.handleChange(e.target.value)}
+                onBlur={field.handleBlur}
+                required={true}
+              >
+                <option value="" disabled={true}>
+                  以下から１つ選択
+                </option>
+                {companies.map((company) => (
+                  <option key={company} value={company}>
+                    {company}
+                  </option>
+                ))}
+              </select>
+            </label>
+          )}
+        </form.Field>
+        <Input item={EMPLOYEE_ID} form={form} />
+        <Input item={TELEPHONE} form={form} />
+        <Input item={EMAIL} form={form} />
         <div className="card bg-base-100 shadow-xl">
           <div className="card-body overflow-y-auto max-h-72">
             <p className="mb-2 after:ml-0.5 after:text-red-500 after:content-['*']">
@@ -191,22 +227,33 @@ export default function Register(): JSX.Element {
               お願い致します。
               <br />
             </p>
-            <label className="label cursor-pointer self-center">
-              <span className="label-text mr-2">{AGREEMENT.placeholder}</span>
-              <input
-                type="checkbox"
-                className="checkbox"
-                {...register("agreement", { required: true })}
-                value={AGREEMENT.placeholder}
-                required={true}
-              />
-            </label>
+            <form.Field name="agreement">
+              {(field) => (
+                <label className="label cursor-pointer self-center">
+                  <span className="label-text mr-2">
+                    {AGREEMENT.placeholder}
+                  </span>
+                  <input
+                    type="checkbox"
+                    className="checkbox"
+                    name={field.name}
+                    checked={field.state.value as boolean}
+                    onChange={(e) =>
+                      field.handleChange(e.target.checked as never)
+                    }
+                    onBlur={field.handleBlur}
+                    value={AGREEMENT.placeholder}
+                    required={true}
+                  />
+                </label>
+              )}
+            </form.Field>
           </div>
         </div>
         <p className="after:ml-0.5 after:text-red-500 after:content-['*']">
           {IMAGE.label}
         </p>
-        <ImageUploader register={register} unregister={unregister} />
+        <ImageUploader form={form} onPreviewChange={setImagePreviewUrl} />
         <button
           className={`btn btn-warning w-max place-self-center${
             isValid ? " [&:not(:hover)]:animate-bounce" : ""
@@ -218,7 +265,12 @@ export default function Register(): JSX.Element {
           <CheckIcon className="size-6" />
           確認画面へ
         </button>
-        <ConfirmDialog isPending={isPending} ref={dialogRef} watch={watch} />
+        <ConfirmDialog
+          isPending={isPending}
+          ref={dialogRef}
+          form={form}
+          imagePreviewUrl={imagePreviewUrl}
+        />
       </form>
     </>
   )
@@ -226,37 +278,46 @@ export default function Register(): JSX.Element {
 
 function Input({
   item,
-  register,
+  form,
 }: Readonly<{
   item: ProfileFormItem
-  register: UseFormRegister<ProfileForm>
+  form: RegisterFormApi
 }>): JSX.Element {
   return (
-    <label className="input input-bordered flex flex-row items-center gap-2">
-      <span className="flex flex-row items-center text-sm whitespace-nowrap after:ml-0.5 after:text-red-500 after:content-['*']">
-        <item.icon className="mr-2 size-4 opacity-70" />
-        {item.label}
-      </span>
-      <input
-        type={item.type}
-        {...register(item.name, { required: true })}
-        placeholder={item.placeholder}
-        required={true}
-      />
-    </label>
+    <form.Field name={item.name}>
+      {(field) => (
+        <label className="input input-bordered flex flex-row items-center gap-2">
+          <span className="flex flex-row items-center text-sm whitespace-nowrap after:ml-0.5 after:text-red-500 after:content-['*']">
+            <item.icon className="mr-2 size-4 opacity-70" />
+            {item.label}
+          </span>
+          <input
+            type={item.type}
+            name={field.name}
+            value={field.state.value as string}
+            onChange={(e) => field.handleChange(e.target.value as never)}
+            onBlur={field.handleBlur}
+            placeholder={item.placeholder}
+            required={true}
+          />
+        </label>
+      )}
+    </form.Field>
   )
 }
 
 function ConfirmDialog({
   isPending,
   ref,
-  watch,
+  form,
+  imagePreviewUrl,
 }: Readonly<{
   isPending: boolean
   ref: RefObject<HTMLDialogElement | null>
-  watch: UseFormWatch<ProfileForm>
+  form: RegisterFormApi
+  imagePreviewUrl: string
 }>): JSX.Element {
-  const form: ProfileFormItem[] = [
+  const formItems: ProfileFormItem[] = [
     NAME,
     COMPANY,
     EMPLOYEE_ID,
@@ -279,20 +340,26 @@ function ConfirmDialog({
         <Stepper targetStep={1} />
         <table className="table">
           <tbody>
-            {form.map((item) => (
+            {formItems.map((item) => (
               <tr key={item.name} className="grid grid-cols-2">
                 <th>{item.label}</th>
                 <td className="text-center">
-                  {item.name === "image" && watch(item.name) ? (
+                  {item.name === "image" && form.state.values[item.name] ? (
                     <Image
-                      src={document.getElementsByTagName("img")[0].src}
+                      src={imagePreviewUrl}
                       width={100}
                       height={100}
                       alt="Uploaded File"
                       className="w-full"
                     />
+                  ) : item.name === "agreement" ? (
+                    form.state.values[item.name] ? (
+                      AGREEMENT.placeholder
+                    ) : (
+                      ""
+                    )
                   ) : (
-                    (watch(item.name) as string)
+                    (form.state.values[item.name] as string)
                   )}
                 </td>
               </tr>
