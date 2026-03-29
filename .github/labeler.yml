@@ -18,6 +18,9 @@ docker:
 📝documentation:
 - changed-files:
   - any-glob-to-any-file: ['**/*.md']
+💧drizzle:
+- changed-files:
+  - any-glob-to-any-file: ['app/lib/schema.ts', 'drizzle.config.ts']
 🚀enhancement:
 - all:
   - changed-files:
@@ -28,9 +31,6 @@ docker:
 🧰infrastructure:
 - changed-files:
   - any-glob-to-any-file: ['.devcontainer/*', '.editorconfig', 'biome.json']
-💧drizzle:
-- changed-files:
-  - any-glob-to-any-file: ['app/lib/schema.ts', 'drizzle.config.ts']
 ✅test:
 - changed-files:
   - any-glob-to-any-file: ['happydom.tsx', 'test/**']
