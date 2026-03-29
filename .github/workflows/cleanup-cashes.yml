@@ -7,11 +7,10 @@ on:
       - "public/**"
       - "test/**"
       - ".dockerignore"
-      - "auth.ts"
       - "bun.lock"
       - "Dockerfile"
-      - "middleware.ts"
       - "package.json"
+      - "proxy.ts"
       - "*config.*"
     types:
       - closed
