@@ -45,7 +45,7 @@ bun dev
 ### 4. Test the app
 
 ```bash
-bun test:app
+bun test:unit
 ```
 
 ### 5. E2E Test
@@ -57,7 +57,7 @@ bun test:e2e
 ### 6. Format and Lint the files
 
 ```bash
-bun check
+bun lint:fix
 ```
 
 ### 7. Build the app

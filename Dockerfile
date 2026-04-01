@@ -8,7 +8,7 @@ RUN --mount=type=bind,source=package.json,target=package.json \
   bun i --frozen-lockfile
 COPY . .
 RUN --mount=type=secret,id=database,env=DATABASE_URL \
-  bun test:app
+  bun test:unit
 RUN --mount=type=secret,id=database,env=DATABASE_URL \
   bun run build
 
