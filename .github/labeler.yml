@@ -17,7 +17,7 @@ docker:
   - any-glob-to-any-file: ['.dockerignore', 'Dockerfile']
 📝documentation:
 - changed-files:
-  - any-glob-to-any-file: ['**/*.md', '/.markdownlint-cli2.yaml']
+  - any-glob-to-any-file: ['**/*.md', '.markdownlint-cli2.yaml']
 💧drizzle:
 - changed-files:
   - any-glob-to-any-file: ['app/lib/schema.ts', 'drizzle.config.ts']
