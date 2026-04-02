@@ -33,7 +33,7 @@
     "lint": "biome lint --write",
     "format": "biome format --write",
     "lint:fix": "biome check --write",
-    "test:unit": "bun test test/unit --preload ./happydom.tsx",
+    "test:unit": "bun test test/unit --preload ./happydom.ts",
     "test:e2e": "playwright test",
     "test:report": "playwright show-report",
     "generate": "drizzle-kit generate",
@@ -41,7 +41,7 @@
     "studio": "drizzle-kit studio"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.1021.0",
+    "@aws-sdk/client-s3": "^3.1022.0",
     "@heroicons/react": "^2.2.0",
     "@neondatabase/serverless": "^1.0.2",
     "@tanstack/react-form": "^1.28.6",

@@ -17,7 +17,7 @@ docker:
   - any-glob-to-any-file: ['.dockerignore', 'Dockerfile']
 📝documentation:
 - changed-files:
-  - any-glob-to-any-file: ['**/*.md']
+  - any-glob-to-any-file: ['**/*.md', '/.markdownlint-cli2.yaml']
 💧drizzle:
 - changed-files:
   - any-glob-to-any-file: ['app/lib/schema.ts', 'drizzle.config.ts']
@@ -33,7 +33,7 @@ docker:
   - any-glob-to-any-file: ['**/*.toml', '.devcontainer/*', '.editorconfig', 'biome.json']
 ✅test:
 - changed-files:
-  - any-glob-to-any-file: ['happydom.tsx', 'test/**']
+  - any-glob-to-any-file: ['happydom.ts', 'test/**']
 🆚vscode:
 - changed-files:
   - any-glob-to-any-file: '.vscode/*'
