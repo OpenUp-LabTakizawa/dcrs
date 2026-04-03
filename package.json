@@ -41,7 +41,7 @@
     "studio": "drizzle-kit studio"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.1023.0",
+    "@aws-sdk/client-s3": "^3.1024.0",
     "@heroicons/react": "^2.2.0",
     "@neondatabase/serverless": "^1.0.2",
     "@tanstack/react-form": "^1.28.6",
