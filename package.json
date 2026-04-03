@@ -41,11 +41,11 @@
     "studio": "drizzle-kit studio"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.1022.0",
+    "@aws-sdk/client-s3": "^3.1023.0",
     "@heroicons/react": "^2.2.0",
     "@neondatabase/serverless": "^1.0.2",
     "@tanstack/react-form": "^1.28.6",
-    "@vercel/blob": "^2.3.2",
+    "@vercel/blob": "^2.3.3",
     "better-auth": "^1.5.6",
     "drizzle-orm": "^0.45.2",
     "next": "canary",
