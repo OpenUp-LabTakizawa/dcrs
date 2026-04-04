@@ -8,7 +8,11 @@ import {
 import { type JSX, type RefObject, useState } from "react"
 import { signIn } from "@/app/lib/auth-client"
 
-const emailRegex = /\S+@\S+\.\S+/
+export const emailRegex = /\S+@\S+\.\S+/
+
+export function isValidEmail(email: string): boolean {
+  return emailRegex.test(email)
+}
 
 export function SignInModal({
   dialogRef,
@@ -17,10 +21,6 @@ export function SignInModal({
   const [error, setError] = useState<string | null>(null)
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
   const [isSent, setIsSent] = useState<boolean>(false)
-
-  function isValidEmail(email: string): boolean {
-    return emailRegex.test(email)
-  }
 
   function handleClose() {
     dialogRef.current?.close()
