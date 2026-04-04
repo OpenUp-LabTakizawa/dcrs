@@ -95,24 +95,23 @@ export default function Register(): JSX.Element {
     _prevState: FormData,
     formData: FormData,
   ): Promise<FormData> {
-    fetch("/api/users", {
-      method: "POST",
-      body: formData,
-    })
-      .then((res) => {
-        dialogRef.current?.close()
-        if (res.ok) {
-          setAlert({ eventType: "success", message: "送信に成功しました" })
-          setIsBlocked(false)
-          router.push("/register/success")
-        } else {
-          setAlert({ eventType: "error", message: res.statusText })
-        }
+    try {
+      const res = await fetch("/api/users", {
+        method: "POST",
+        body: formData,
       })
-      .catch((error) => {
-        dialogRef.current?.close()
-        setAlert({ eventType: "error", message: error })
-      })
+      dialogRef.current?.close()
+      if (res.ok) {
+        setAlert({ eventType: "success", message: "送信に成功しました" })
+        setIsBlocked(false)
+        router.push("/register/success")
+      } else {
+        setAlert({ eventType: "error", message: res.statusText })
+      }
+    } catch (error) {
+      dialogRef.current?.close()
+      setAlert({ eventType: "error", message: String(error) })
+    }
     return formData
   }
 
