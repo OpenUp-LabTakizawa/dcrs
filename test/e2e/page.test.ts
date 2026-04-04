@@ -1,22 +1,5 @@
-import { expect, type Page, test } from "@playwright/test"
-
-async function gotoWithRetry(page: Page, url: string, options = {}) {
-  const maxRetries = 3
-  const defaultOptions = { timeout: 20000, waitUntil: "load" as const }
-  const mergedOptions = { ...defaultOptions, ...options }
-
-  for (let attempt = 1; attempt <= maxRetries; attempt++) {
-    try {
-      await page.goto(url, mergedOptions)
-      return
-    } catch (error) {
-      if (attempt === maxRetries) {
-        throw error
-      }
-      await new Promise((resolve) => setTimeout(resolve, 2000))
-    }
-  }
-}
+import { expect, test } from "@playwright/test"
+import { gotoWithRetry } from "./utils/helpers"
 
 test.describe("Top page", () => {
   test.beforeEach(async ({ page }) => {

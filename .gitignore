@@ -11,6 +11,8 @@
 !.yarn/versions
 
 # testing
+/.auth/
+/.playwright-mcp
 /blob-report/
 /coverage
 /playwright/.cache/

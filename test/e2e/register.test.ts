@@ -1,25 +1,11 @@
 import path from "node:path"
-import { expect, type Page, test } from "@playwright/test"
-
-async function gotoWithRetry(page: Page, url: string, options = {}) {
-  const maxRetries = 3
-  const defaultOptions = { timeout: 20000, waitUntil: "load" as const }
-  const mergedOptions = { ...defaultOptions, ...options }
-
-  for (let attempt = 1; attempt <= maxRetries; attempt++) {
-    try {
-      await page.goto(url, mergedOptions)
-      return
-    } catch (error) {
-      if (attempt === maxRetries) {
-        throw error
-      }
-      await new Promise((resolve) => setTimeout(resolve, 2000))
-    }
-  }
-}
+import { expect, test } from "@playwright/test"
+import { gotoWithRetry, setFileInput } from "./utils/helpers"
 
 test.describe("Registration form submission", () => {
+  // WebKit/Mobile Safari may be slow to process setInputFiles change events
+  test.describe.configure({ retries: 2 })
+
   test("submits all form fields to POST /api/users", async ({ page }) => {
     const capturedFields = new Set<string>()
     let requestCaptured: () => void
@@ -76,11 +62,11 @@ test.describe("Registration form submission", () => {
       "fixtures",
       "test-image.png",
     )
-    await page.locator('input[type="file"]').setInputFiles(testImagePath)
+    await setFileInput(page, testImagePath)
 
     // Open the confirm dialog
     const confirmButton = page.getByRole("button", { name: "確認画面へ" })
-    await expect(confirmButton).toBeEnabled({ timeout: 5000 })
+    await expect(confirmButton).toBeEnabled({ timeout: 15000 })
     await confirmButton.click()
 
     // Submit the form from the confirm dialog

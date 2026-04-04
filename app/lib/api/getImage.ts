@@ -1,9 +1,11 @@
-import { baseUrl } from "./baseUrl"
+import { storageClient } from "@/app/lib/storage"
 
-export async function getImage(path: Readonly<string>): Promise<Response> {
-  const res = await fetch(`${baseUrl}/api/image/${encodeURIComponent(path)}`)
-  if (!res.ok) {
-    throw new Error(`Failed to fetch image: ${res.status} ${res.statusText}`)
+export async function getImage(
+  path: Readonly<string>,
+): Promise<{ body: ReadableStream; contentType: string }> {
+  const result = await storageClient.get(path)
+  if (!result.body) {
+    throw new Error(`Image not found or empty: ${path}`)
   }
-  return res
+  return result
 }
