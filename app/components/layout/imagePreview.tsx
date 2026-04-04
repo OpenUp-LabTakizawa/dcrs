@@ -6,9 +6,11 @@ import { getImage } from "@/app/lib/api/getImage"
 export async function ImagePreview({
   path,
 }: Readonly<{ path: string }>): Promise<JSX.Element> {
-  const response: Response = await getImage(path)
-  const contentType: string = response.headers.get("Content-Type") as string
-  const arrayBuffer: ArrayBuffer = await response.arrayBuffer()
+  const { body, contentType } = await getImage(path)
+  if (!body) {
+    throw new Error("Missing image body")
+  }
+  const arrayBuffer: ArrayBuffer = await new Response(body).arrayBuffer()
   const buffer: Buffer = Buffer.from(arrayBuffer)
   const base64: string = buffer.toString("base64")
 

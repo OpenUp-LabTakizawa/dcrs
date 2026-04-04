@@ -1,24 +1,22 @@
-import { afterEach, beforeEach, describe, expect, it, mock } from "bun:test"
+import { describe, expect, it, mock } from "bun:test"
 import type { User } from "@/app/lib/schema"
 
-const mockFetch = mock()
+const mockSelect = mock()
+const mockFrom = mock()
 
-const originalFetch = globalThis.fetch
-
-beforeEach(() => {
-  mockFetch.mockClear()
-  globalThis.fetch = mockFetch
-})
-
-afterEach(() => {
-  globalThis.fetch = originalFetch
-})
+mock.module("@/app/lib/db", () => ({
+  db: {
+    select: () => {
+      mockSelect()
+      return { from: mockFrom }
+    },
+  },
+}))
 
 const { getUsers } = await import("@/app/lib/api/getUsers")
-const { baseUrl } = await import("@/app/lib/api/baseUrl")
 
 describe("GetUsers Client", () => {
-  it("should return { getUsers: User[] } when fetch returns status 200", async () => {
+  it("should return { getUsers: User[] } when DB returns records", async () => {
     const users: User[] = [
       {
         id: 1,
@@ -31,39 +29,36 @@ describe("GetUsers Client", () => {
         image: "EMP001.png",
       },
     ]
-    const body = { getUsers: users }
-    mockFetch.mockResolvedValueOnce(
-      new Response(JSON.stringify(body), { status: 200 }),
-    )
+    mockFrom.mockResolvedValueOnce(users)
 
     const result = await getUsers()
 
-    expect(result).toEqual(JSON.parse(JSON.stringify(body)))
+    expect(result).toEqual({ getUsers: users })
   })
 
-  it("should throw Error with status code and status text when fetch returns non-200", async () => {
-    mockFetch.mockResolvedValueOnce(
-      new Response("Not Found", { status: 404, statusText: "Not Found" }),
-    )
+  it("should return { getUsers: [] } when DB returns empty array", async () => {
+    mockFrom.mockResolvedValueOnce([])
 
-    await expect(getUsers()).rejects.toThrow("404")
+    const result = await getUsers()
+
+    expect(result).toEqual({ getUsers: [] })
   })
 
-  it("should propagate network errors thrown by fetch", async () => {
-    const networkError = new TypeError("fetch failed")
-    mockFetch.mockRejectedValueOnce(networkError)
+  it("should propagate DB errors", async () => {
+    const dbError = new Error("connection refused")
+    mockFrom.mockRejectedValueOnce(dbError)
 
-    await expect(getUsers()).rejects.toThrow(networkError)
+    await expect(getUsers()).rejects.toThrow("connection refused")
   })
 
-  it(`should fetch from ${baseUrl}/api/users`, async () => {
-    mockFetch.mockResolvedValueOnce(
-      new Response(JSON.stringify({ getUsers: [] }), { status: 200 }),
-    )
+  it("should call db.select().from(handicap)", async () => {
+    mockSelect.mockClear()
+    mockFrom.mockClear()
+    mockFrom.mockResolvedValueOnce([])
 
     await getUsers()
 
-    expect(mockFetch).toHaveBeenCalledTimes(1)
-    expect(mockFetch.mock.calls[0][0]).toBe(`${baseUrl}/api/users`)
+    expect(mockSelect).toHaveBeenCalledTimes(1)
+    expect(mockFrom).toHaveBeenCalledTimes(1)
   })
 })
