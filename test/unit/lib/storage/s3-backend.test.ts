@@ -1,32 +1,33 @@
-import { beforeEach, describe, expect, it, mock } from "bun:test"
+import { afterEach, beforeEach, describe, expect, it, spyOn } from "bun:test"
 import {
   DeleteObjectCommand,
   GetObjectCommand,
   PutObjectCommand,
 } from "@aws-sdk/client-s3"
-
-// Mock the S3 client
-const mockSend = mock((_cmd: unknown) => Promise.resolve({}))
-
-mock.module("@/app/lib/s3client", () => ({
-  client: { send: mockSend },
-}))
-
-const { TEST_BUCKET } = await import("@/app/lib/constant")
-const { S3Backend } = await import("@/app/lib/storage/s3-backend")
+import { TEST_BUCKET } from "@/app/lib/constant"
+import { client, getClient, S3Backend } from "@/app/lib/storage/s3-backend"
 
 describe("S3Backend", () => {
-  let backend: InstanceType<typeof S3Backend>
+  let backend: S3Backend
+  let mockSend: ReturnType<typeof spyOn>
 
   beforeEach(() => {
-    mockSend.mockClear()
+    process.env.S3_ACCESS_KEY_ID = "test-key"
+    process.env.S3_SECRET_ACCESS_KEY = "test-secret"
+    process.env.S3_REGION = "ap-northeast-1"
+    getClient()
+    mockSend = spyOn(client, "send").mockResolvedValue({} as never)
     delete process.env.S3_BUCKET
     backend = new S3Backend()
   })
 
+  afterEach(() => {
+    mockSend.mockRestore()
+  })
+
   describe("upload()", () => {
     it("should send PutObjectCommand with correct params and return { url: key }", async () => {
-      mockSend.mockResolvedValueOnce({})
+      mockSend.mockResolvedValueOnce({} as never)
 
       const params = {
         key: "images/test.png",
@@ -59,7 +60,7 @@ describe("S3Backend", () => {
       mockSend.mockResolvedValueOnce({
         Body: fakeBody,
         ContentType: "image/jpeg",
-      })
+      } as never)
 
       const result = await backend.get("images/photo.jpg")
 
@@ -82,7 +83,7 @@ describe("S3Backend", () => {
 
   describe("delete()", () => {
     it("should send DeleteObjectCommand with correct params", async () => {
-      mockSend.mockResolvedValueOnce({})
+      mockSend.mockResolvedValueOnce({} as never)
 
       await backend.delete("images/old.png")
 

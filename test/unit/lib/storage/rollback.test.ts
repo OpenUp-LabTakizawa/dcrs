@@ -16,11 +16,14 @@ const mockReturning = mock()
 const mockValues = mock(() => ({ returning: mockReturning }))
 const mockInsert = mock(() => ({ values: mockValues }))
 
-mock.module("@/app/lib/schema", () => ({
+mock.module("@/app/lib/db", () => ({
   db: {
     select: mock(() => ({ from: mock(async () => []) })),
     insert: mockInsert,
   },
+}))
+
+mock.module("@/app/lib/schema", () => ({
   handicap: {},
 }))
 

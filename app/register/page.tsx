@@ -24,8 +24,6 @@ import { PingAnimation } from "@/app/components/animation/pingAnimation"
 import { AlertContext } from "@/app/components/layout/alertBox"
 import { useNavigationBlocker } from "@/app/components/layout/navigationBlocker"
 import { Stepper } from "@/app/components/layout/stepper"
-import type { Alert } from "@/app/interfaces/alert"
-import type { ProfileForm, ProfileFormItem } from "@/app/interfaces/form"
 import {
   AGREEMENT,
   COMPANY,
@@ -35,6 +33,8 @@ import {
   NAME,
   TELEPHONE,
 } from "@/app/lib/constant"
+import type { Alert } from "@/app/lib/types/alert"
+import type { ProfileForm, ProfileFormItem } from "@/app/lib/types/form"
 import { ImageUploader } from "@/app/register/imageUploader"
 
 // Type helper: extracts the form API type (never called at runtime)

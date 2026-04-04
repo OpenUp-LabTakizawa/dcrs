@@ -38,7 +38,8 @@
     "test:report": "playwright show-report",
     "generate": "drizzle-kit generate",
     "migrate": "drizzle-kit migrate",
-    "studio": "drizzle-kit studio"
+    "studio": "drizzle-kit studio",
+    "setup": "bun run scripts/setup-env.ts"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1024.0",

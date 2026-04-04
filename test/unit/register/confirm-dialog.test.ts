@@ -6,7 +6,6 @@
  */
 import { describe, expect, test } from "bun:test"
 import fc from "fast-check"
-import type { ProfileForm, ProfileFormItem } from "@/app/interfaces/form"
 import {
   AGREEMENT,
   COMPANY,
@@ -16,6 +15,7 @@ import {
   NAME,
   TELEPHONE,
 } from "@/app/lib/constant"
+import type { ProfileForm, ProfileFormItem } from "@/app/lib/types/form"
 
 /**
  * The formItems array used by ConfirmDialog, replicated here to test

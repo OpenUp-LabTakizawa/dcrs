@@ -1,4 +1,5 @@
-import { db, handicap, type NewUser, type User } from "@/app/lib/schema"
+import { db } from "@/app/lib/db"
+import { handicap, type NewUser, type User } from "@/app/lib/schema"
 import { storageClient } from "@/app/lib/storage"
 
 export async function GET(): Promise<Response> {

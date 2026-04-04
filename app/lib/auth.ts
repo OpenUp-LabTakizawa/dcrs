@@ -1,7 +1,8 @@
 import { betterAuth } from "better-auth"
 import { drizzleAdapter } from "better-auth/adapters/drizzle"
 import { magicLink } from "better-auth/plugins"
-import { accounts, db, sessions, users, verifications } from "@/app/lib/schema"
+import { db } from "@/app/lib/db"
+import { accounts, sessions, users, verifications } from "@/app/lib/schema"
 
 export const auth = betterAuth({
   database: drizzleAdapter(db, {
