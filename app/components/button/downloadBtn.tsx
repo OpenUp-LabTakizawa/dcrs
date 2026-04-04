@@ -3,7 +3,7 @@
 import { FolderArrowDownIcon } from "@heroicons/react/24/solid"
 import { type Dispatch, type JSX, type SetStateAction, useContext } from "react"
 import { AlertContext } from "@/app/components/layout//alertBox"
-import type { Alert } from "@/app/interfaces/alert"
+import type { Alert } from "@/app/lib/types/alert"
 
 export function DownloadBtn(): JSX.Element {
   const setAlert: Dispatch<SetStateAction<Alert>> = useContext(AlertContext)

@@ -6,7 +6,7 @@
  */
 import { describe, expect, test } from "bun:test"
 import fc from "fast-check"
-import type { ProfileForm } from "@/app/interfaces/form"
+import type { ProfileForm } from "@/app/lib/types/form"
 
 /**
  * Models the navigation blocker state machine extracted from page.tsx.

@@ -36,37 +36,58 @@ git clone https://github.com/OpenUp-LabTakizawa/dcrs
 cd dcrs && bun i
 ```
 
-### 3. Develop the app
+### 3. Set up environment variables
+
+Interactively generate your `.env` file:
+
+```bash
+bun setup
+```
+
+| Variable | Description | Required |
+| --- | --- | --- |
+| `BETTER_AUTH_SECRET` | Secret key for Better Auth session encryption | ✅ |
+| `BETTER_AUTH_URL` | Base URL for Better Auth (e.g. `http://localhost:3000`) | ✅ |
+| `AUTH_RESEND_KEY` | [Resend](https://resend.com/) API key for sending emails | ✅ |
+| `DATABASE_URL` | Neon PostgreSQL connection string | ✅ |
+| `BLOB_READ_WRITE_TOKEN` | [Vercel Blob](https://vercel.com/docs/storage/vercel-blob) read/write token. When set, Vercel Blob is used as the storage backend; otherwise S3 is used | ❌ |
+| `S3_ACCESS_KEY_ID` | AWS S3 access key ID (required when using S3 backend) | ❌ |
+| `S3_SECRET_ACCESS_KEY` | AWS S3 secret access key (required when using S3 backend) | ❌ |
+| `S3_REGION` | S3 region (`AWS_REGION` is also accepted; required when using S3 backend) | ❌ |
+| `S3_BUCKET` | S3 bucket name (uses default value if omitted) | ❌ |
+| `API_URL` | Base URL for the API (default: `http://localhost:3000`) | ❌ |
+
+### 4. Develop the app
 
 ```bash
 bun dev
 ```
 
-### 4. Test the app
+### 5. Test the app
 
 ```bash
 bun test:unit
 ```
 
-### 5. E2E Test
+### 6. E2E Test
 
 ```bash
 bun test:e2e
 ```
 
-### 6. Format and Lint the files
+### 7. Format and Lint the files
 
 ```bash
 bun lint:fix
 ```
 
-### 7. Build the app
+### 8. Build the app
 
 ```bash
 bun run build
 ```
 
-### 8. Start the app
+### 9. Start the app
 
 ```bash
 bun start

@@ -16,7 +16,7 @@ import {
   useRef,
   useState,
 } from "react"
-import type { Alert } from "@/app/interfaces/alert"
+import type { Alert } from "@/app/lib/types/alert"
 
 export const AlertContext: Context<Dispatch<SetStateAction<Alert>>> =
   createContext<Dispatch<SetStateAction<Alert>>>(() => {

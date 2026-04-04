@@ -1,7 +1,4 @@
-import { drizzle } from "drizzle-orm/neon-http"
 import { boolean, integer, pgTable, text, timestamp } from "drizzle-orm/pg-core"
-
-export const db = drizzle(process.env.DATABASE_URL || "")
 
 export const handicap = pgTable("handicap", {
   id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
