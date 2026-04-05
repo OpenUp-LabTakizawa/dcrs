@@ -45,8 +45,8 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# drizzle
-drizzle
+# drizzle (keep migration files, ignore generated artifacts)
+drizzle/meta/0000_snapshot.json
 
 # Kiro settings
 .kiro

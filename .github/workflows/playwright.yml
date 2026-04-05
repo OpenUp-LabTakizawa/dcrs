@@ -5,7 +5,7 @@ concurrency:
   cancel-in-progress: true
 
 on:
-  pull_request:
+  pull_request_target:
     paths:
       - "app/**"
       - "public/**"
@@ -51,6 +51,8 @@ jobs:
           - 5432:5432
     env:
       DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
+      DB_TYPE: postgres
+      BETTER_AUTH_URL: http://localhost:3000
 
     steps:
       - name: 📥 Checkout
@@ -72,6 +74,9 @@ jobs:
       - name: 🔑 Generate Better Auth Secret
         run: echo "BETTER_AUTH_SECRET=$(openssl rand -base64 32)" >> "$GITHUB_ENV"
 
+      - name: 🗃️ Run database migrations
+        run: bun run migrate
+
       - name: 🧩 Build app
         run: bun run build
 
@@ -79,6 +84,8 @@ jobs:
         run: bun playwright install --with-deps
 
       - name: 🧪 Run Playwright tests
+        env:
+          BLOB_READ_WRITE_TOKEN: ${{ secrets.BLOB_READ_WRITE_TOKEN }}
         run: bun playwright test
 
 
