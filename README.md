@@ -50,6 +50,7 @@ bun setup
 | `BETTER_AUTH_URL` | Base URL for Better Auth (e.g. `http://localhost:3000`) | ✅ |
 | `AUTH_RESEND_KEY` | [Resend](https://resend.com/) API key for sending emails | ✅ |
 | `DATABASE_URL` | Neon PostgreSQL connection string | ✅ |
+| `DB_TYPE` | Database driver type: `neon` (default) or `postgres` for standard PostgreSQL | ❌ |
 | `BLOB_READ_WRITE_TOKEN` | [Vercel Blob](https://vercel.com/docs/storage/vercel-blob) read/write token. When set, Vercel Blob is used as the storage backend; otherwise S3 is used | ❌ |
 | `S3_ACCESS_KEY_ID` | AWS S3 access key ID (required when using S3 backend) | ❌ |
 | `S3_SECRET_ACCESS_KEY` | AWS S3 secret access key (required when using S3 backend) | ❌ |

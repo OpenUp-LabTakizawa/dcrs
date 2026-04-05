@@ -1,13 +1,9 @@
-import { neon } from "@neondatabase/serverless"
 import { test as teardown } from "@playwright/test"
 import { TEST_HANDICAP_USERS, TEST_UNIQUE_ID } from "./fixtures/auth-constants"
+import { createSqlClient } from "./fixtures/sql-client"
 
 teardown("clean up test data", async () => {
-  const databaseUrl = process.env.DATABASE_URL
-  if (!databaseUrl) {
-    throw new Error("DATABASE_URL is not set")
-  }
-  const sql = neon(databaseUrl)
+  const sql = await createSqlClient()
 
   // Clean up auth data
   await sql`DELETE FROM "session" WHERE "userId" = ${TEST_UNIQUE_ID}`

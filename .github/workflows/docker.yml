@@ -135,6 +135,7 @@ jobs:
           provenance: ${{ fromJSON(env.IS_PUSH) && 'mode=max' }}
           push: ${{ fromJSON(env.IS_PUSH) }}
           sbom: ${{ fromJSON(env.IS_PUSH) }}
+          build-args: DB_TYPE=postgres
           secrets: database=postgres://postgres:postgres@localhost:5432/postgres
           tags: ${{ steps.meta.outputs.tags }}
 

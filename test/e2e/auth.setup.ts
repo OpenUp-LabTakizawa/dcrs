@@ -1,7 +1,6 @@
 import crypto from "node:crypto"
 import fs from "node:fs/promises"
 import path from "node:path"
-import { neon } from "@neondatabase/serverless"
 import { test as setup } from "@playwright/test"
 import { put } from "@vercel/blob"
 import {
@@ -9,18 +8,15 @@ import {
   TEST_UNIQUE_ID,
   TEST_USER,
 } from "./fixtures/auth-constants"
+import { createSqlClient } from "./fixtures/sql-client"
 
 setup("create authenticated session and seed test data", async () => {
-  const databaseUrl = process.env.DATABASE_URL
-  if (!databaseUrl) {
-    throw new Error("DATABASE_URL is not set")
-  }
   const authSecret = process.env.BETTER_AUTH_SECRET
   if (!authSecret) {
     throw new Error("BETTER_AUTH_SECRET is not set")
   }
 
-  const sql = neon(databaseUrl)
+  const sql = await createSqlClient()
   const now = new Date()
   const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) // 7 days
 

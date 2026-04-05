@@ -33,6 +33,13 @@ const envVars: EnvVar[] = [
     required: true,
   },
   {
+    key: "DB_TYPE",
+    description:
+      "Database driver type: 'neon' (default) or 'postgres' for standard PostgreSQL",
+    required: false,
+    defaultValue: "neon",
+  },
+  {
     key: "BLOB_READ_WRITE_TOKEN",
     description:
       "Vercel Blob read/write token (S3 backend is used when not set)",

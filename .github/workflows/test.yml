@@ -69,6 +69,7 @@ jobs:
         id: test
         env:
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
+          DB_TYPE: postgres
         run: |
           bun test:unit &> >(tee -p test.log) || STATUS=$?
           if [ $STATUS -ne 0 ]; then

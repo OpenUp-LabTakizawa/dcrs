@@ -7,6 +7,8 @@ RUN --mount=type=bind,source=package.json,target=package.json \
   --mount=type=cache,target=/root/.bun \
   bun i --frozen-lockfile
 COPY . .
+ARG DB_TYPE=postgres
+ENV DB_TYPE=$DB_TYPE
 RUN --mount=type=secret,id=database,env=DATABASE_URL \
   bun test:unit
 RUN --mount=type=secret,id=database,env=DATABASE_URL \
