@@ -2,7 +2,7 @@ import crypto from "node:crypto"
 import fs from "node:fs/promises"
 import path from "node:path"
 import { test as setup } from "@playwright/test"
-import { put } from "@vercel/blob"
+import { storageClient } from "@/app/lib/storage"
 import {
   TEST_HANDICAP_USERS,
   TEST_UNIQUE_ID,
@@ -62,11 +62,10 @@ setup("create authenticated session and seed test data", async () => {
     `
 
     // Upload test image to storage
-    await put(user.image, testImageBuffer, {
-      access: "private",
+    await storageClient.upload({
+      key: user.image,
+      body: testImageBuffer,
       contentType: "image/png",
-      addRandomSuffix: false,
-      allowOverwrite: true,
     })
   }
 

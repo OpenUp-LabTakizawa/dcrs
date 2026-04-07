@@ -23,9 +23,15 @@ function createS3Client(): S3Client {
     )
   }
 
+  const endpoint = process.env.S3_ENDPOINT
+
   return new S3Client({
     credentials: { accessKeyId, secretAccessKey },
     region,
+    ...(endpoint && {
+      endpoint,
+      forcePathStyle: true,
+    }),
   })
 }
 

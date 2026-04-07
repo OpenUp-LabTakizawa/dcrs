@@ -1,4 +1,5 @@
 import { test as teardown } from "@playwright/test"
+import { storageClient } from "@/app/lib/storage"
 import { TEST_HANDICAP_USERS, TEST_UNIQUE_ID } from "./fixtures/auth-constants"
 import { createSqlClient } from "./fixtures/sql-client"
 
@@ -14,8 +15,8 @@ teardown("clean up test data", async () => {
   const employeeIds = TEST_HANDICAP_USERS.map((u) => u.employeeId)
   await sql`DELETE FROM "handicap" WHERE "employeeId" = ANY(${employeeIds})`
 
-  // Note: Test images in Vercel Blob are intentionally NOT deleted here.
-  // Vercel Blob has a CDN cache (up to 1 minute) that can cause get() to
-  // return null immediately after delete + re-upload with the same key.
-  // The images are overwritten on each setup run with allowOverwrite: true.
+  // Clean up test images from storage
+  for (const user of TEST_HANDICAP_USERS) {
+    await storageClient.delete(user.image)
+  }
 })
