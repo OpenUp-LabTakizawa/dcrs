@@ -14,7 +14,7 @@ dependencies:
   - any-glob-to-any-file: ['bun.lock', 'package.json']
 docker:
 - changed-files:
-  - any-glob-to-any-file: ['.dockerignore', 'Dockerfile']
+  - any-glob-to-any-file: ['.dockerignore', 'compose.yaml', 'Dockerfile']
 📝documentation:
 - changed-files:
   - any-glob-to-any-file: ['**/*.md', '.markdownlint-cli2.yaml']

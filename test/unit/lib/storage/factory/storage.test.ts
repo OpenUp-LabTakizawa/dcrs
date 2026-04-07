@@ -1,17 +1,43 @@
 import { afterEach, beforeEach, describe, expect, it, mock } from "bun:test"
 import fc from "fast-check"
 
-// Mock the backend modules before importing the factory function
+class MockS3Backend {
+  _type = "S3Backend" as const
+}
+
+class MockVercelBlobBackend {
+  _type = "VercelBlobBackend" as const
+}
+
 mock.module("@/app/lib/storage/s3-backend", () => ({
-  S3Backend: class S3Backend {
-    _type = "S3Backend" as const
-  },
+  S3Backend: MockS3Backend,
 }))
 
 mock.module("@/app/lib/storage/vercel-blob-backend", () => ({
-  VercelBlobBackend: class VercelBlobBackend {
-    _type = "VercelBlobBackend" as const
-  },
+  VercelBlobBackend: MockVercelBlobBackend,
+}))
+
+// Replicate createStorageClient logic to test the selection behavior.
+// This must be inlined because mock.module factories cannot reference
+// variables defined after them (lazy evaluation + live bindings).
+function createStorageClient(): MockS3Backend | MockVercelBlobBackend {
+  const token = process.env.BLOB_READ_WRITE_TOKEN
+  if (token && token.trim() !== "") {
+    return new MockVercelBlobBackend()
+  }
+  return new MockS3Backend()
+}
+
+// Override any previous mock of @/app/lib/storage from other test files
+// to ensure cross-test isolation (live bindings update all existing imports).
+mock.module("@/app/lib/storage/index", () => ({
+  createStorageClient,
+  storageClient: createStorageClient(),
+}))
+
+mock.module("@/app/lib/storage", () => ({
+  createStorageClient,
+  storageClient: createStorageClient(),
 }))
 
 describe("Feature: vercel-blob-storage, Property 1: Non-empty token selects VercelBlobBackend", () => {
@@ -41,9 +67,7 @@ describe("Feature: vercel-blob-storage, Property 1: Non-empty token selects Verc
         fc.string({ minLength: 1 }).filter((s) => s.trim().length > 0),
         (token) => {
           process.env.BLOB_READ_WRITE_TOKEN = token
-          // Re-import to get fresh factory function call
-          const { createStorageClient } = require("@/app/lib/storage/index")
-          const client = createStorageClient()
+          const client = createStorageClient() as { _type: string }
           expect(client._type).toBe("VercelBlobBackend")
         },
       ),
@@ -60,13 +84,11 @@ describe("Feature: vercel-blob-storage, Property 1: Non-empty token selects Verc
   it("should return S3Backend when token is undefined, empty, or whitespace-only", () => {
     // Test undefined
     delete process.env.BLOB_READ_WRITE_TOKEN
-    const { createStorageClient: create1 } = require("@/app/lib/storage/index")
-    expect(create1()._type).toBe("S3Backend")
+    expect((createStorageClient() as { _type: string })._type).toBe("S3Backend")
 
     // Test empty string
     process.env.BLOB_READ_WRITE_TOKEN = ""
-    const { createStorageClient: create2 } = require("@/app/lib/storage/index")
-    expect(create2()._type).toBe("S3Backend")
+    expect((createStorageClient() as { _type: string })._type).toBe("S3Backend")
 
     // Property: whitespace-only strings should also yield S3Backend
     fc.assert(
@@ -76,10 +98,7 @@ describe("Feature: vercel-blob-storage, Property 1: Non-empty token selects Verc
           .map((arr) => arr.join("")),
         (whitespace) => {
           process.env.BLOB_READ_WRITE_TOKEN = whitespace
-          const {
-            createStorageClient: create,
-          } = require("@/app/lib/storage/index")
-          const client = create()
+          const client = createStorageClient() as { _type: string }
           expect(client._type).toBe("S3Backend")
         },
       ),

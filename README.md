@@ -56,6 +56,7 @@ bun setup
 | `S3_SECRET_ACCESS_KEY` | AWS S3 secret access key (required when using S3 backend) | ❌ |
 | `S3_REGION` | S3 region (`AWS_REGION` is also accepted; required when using S3 backend) | ❌ |
 | `S3_BUCKET` | S3 bucket name (uses default value if omitted) | ❌ |
+| `S3_ENDPOINT` | S3-compatible endpoint URL (e.g. `http://localhost:9000` for RustFS). When set, path-style access is enabled | ❌ |
 | `API_URL` | Base URL for the API (default: `http://localhost:3000`) | ❌ |
 
 ### 4. Develop the app
@@ -93,6 +94,45 @@ bun run build
 ```bash
 bun start
 ```
+
+## 🐋 Local Development Environment
+
+Instead of connecting to remote services (Neon PostgreSQL, Vercel Blob), you can run a fully local environment using Docker Compose with PostgreSQL and [RustFS](https://github.com/rustfs/rustfs) (S3-compatible storage).
+
+Prerequisites: [Docker](https://www.docker.com/)
+
+### Start
+
+```bash
+mise dev:up
+```
+
+This single command will:
+
+1. Generate a `.env` file with local development defaults
+2. Start PostgreSQL and RustFS via Docker Compose
+3. Run database migrations
+4. Create the S3 bucket in RustFS
+
+### Stop
+
+```bash
+docker compose down
+```
+
+### Reset (delete volumes and restart)
+
+```bash
+mise dev:reset
+```
+
+### Services
+
+| Service | Host Port | Description |
+| --- | --- | --- |
+| PostgreSQL | 5432 | Database |
+| RustFS S3 API | 9000 | S3-compatible object storage |
+| RustFS Console | 9001 | Web management console |
 
 ## 🆚 VSCode
 
@@ -171,6 +211,7 @@ This software uses the following open source packages:
 - [Node.js](https://nodejs.org/)
 - [Playwright](https://playwright.dev/)
 - [React](https://react.dev/)
+- [RustFS](https://github.com/rustfs/rustfs)
 - [TanStack Form](https://tanstack.com/form/)
 - [StackBlitz Codeflow](https://stackblitz.com/codeflow/)
 - [Tailwind CSS](https://tailwindcss.com/)

@@ -3,6 +3,18 @@ bun = "latest"
 markdownlint-cli2 = "latest"
 pitchfork = "latest"
 
+[tasks."dev:up"]
+description = "Start local dev environment"
+run = "bun run scripts/dev-up.ts"
+
+[tasks."dev:reset"]
+description = "Reset local dev environment (delete volumes)"
+run = """
+docker compose down -v
+bun run scripts/dev-up.ts
+bun run migrate
+"""
+
 [tasks.lint]
 run = ["bun lint:fix --unsafe", "mise lint:md"]
 
