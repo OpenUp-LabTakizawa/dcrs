@@ -42,17 +42,17 @@
     "setup": "bun run scripts/setup-env.ts"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.1026.0",
+    "@aws-sdk/client-s3": "^3.1027.0",
     "@heroicons/react": "^2.2.0",
     "@neondatabase/serverless": "^1.0.2",
     "@tanstack/react-form": "^1.28.6",
     "@vercel/blob": "^2.3.3",
-    "better-auth": "^1.6.0",
+    "better-auth": "^1.6.1",
     "drizzle-orm": "^0.45.2",
     "next": "canary",
     "pg": "^8.20.0",
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
     "theme-change": "^2.5.0"
   },
   "devDependencies": {
