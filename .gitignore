@@ -48,5 +48,5 @@ next-env.d.ts
 # drizzle (keep migration files, ignore generated artifacts)
 drizzle/meta/0000_snapshot.json
 
-# Kiro settings
-.kiro
+# AI settings
+.claude
