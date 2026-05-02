@@ -42,7 +42,7 @@
     "setup": "bun run scripts/setup-env.ts"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.1040.0",
+    "@aws-sdk/client-s3": "^3.1041.0",
     "@heroicons/react": "^2.2.0",
     "@neondatabase/serverless": "^1.1.0",
     "@tanstack/react-form": "^1.29.1",
@@ -56,7 +56,7 @@
     "theme-change": "^2.5.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.4.13",
+    "@biomejs/biome": "^2.4.14",
     "@happy-dom/global-registrator": "^20.9.0",
     "@playwright/test": "next",
     "@tailwindcss/postcss": "^4.2.4",
