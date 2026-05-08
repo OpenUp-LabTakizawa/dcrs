@@ -1,7 +1,7 @@
 [tools]
 bun = "latest"
-markdownlint-cli2 = "latest"
 pitchfork = "latest"
+rumdl = "latest"
 
 [tasks."dev:up"]
 description = "Start local dev environment"
@@ -20,7 +20,7 @@ run = ["bun lint:fix --unsafe", "mise lint:md"]
 
 [tasks."lint:md"]
 description = "Check markdown files for linting issues"
-run = "markdownlint-cli2 '**/*.md'"
+run = "rumdl check --fix ."
 
 [tasks.update]
 description = "Update bun dependencies and reinstall with isolated linker"
