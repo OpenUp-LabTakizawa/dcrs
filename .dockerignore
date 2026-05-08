@@ -5,7 +5,7 @@
 .github
 .gitignore
 .jj
-.markdownlint-cli2.yaml
+.rumdl.toml
 .next
 .sl
 .vscode
