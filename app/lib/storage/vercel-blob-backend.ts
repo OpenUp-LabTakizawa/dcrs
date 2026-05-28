@@ -13,7 +13,7 @@ export class VercelBlobBackend implements StorageClient {
 
   async get(key: string): Promise<GetResult> {
     const result = await get(key, { access: "private" })
-    if (!result || result.statusCode !== 200 || !result.stream) {
+    if (result?.statusCode !== 200 || !result.stream) {
       throw new Error(`Failed to fetch blob: ${key}`)
     }
     return {
