@@ -47,7 +47,7 @@
     "@neondatabase/serverless": "^1.1.0",
     "@tanstack/react-form": "^1.33.0",
     "@vercel/blob": "^2.5.0",
-    "better-auth": "^1.6.20",
+    "better-auth": "^1.6.21",
     "drizzle-orm": "^0.45.2",
     "next": "canary",
     "pg": "^8.22.0",
