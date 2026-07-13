@@ -42,7 +42,7 @@
     "setup": "bun run scripts/setup-env.ts"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.1085.0",
+    "@aws-sdk/client-s3": "^3.1086.0",
     "@heroicons/react": "^2.2.0",
     "@neondatabase/serverless": "^1.1.0",
     "@tanstack/react-form": "^1.33.2",
@@ -71,7 +71,7 @@
     "dotenv": "^17.4.2",
     "drizzle-kit": "^0.31.10",
     "fast-check": "^4.9.0",
-    "postcss": "^8.5.18",
+    "postcss": "^8.5.19",
     "tailwindcss": "^4.3.2",
     "typescript": "^7.0.2"
   },
