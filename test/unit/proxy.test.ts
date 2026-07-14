@@ -81,7 +81,7 @@ describe("Authorization proxy access control", () => {
     await fc.assert(
       fc.asyncProperty(usersPathArb, fc.boolean(), async (path, hasSession) => {
         // Reset state
-        state.redirectPath = null
+        state.redirectPath = null as string | null
         state.nextCalled = false
 
         // Configure session

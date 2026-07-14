@@ -41,7 +41,7 @@ describe("Feature: local-dev-environment, Property 3: Idempotent bucket creation
 
 describe("createBucketIfNotExists", () => {
   it("creates bucket when it does not exist", async () => {
-    const sendMock = mock(() => Promise.resolve({}))
+    const sendMock = mock((_command: unknown) => Promise.resolve({}))
     const client = createMockS3Client(sendMock)
     const consoleSpy = spyOn(console, "log").mockImplementation(() => {})
 

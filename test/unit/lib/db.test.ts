@@ -31,7 +31,9 @@ describe("createDb driver selection", () => {
     process.env.DB_TYPE = "postgres"
 
     const db = await createDb()
-    const kind = (db.constructor as Record<symbol, string>)[entityKind]
+    const kind = (db.constructor as unknown as Record<symbol, string>)[
+      entityKind
+    ]
 
     expect(kind).toBe("NodePgDatabase")
   })
@@ -41,7 +43,9 @@ describe("createDb driver selection", () => {
     process.env.DB_TYPE = "neon"
 
     const db = await createDb()
-    const kind = (db.constructor as Record<symbol, string>)[entityKind]
+    const kind = (db.constructor as unknown as Record<symbol, string>)[
+      entityKind
+    ]
 
     expect(kind).toBe("NeonHttpDatabase")
   })
@@ -51,7 +55,9 @@ describe("createDb driver selection", () => {
     delete process.env.DB_TYPE
 
     const db = await createDb()
-    const kind = (db.constructor as Record<symbol, string>)[entityKind]
+    const kind = (db.constructor as unknown as Record<symbol, string>)[
+      entityKind
+    ]
 
     expect(kind).toBe("NeonHttpDatabase")
   })

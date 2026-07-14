@@ -5,6 +5,7 @@ const nextConfig: NextConfig = {
     inlineCss: true,
     isrFlushToDisk: false,
     viewTransition: true,
+    useTypeScriptCli: true,
   },
   output: "standalone",
   reactCompiler: true,

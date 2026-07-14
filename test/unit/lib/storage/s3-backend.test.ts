@@ -124,7 +124,12 @@ describe("Feature: local-dev-environment, Property 1: S3Client custom endpoint c
 
         expect(s3.config.forcePathStyle).toBe(true)
 
-        const resolvedEndpoint = await s3.config.endpoint()
+        const resolvedEndpoint = await s3.config.endpoint?.()
+        expect(resolvedEndpoint).toBeDefined()
+        if (!resolvedEndpoint) {
+          return
+        }
+
         const url = new URL(endpoint)
         expect(resolvedEndpoint.hostname).toBe(url.hostname)
         expect(resolvedEndpoint.protocol).toBe(url.protocol)
@@ -255,7 +260,7 @@ describe("createS3Client unit tests", () => {
         secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
       },
       region: process.env.S3_REGION,
-      ...(endpoint && { endpoint, forcePathStyle: true }),
+      ...(endpoint ? { endpoint, forcePathStyle: true } : {}),
     })
 
     // No custom endpoint: forcePathStyle is not set and endpoint config is undefined
@@ -276,11 +281,15 @@ describe("createS3Client unit tests", () => {
         secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
       },
       region: process.env.S3_REGION,
-      ...(endpoint && { endpoint, forcePathStyle: true }),
+      ...(endpoint ? { endpoint, forcePathStyle: true } : {}),
     })
 
     expect(s3.config.forcePathStyle).toBe(true)
-    const resolved = await s3.config.endpoint()
+    const resolved = await s3.config.endpoint?.()
+    expect(resolved).toBeDefined()
+    if (!resolved) {
+      return
+    }
     expect(resolved.hostname).toBe("localhost")
     expect(resolved.port).toBe(9000)
   })
