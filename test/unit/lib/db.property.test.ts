@@ -49,7 +49,9 @@ describe("Feature: dual-database-support, Property 1: Driver selection is determ
         }
 
         const db = await createDb()
-        const kind = (db.constructor as Record<symbol, string>)[entityKind]
+        const kind = (db.constructor as unknown as Record<symbol, string>)[
+          entityKind
+        ]
 
         if (dbType === "postgres") {
           expect(kind).toBe("NodePgDatabase")

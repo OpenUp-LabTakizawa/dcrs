@@ -1,11 +1,14 @@
 import { beforeEach, describe, expect, it, mock } from "bun:test"
 import fc from "fast-check"
 import type { User } from "@/app/lib/schema"
+import type { UploadParams } from "@/app/lib/storage"
 
 const mockFrom = mock()
 const mockSelect = mock(() => ({ from: mockFrom }))
 
-const mockUpload = mock(async () => ({ url: "https://example.com/img.png" }))
+const mockUpload = mock(async (_params: UploadParams) => ({
+  url: "https://example.com/img.png",
+}))
 const mockDelete = mock(async () => {})
 const mockGet = mock()
 
@@ -151,7 +154,7 @@ describe("Users Route Handler", () => {
         mockInsert.mockClear()
 
         const dbModule = await import("@/app/lib/db")
-        db = dbModule.db as typeof db
+        db = dbModule.db as unknown as typeof db
         db.insert = mockInsert
       })
 
@@ -299,7 +302,7 @@ describe("Users Route Handler", () => {
         mockInsert.mockClear()
 
         const dbModule = await import("@/app/lib/db")
-        db = dbModule.db as typeof db
+        db = dbModule.db as unknown as typeof db
         db.insert = mockInsert
       })
 
@@ -344,7 +347,7 @@ describe("Users Route Handler", () => {
 
               await POST(request)
 
-              const expectedExt = filename.split(".").pop()
+              const expectedExt = filename.split(".").pop() ?? ""
               const expectedKey = `${employeeId}.${expectedExt}`
 
               expect(mockUpload).toHaveBeenCalledTimes(1)
