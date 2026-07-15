@@ -56,7 +56,7 @@
     "theme-change": "^3.0.4"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.5.3",
+    "@biomejs/biome": "^2.5.4",
     "@happy-dom/global-registrator": "^20.10.6",
     "@playwright/test": "next",
     "@tailwindcss/postcss": "^4.3.2",
