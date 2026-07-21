@@ -42,7 +42,7 @@
     "setup": "bun run scripts/setup-env.ts"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.1091.0",
+    "@aws-sdk/client-s3": "^3.1092.0",
     "@heroicons/react": "^2.2.0",
     "@neondatabase/serverless": "^1.1.0",
     "@tanstack/react-form": "^1.33.2",
@@ -51,12 +51,12 @@
     "drizzle-orm": "^0.45.2",
     "next": "canary",
     "pg": "^8.22.0",
-    "react": "^19.2.7",
-    "react-dom": "^19.2.7",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
     "theme-change": "^3.0.4"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.5.4",
+    "@biomejs/biome": "^2.5.5",
     "@happy-dom/global-registrator": "^20.11.0",
     "@playwright/test": "next",
     "@tailwindcss/postcss": "^4.3.3",
@@ -71,7 +71,7 @@
     "dotenv": "^17.4.2",
     "drizzle-kit": "^0.31.10",
     "fast-check": "^4.9.0",
-    "postcss": "^8.5.20",
+    "postcss": "^8.5.21",
     "tailwindcss": "^4.3.3",
     "typescript": "^7.0.2"
   },
