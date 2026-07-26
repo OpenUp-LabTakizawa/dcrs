@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { Sawarabi_Gothic } from "next/font/google"
+import Script from "next/script"
 import { ScrollToTop } from "@/app/components/button/scrollToTop"
 import { AlertBox } from "@/app/components/layout/alertBox"
 import { Footer } from "@/app/components/layout/footer"
@@ -20,9 +21,31 @@ export const metadata: Metadata = {
   description: SITE_TITLE,
 }
 
+const themeInitializationScript = `
+  (() => {
+    const savedTheme = localStorage.getItem("theme")
+    const theme =
+      savedTheme === "dark" || savedTheme === "light"
+        ? savedTheme
+        : window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light"
+
+    document.documentElement.dataset.theme = theme
+    if (savedTheme === null && theme === "dark") {
+      localStorage.setItem("theme", theme)
+    }
+  })()
+`
+
 export default function RootLayout(props: LayoutProps<"/">): JSX.Element {
   return (
-    <html lang="ja" className={sawarabi.variable}>
+    <html lang="ja" className={sawarabi.variable} suppressHydrationWarning>
+      <head>
+        <Script id="theme-initialization" strategy="beforeInteractive">
+          {themeInitializationScript}
+        </Script>
+      </head>
       <body className="font-sawarabi">
         <ViewTransition>
           <NavigationBlockerProvider>

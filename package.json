@@ -52,8 +52,7 @@
     "next": "canary",
     "pg": "^8.22.0",
     "react": "^19.2.8",
-    "react-dom": "^19.2.8",
-    "theme-change": "^3.0.4"
+    "react-dom": "^19.2.8"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.5.5",

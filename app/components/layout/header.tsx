@@ -7,36 +7,52 @@ import {
   SunIcon,
 } from "@heroicons/react/24/outline"
 import { type JSX, useEffect, useRef, useState } from "react"
-import { themeChange } from "theme-change"
 import { BlockerLink } from "@/app/components/button/blockerLink"
 import { SignInModal } from "@/app/components/layout/signInModal"
 import { signOut, useSession } from "@/app/lib/auth-client"
 import { SITE_TITLE } from "@/app/lib/constant"
 
+type Theme = "light" | "dark"
+
 export function Header(): JSX.Element {
   const { data: session } = useSession()
-  const [theme, setTheme] = useState<"light" | "dark">("light")
+  const [theme, setTheme] = useState<Theme | null>(null)
   const dialogRef = useRef<HTMLDialogElement | null>(null)
   const [scrollY, setScrollY] = useState<number>(0)
   const headerHeight: number = 100
 
   useEffect(() => {
-    if (
-      !("theme" in localStorage) &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches
-    ) {
-      localStorage.setItem("theme", "dark")
-    }
+    const documentTheme = document.documentElement.dataset.theme
+    const savedTheme = localStorage.getItem("theme")
+    const initialTheme =
+      documentTheme === "dark" || documentTheme === "light"
+        ? documentTheme
+        : savedTheme === "dark" || savedTheme === "light"
+          ? savedTheme
+          : window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light"
 
-    themeChange(false)
-    if (localStorage.getItem("theme") === "dark") {
-      setTheme("dark")
+    document.documentElement.dataset.theme = initialTheme
+    if (savedTheme === null && initialTheme === "dark") {
+      localStorage.setItem("theme", initialTheme)
     }
+    setTheme(initialTheme)
+  }, [])
 
-    window.addEventListener("scroll", () => {
-      setScrollY(window.scrollY)
-    })
-  })
+  useEffect(() => {
+    const handleScroll = (): void => setScrollY(window.scrollY)
+    handleScroll()
+    window.addEventListener("scroll", handleScroll, { passive: true })
+
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
+  function changeTheme(nextTheme: Theme): void {
+    document.documentElement.dataset.theme = nextTheme
+    localStorage.setItem("theme", nextTheme)
+    setTheme(nextTheme)
+  }
 
   return (
     <>
@@ -82,19 +98,21 @@ export function Header(): JSX.Element {
             <ArrowLeftStartOnRectangleIcon className="rotate-y size-10 text-accent" />
             ログアウト
           </button>
-          <label className="btn btn-ghost btn-square h-fit swap swap-rotate">
-            <input type="checkbox" />
-            <div
-              className={`${theme === "light" ? "swap-off" : "swap-on"}`}
-              data-set-theme="light"
-            >
+          <label className="btn btn-ghost btn-square h-fit">
+            <input
+              type="checkbox"
+              aria-label="ダークモード"
+              className="sr-only"
+              checked={theme === "dark"}
+              onChange={(event) =>
+                changeTheme(event.currentTarget.checked ? "dark" : "light")
+              }
+            />
+            <div className="theme-toggle-light flex flex-col items-center">
               <SunIcon className="size-10 text-warning" />
               ライト
             </div>
-            <div
-              className={`${theme === "dark" ? "swap-off" : "swap-on"}`}
-              data-set-theme="dark"
-            >
+            <div className="theme-toggle-dark flex-col items-center">
               <MoonIcon className="size-10 text-secondary" />
               ダーク
             </div>

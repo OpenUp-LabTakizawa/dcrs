@@ -7,6 +7,20 @@
   --font-sawarabi: "Sawarabi Gothic", sans-serif;
 }
 
+.theme-toggle-dark {
+  display: none;
+}
+
+html[data-theme="dark"] {
+  .theme-toggle-light {
+    display: none;
+  }
+
+  .theme-toggle-dark {
+    display: flex;
+  }
+}
+
 .fade-out-alert {
   animation: fade-out-alert 1.5s forwards;
 }
