@@ -7,11 +7,7 @@ const entityKind = Symbol.for("drizzle:entityKind")
 const originalDbType = process.env.DB_TYPE
 const originalDatabaseUrl = process.env.DATABASE_URL
 
-// Ensure DATABASE_URL is set for module-level createDb() call in db.ts
-process.env.DATABASE_URL =
-  process.env.DATABASE_URL ?? "postgresql://user:pass@localhost:5432/testdb"
-
-const { createDb } = await import("@/app/lib/db")
+const { createDb } = await import("@/app/lib/create-db")
 
 describe("Feature: dual-database-support, Property 1: Driver selection is determined solely by DB_TYPE value", () => {
   afterEach(() => {
