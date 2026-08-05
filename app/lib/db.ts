@@ -1,25 +1,9 @@
-import type { NeonHttpDatabase } from "drizzle-orm/neon-http"
-import type { NodePgDatabase } from "drizzle-orm/node-postgres"
+import { createDb, type DbClient } from "@/app/lib/create-db"
 
-export type DbClient = NeonHttpDatabase | NodePgDatabase
+export type { DbClient }
 
-export async function createDb(): Promise<DbClient> {
-  if (!process.env.DATABASE_URL) {
-    throw new Error("DATABASE_URL is not set")
-  }
-
-  const connectionString = process.env.DATABASE_URL
-  const dbType = process.env.DB_TYPE ?? "neon"
-
-  if (dbType === "postgres") {
-    const { drizzle } = await import("drizzle-orm/node-postgres")
-    const { Pool } = await import("pg")
-    return drizzle(new Pool({ connectionString }))
-  }
-
-  const { neon } = await import("@neondatabase/serverless")
-  const { drizzle } = await import("drizzle-orm/neon-http")
-  return drizzle(neon(connectionString))
-}
-
+// `db` is deliberately the only runtime export: test files mock
+// "@/app/lib/db" to swap it out, and `mock.module` replaces the whole module
+// namespace. Keeping `createDb` in its own module means those mocks cannot
+// hide it from the tests that exercise it for real.
 export const db: DbClient = await createDb()

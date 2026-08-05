@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, expect, it, mock } from "bun:test"
+import { afterEach, beforeEach, describe, expect, it } from "bun:test"
 
 class MockS3Backend {
   _type = "S3Backend" as const
@@ -8,17 +8,7 @@ class MockVercelBlobBackend {
   _type = "VercelBlobBackend" as const
 }
 
-mock.module("@/app/lib/storage/s3-backend", () => ({
-  S3Backend: MockS3Backend,
-}))
-
-mock.module("@/app/lib/storage/vercel-blob-backend", () => ({
-  VercelBlobBackend: MockVercelBlobBackend,
-}))
-
 // Replicate createStorageClient logic to test the selection behavior.
-// This must be inlined because mock.module factories cannot reference
-// variables defined after them (lazy evaluation + live bindings).
 function createStorageClient(): MockS3Backend | MockVercelBlobBackend {
   const token = process.env.BLOB_READ_WRITE_TOKEN
   if (token && token.trim() !== "") {
@@ -26,18 +16,6 @@ function createStorageClient(): MockS3Backend | MockVercelBlobBackend {
   }
   return new MockS3Backend()
 }
-
-// Override any previous mock of @/app/lib/storage from other test files
-// to ensure cross-test isolation (live bindings update all existing imports).
-mock.module("@/app/lib/storage/index", () => ({
-  createStorageClient,
-  storageClient: createStorageClient(),
-}))
-
-mock.module("@/app/lib/storage", () => ({
-  createStorageClient,
-  storageClient: createStorageClient(),
-}))
 
 describe("createStorageClient()", () => {
   let originalToken: string | undefined
