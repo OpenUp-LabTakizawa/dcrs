@@ -5,7 +5,6 @@ const nextConfig: NextConfig = {
   experimental: {
     inlineCss: true,
     isrFlushToDisk: false,
-    useTypeScriptCli: true,
   },
   // Vercel builds its own output and fails on standalone. Everywhere else
   // (the Docker image, the Playwright webServer on CI) needs it.

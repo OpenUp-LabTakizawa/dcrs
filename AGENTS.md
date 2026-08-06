@@ -54,16 +54,15 @@ drizzle/                 # Database migration files
 | ---------------------- | -------------------- |
 | Dev server             | `bun dev`            |
 | Build                  | `bun run build`      |
-| Lint (Biome)           | `bun lint`           |
-| Format (Biome)         | `bun format`         |
-| Lint + Format fix      | `bun lint:fix`       |
+| Check (Biome)          | `bun check`          |
+| Auto-fix (Biome)       | `bun fix`            |
 | Unit tests             | `bun test:unit`      |
 | E2E tests              | `bun test:e2e`       |
 | DB migration generate  | `bun run generate`   |
 | DB migration apply     | `bun run migrate`    |
 | Drizzle Studio         | `bun run studio`     |
-| Markdown lint          | `mise lint:md`       |
-| Full lint (Biome + MD) | `mise lint`          |
+| Markdown fix           | `mise fix:md`        |
+| Full fix (Biome + MD)  | `mise fix`           |
 
 ## Coding Conventions
 
