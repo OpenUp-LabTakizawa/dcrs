@@ -40,6 +40,9 @@ export const sessions = pgTable("session", {
 
 export const accounts = pgTable("account", {
   id: text("id").primaryKey(),
+  // Better Auth 1.7.0+ namespaces every identity by issuer
+  // ("local:credential" for email/password, "local:oauth:<provider>" for OAuth).
+  issuer: text("issuer").notNull(),
   accountId: text("accountId").notNull(),
   providerId: text("providerId").notNull(),
   userId: text("userId")
