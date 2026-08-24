@@ -41,7 +41,7 @@
     "setup": "bun run scripts/setup-env.ts"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.1116.0",
+    "@aws-sdk/client-s3": "^3.1117.0",
     "@heroicons/react": "^2.2.0",
     "@neondatabase/serverless": "^1.1.0",
     "@tanstack/react-form": "^1.33.5",
@@ -63,9 +63,9 @@
     "@types/bun": "^1.4.0",
     "@types/pg": "^8.23.1",
     "@types/react": "^19.2.18",
-    "@types/react-dom": "^19.2.4",
+    "@types/react-dom": "^19.2.5",
     "babel-plugin-react-compiler": "^1.0.0",
-    "daisyui": "^5.7.20",
+    "daisyui": "^5.7.22",
     "dotenv": "^17.4.2",
     "drizzle-kit": "^0.31.10",
     "fast-check": "^4.9.0",
