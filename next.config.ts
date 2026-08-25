@@ -6,9 +6,7 @@ const nextConfig: NextConfig = {
     inlineCss: true,
     isrFlushToDisk: false,
   },
-  // Vercel builds its own output and fails on standalone. Everywhere else
-  // (the Docker image, the Playwright webServer on CI) needs it.
-  output: process.env.VERCEL ? undefined : "standalone",
+  output: "standalone",
   reactCompiler: true,
   typedRoutes: true,
 }
