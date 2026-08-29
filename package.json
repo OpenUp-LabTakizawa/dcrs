@@ -41,12 +41,12 @@
     "setup": "bun run scripts/setup-env.ts"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.1117.0",
+    "@aws-sdk/client-s3": "^3.1121.0",
     "@heroicons/react": "^2.2.0",
     "@neondatabase/serverless": "^1.1.0",
     "@tanstack/react-form": "^1.33.5",
     "@vercel/blob": "^2.8.0",
-    "better-auth": "^1.7.1",
+    "better-auth": "^1.7.2",
     "drizzle-orm": "^0.45.2",
     "next": "canary",
     "pg": "^8.23.0",
@@ -54,12 +54,12 @@
     "react-dom": "^19.2.8"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.5.10",
-    "@happy-dom/global-registrator": "^20.11.6",
+    "@biomejs/biome": "^2.5.11",
+    "@happy-dom/global-registrator": "^20.11.15",
     "@playwright/test": "next",
     "@tailwindcss/postcss": "^4.3.3",
     "@testing-library/dom": "^10.4.1",
-    "@testing-library/react": "^16.3.2",
+    "@testing-library/react": "^16.3.3",
     "@types/bun": "^1.4.0",
     "@types/pg": "^8.23.1",
     "@types/react": "^19.2.18",
