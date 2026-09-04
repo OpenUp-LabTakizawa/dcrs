@@ -41,7 +41,7 @@
     "setup": "bun run scripts/setup-env.ts"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.1123.0",
+    "@aws-sdk/client-s3": "^3.1127.0",
     "@heroicons/react": "^2.2.0",
     "@neondatabase/serverless": "^1.1.0",
     "@tanstack/react-form": "^1.33.5",
@@ -54,22 +54,22 @@
     "react-dom": "^19.2.8"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.5.11",
-    "@happy-dom/global-registrator": "^20.12.0",
+    "@biomejs/biome": "^2.5.12",
+    "@happy-dom/global-registrator": "^20.14.0",
     "@playwright/test": "next",
     "@tailwindcss/postcss": "^4.3.3",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/react": "^16.3.3",
-    "@types/bun": "^1.4.0",
+    "@types/bun": "^1.4.1",
     "@types/pg": "^8.23.1",
     "@types/react": "^19.2.18",
-    "@types/react-dom": "^19.2.5",
+    "@types/react-dom": "^19.2.7",
     "babel-plugin-react-compiler": "^1.0.0",
-    "daisyui": "^5.7.23",
+    "daisyui": "^5.7.28",
     "dotenv": "^17.4.2",
     "drizzle-kit": "^0.31.10",
     "fast-check": "^4.9.0",
-    "postcss": "^8.5.26",
+    "postcss": "^8.5.28",
     "tailwindcss": "^4.3.3",
     "typescript": "^7.0.2"
   },
