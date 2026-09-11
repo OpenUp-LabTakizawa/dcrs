@@ -5,6 +5,7 @@ rumdl = "latest"
 
 # Local development defaults, previously written into `.env` by
 # `scripts/dev-up.ts`. They mirror the service definitions in compose.yaml.
+# That script is now the `dev:up` task below plus `scripts/ensure-bucket.ts`.
 #
 # Precedence is deliberate, and `_.file` has to stay above the keys below so
 # they can read what it loaded:
@@ -32,15 +33,17 @@ S3_ENDPOINT = "{{ env.S3_ENDPOINT | default(value='http://localhost:9000') }}"
 
 [tasks."dev:up"]
 description = "Start local dev environment"
-run = "bun run scripts/dev-up.ts"
+# Each step runs with the [env] table above applied, so `migrate` reads
+# DATABASE_URL straight from it. Only the bucket needs an S3 API call.
+run = [
+  "docker compose up -d --wait",
+  "bun run migrate",
+  "bun run scripts/ensure-bucket.ts",
+]
 
 [tasks."dev:reset"]
 description = "Reset local dev environment (delete volumes)"
-run = """
-docker compose down -v
-bun run scripts/dev-up.ts
-bun run migrate
-"""
+run = ["docker compose down -v", "mise run dev:up"]
 
 [tasks.fix]
 run = ["bun fix --unsafe", "mise fix:md"]
