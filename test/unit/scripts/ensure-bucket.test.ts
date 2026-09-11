@@ -1,7 +1,7 @@
 import { describe, expect, it, mock, spyOn } from "bun:test"
 import type { CreateBucketCommand, S3Client } from "@aws-sdk/client-s3"
 import fc from "fast-check"
-import { createBucketIfNotExists } from "@/scripts/dev-up"
+import { createBucketIfNotExists } from "@/scripts/ensure-bucket"
 
 function createMockS3Client(sendMock: ReturnType<typeof mock>): S3Client {
   return { send: sendMock } as unknown as S3Client
