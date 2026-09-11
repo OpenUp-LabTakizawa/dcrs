@@ -3,6 +3,33 @@ bun = "latest"
 pitchfork = "latest"
 rumdl = "latest"
 
+# Local development defaults, previously written into `.env` by
+# `scripts/dev-up.ts`. They mirror the service definitions in compose.yaml.
+#
+# Precedence is deliberate, and `_.file` has to stay above the keys below so
+# they can read what it loaded:
+#
+#   1. an already-exported variable -- a CI workflow's `env:` block
+#   2. `.env` -- the Neon / Vercel Blob / Resend credentials from `bun setup`
+#   3. the defaults here -- the local Docker stack
+#
+# Hence `default(value=...)` on every key rather than a plain `KEY = "value"`,
+# which makes mise overwrite the parent environment unconditionally and would
+# point a remote-mode checkout at a local database that may not be running.
+#
+# Personal overrides belong in `mise.local.toml`, which is gitignored.
+[env]
+_.file = { path = ".env", redact = true }
+DATABASE_URL = "{{ env.DATABASE_URL | default(value='postgres://dcrs:dcrs@localhost:5432/dcrs') }}"
+DB_TYPE = "{{ env.DB_TYPE | default(value='postgres') }}"
+BETTER_AUTH_SECRET = "{{ env.BETTER_AUTH_SECRET | default(value='local-dev-secret-key-change-in-production') }}"
+BETTER_AUTH_URL = "{{ env.BETTER_AUTH_URL | default(value='http://localhost:3000') }}"
+S3_ACCESS_KEY_ID = "{{ env.S3_ACCESS_KEY_ID | default(value='rustfs') }}"
+S3_SECRET_ACCESS_KEY = "{{ env.S3_SECRET_ACCESS_KEY | default(value='rustfs123') }}"
+S3_REGION = "{{ env.S3_REGION | default(value='us-east-1') }}"
+S3_BUCKET = "{{ env.S3_BUCKET | default(value='dcrs-dev') }}"
+S3_ENDPOINT = "{{ env.S3_ENDPOINT | default(value='http://localhost:9000') }}"
+
 [tasks."dev:up"]
 description = "Start local dev environment"
 run = "bun run scripts/dev-up.ts"

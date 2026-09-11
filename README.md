@@ -38,11 +38,18 @@ cd dcrs && bun i
 
 ### 3. Set up environment variables
 
-Interactively generate your `.env` file:
+Skip this step if you are using the [local development environment](#-local-development-environment);
+`mise.toml` already carries defaults for it.
+
+To connect to the remote services (Neon, Vercel Blob, Resend), generate your
+`.env` interactively:
 
 ```bash
 bun setup
 ```
+
+`.env` takes precedence over the defaults in `mise.toml`, so a checkout
+configured this way keeps pointing at the remote services.
 
 | Variable | Description | Required |
 | --- | --- | --- |
@@ -109,10 +116,40 @@ mise dev:up
 
 This single command will:
 
-1. Generate a `.env` file with local development defaults
-2. Start PostgreSQL and RustFS via Docker Compose
-3. Run database migrations
-4. Create the S3 bucket in RustFS
+1. Start PostgreSQL and RustFS via Docker Compose
+2. Run database migrations
+3. Create the S3 bucket in RustFS
+
+No `.env` is needed. The local defaults live in the `[env]` table of
+`mise.toml`, and mise exports them into every shell opened inside the
+repository, so `bun dev` and the database commands pick them up on their own.
+That relies on mise's shell integration, which is also what puts `bun` on
+`PATH`; if `mise doctor` reports it as missing, enable it once:
+
+```bash
+echo 'eval "$(mise activate bash)"' >> ~/.bashrc && exec bash
+```
+
+See [activate](https://mise.jdx.dev/cli/activate.html) for zsh, fish, and
+friends, or use `mise exec -- <cmd>` for a one-off command.
+
+Values resolve in this order, so each mode keeps working without touching the
+other:
+
+| Priority | Source | Used by |
+| --- | --- | --- |
+| 1 | An already-exported variable | CI workflows, one-off overrides |
+| 2 | `.env` | Remote mode (`bun setup`) |
+| 3 | `[env]` in `mise.toml` | Local Docker mode |
+
+Personal overrides go in `mise.local.toml`, which is gitignored.
+
+> **Note:** the defaults include `S3_ENDPOINT=http://localhost:9000` for RustFS.
+> If you use the S3 backend against real AWS instead, set `S3_ENDPOINT=` (empty)
+> in your `.env` alongside the other `S3_*` values, so the SDK falls back to the
+> AWS endpoint. This does not apply when `BLOB_READ_WRITE_TOKEN` is set, since
+> Vercel Blob is then used and the `S3_*` values are ignored. `mise dev:up`
+> always targets the local RustFS regardless, since it bootstraps that stack.
 
 ### Stop
 
