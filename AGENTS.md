@@ -123,6 +123,14 @@ drizzle/                 # Database migration files
 | `BETTER_AUTH_URL`      | Application URL                        |
 | `BLOB_READ_WRITE_TOKEN`| Vercel Blob token                      |
 
+Resolved in order: an already-exported variable, then `.env` (remote mode, from
+`bun setup`), then the local Docker defaults in `mise.toml`'s `[env]`. Secrets
+go in `.env` or the gitignored `mise.local.toml`, never in `mise.toml`.
+
+Entries in `[env]` must use `{{ env.NAME | default(value='...') }}`. A bare
+`NAME = "value"` overwrites the parent environment, which would replace a CI
+workflow's `env:` block or a remote-mode `.env` with the local defaults.
+
 ## CI/CD
 
 Automated via GitHub Actions:
