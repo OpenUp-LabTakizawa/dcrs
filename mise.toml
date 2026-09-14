@@ -33,17 +33,27 @@ S3_ENDPOINT = "{{ env.S3_ENDPOINT | default(value='http://localhost:9000') }}"
 
 [tasks."dev:up"]
 description = "Start local dev environment"
+# The `db` daemon below owns the containers and runs `dev:provision` as its
+# readiness check, so this stays the one command that brings the stack up.
+run = "mise daemons start db"
+
+[tasks."dev:down"]
+description = "Stop local dev environment"
+run = "mise daemons stop"
+
+[tasks."dev:provision"]
+description = "Apply migrations and create the bucket"
 # Each step runs with the [env] table above applied, so `migrate` reads
 # DATABASE_URL straight from it. Only the bucket needs an S3 API call.
-run = [
-  "docker compose up -d --wait",
-  "bun run migrate",
-  "bun run scripts/ensure-bucket.ts",
-]
+#
+# This is the `db` daemon's ready_cmd, which means it is polled until it
+# succeeds rather than run once: both steps are idempotent, so an attempt made
+# before PostgreSQL accepts connections costs nothing but the retry.
+run = ["bun run migrate", "bun run scripts/ensure-bucket.ts"]
 
 [tasks."dev:reset"]
 description = "Reset local dev environment (delete volumes)"
-run = ["docker compose down -v", "mise run dev:up"]
+run = ["mise daemons stop", "docker compose down -v", "mise run dev:up"]
 
 [tasks.fix]
 run = ["bun fix --unsafe", "mise fix:md"]
@@ -56,13 +66,27 @@ run = "rumdl check --fix ."
 description = "Update bun dependencies and reinstall"
 run = ["bun update", "mise deps"]
 
-# Replaces the former `pitchfork.toml`. mise writes the pitchfork config under
-# $MISE_STATE_DIR and registers it, so the daemon inherits the [env] table
-# above and `bun dev` sees DATABASE_URL and friends. `mise daemons` drives
-# pitchfork rather than replacing it, which is why it stays in [tools].
+# mise writes the pitchfork config under $MISE_STATE_DIR and registers it, so
+# these daemons inherit the [env] table above and see DATABASE_URL and friends.
+# `mise daemons` drives pitchfork rather than replacing it, which is why
+# pitchfork stays in [tools].
+
+# `docker compose up` stays in the foreground. Backgrounding is the
+# supervisor's job, and `-d` would put the containers outside it: stopping the
+# daemon would leave them running. Attached, compose handles the SIGTERM
+# pitchfork sends and both containers exit 0.
+[daemons.db]
+run = "docker compose up"
+ready_cmd = { run = "mise run dev:provision", timeout = "300s" }
+stop_signal = { signal = "SIGTERM", timeout = "30s" }
+
+# `depends` makes `mise daemons start web` bring the database up first and wait
+# for the migrations, so there is no separate "start the stack, then the server"
+# step to remember.
 [daemons.web]
 run = "bun dev"
-ready_port = 3000
+depends = ["db"]
+ready_port = { port = 3000, timeout = "60s" }
 
 [deps.bun]
 auto = true
