@@ -5,7 +5,7 @@ rumdl = "latest"
 
 # Local development defaults, previously written into `.env` by
 # `scripts/dev-up.ts`. They mirror the service definitions in compose.yaml.
-# That script is now the `dev:up` task below plus `scripts/ensure-bucket.ts`.
+# That script is now the `dev:up` task below plus `mise-tasks/dev/ensure-bucket.ts`.
 #
 # Precedence is deliberate, and `_.file` has to stay above the keys below so
 # they can read what it loaded:
@@ -49,7 +49,7 @@ description = "Apply migrations and create the bucket"
 # This is the `db` daemon's ready_cmd, which means it is polled until it
 # succeeds rather than run once: both steps are idempotent, so an attempt made
 # before PostgreSQL accepts connections costs nothing but the retry.
-run = ["bun run migrate", "bun run scripts/ensure-bucket.ts"]
+run = ["bun run migrate", "mise dev:ensure-bucket"]
 
 [tasks."dev:reset"]
 description = "Reset local dev environment (delete volumes)"
