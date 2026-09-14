@@ -1,3 +1,5 @@
+#!/usr/bin/env bun
+//MISE description="Write .env interactively for remote mode"
 import { existsSync, writeFileSync } from "node:fs"
 import { createInterface } from "node:readline"
 
