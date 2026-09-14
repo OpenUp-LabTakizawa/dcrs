@@ -68,7 +68,7 @@
     "daisyui": "^5.7.37",
     "dotenv": "^17.4.2",
     "drizzle-kit": "^0.31.10",
-    "fast-check": "^4.9.0",
+    "fast-check": "^4.10.0",
     "postcss": "^8.5.28",
     "tailwindcss": "^4.3.3",
     "typescript": "^7.0.2"
