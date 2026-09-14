@@ -120,6 +120,15 @@ This single command will:
 2. Run database migrations
 3. Create the S3 bucket in RustFS
 
+The containers run under pitchfork as the `db` daemon rather than detached, so
+`mise daemons logs db` tails them and `mise dev:down` stops them. To bring the
+dev server up with the stack, start the `web` daemon instead -- it depends on
+`db`, so this does everything `mise dev:up` does and then runs `bun dev`:
+
+```bash
+mise daemons start web
+```
+
 No `.env` is needed. The local defaults live in the `[env]` table of
 `mise.toml`, and mise exports them into every shell opened inside the
 repository, so `bun dev` and the database commands pick them up on their own.
@@ -154,7 +163,7 @@ Personal overrides go in `mise.local.toml`, which is gitignored.
 ### Stop
 
 ```bash
-docker compose down
+mise dev:down
 ```
 
 ### Reset (delete volumes and restart)
