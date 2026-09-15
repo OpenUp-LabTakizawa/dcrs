@@ -41,12 +41,12 @@
     "setup": "bun run mise-tasks/setup-env.ts"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.1131.0",
+    "@aws-sdk/client-s3": "^3.1132.0",
     "@heroicons/react": "^2.2.0",
     "@neondatabase/serverless": "^1.1.0",
     "@tanstack/react-form": "^1.33.5",
     "@vercel/blob": "^2.8.0",
-    "better-auth": "^1.7.4",
+    "better-auth": "^1.7.5",
     "drizzle-orm": "^0.45.2",
     "next": "canary",
     "pg": "^8.23.0",
@@ -65,7 +65,7 @@
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "babel-plugin-react-compiler": "^1.0.0",
-    "daisyui": "^5.7.37",
+    "daisyui": "^5.7.38",
     "dotenv": "^17.4.2",
     "drizzle-kit": "^0.31.10",
     "fast-check": "^4.10.0",
