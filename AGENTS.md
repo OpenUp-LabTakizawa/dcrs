@@ -138,7 +138,7 @@ Automated via GitHub Actions:
 - `test.yml`: Unit + E2E tests (with PostgreSQL service container)
 - `docker.yml`: Docker image build & push
 - `codeql.yml`: Security scanning
-- `commitlint.yml`: Commit message validation
+- `conventional-commits.yml`: Pull request title & commit message validation
 - `autofix.yml`: Auto-fix lint issues
 - `dependency-review.yml`: Dependency security review
 

@@ -282,7 +282,7 @@
 
     "@opentelemetry/semantic-conventions": ["@opentelemetry/semantic-conventions@1.43.0", "", {}, "sha512-eSYWTm620tTk45EKSedaUL8MFYI8hW164hIXsgIHyxu3VobUB3fFCu5t0hQby6OoWRPsG1KkKUG2M5UadiLiVg=="],
 
-    "@playwright/test": ["@playwright/test@1.64.0-alpha-2026-09-14", "", { "dependencies": { "playwright": "1.64.0-alpha-2026-09-14" }, "bin": { "playwright": "cli.js" } }, "sha512-jSB1pCsT/j6ZLHnmc4pBs/9LDJrNJvvV4zmzthdufRk0RaijJTZ9dVqk29qAO6s1+I3u2vme8nsHqjmoEK1sTg=="],
+    "@playwright/test": ["@playwright/test@1.64.0-alpha-2026-09-15", "", { "dependencies": { "playwright": "1.64.0-alpha-2026-09-15" }, "bin": { "playwright": "cli.js" } }, "sha512-0Pq1+w1pOafTEUgiZA47rGIsJX9msNEdijV6Z3BnGXrcw4dGA6x8BT5xwn3uQjnjV7YuxS2KvBnP3Gahf0uBhQ=="],
 
     "@smithy/core": ["@smithy/core@3.34.1", "", { "dependencies": { "@smithy/types": "^4.18.0", "tslib": "^2.6.2" } }, "sha512-dLcOUxz8YCv1RZUMKq6GbyUf95pLbrqh34bPvpCZ1+CByFF31BEAFewZjsGCnVsZTKdThNENfGyAgk2TJqVwSw=="],
 
@@ -560,9 +560,9 @@
 
     "picocolors": ["picocolors@1.1.1", "", {}, "sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA=="],
 
-    "playwright": ["playwright@1.64.0-alpha-2026-09-14", "", { "dependencies": { "playwright-core": "1.64.0-alpha-2026-09-14" }, "bin": { "playwright": "cli.js" } }, "sha512-CdpbZ03/Iq4HMth9RP2NHBv/gv9exDLkR3eJEDvS2fKdAjZSNYvL2PrJum3wHe8qOSFR8KzWuyKUx3AZ5vZc4w=="],
+    "playwright": ["playwright@1.64.0-alpha-2026-09-15", "", { "dependencies": { "playwright-core": "1.64.0-alpha-2026-09-15" }, "bin": { "playwright": "cli.js" } }, "sha512-rPaC8CmW2dDkQjAMs38ToXNsSKVHsbL3P47OX6aBo/deAyI2rKff11DDIxGO9gsV7wBZq7alRSioxKIUE4uNlQ=="],
 
-    "playwright-core": ["playwright-core@1.64.0-alpha-2026-09-14", "", { "bin": { "playwright-core": "cli.js" } }, "sha512-VCqlQ8lEKS8NAfEU/sWx3KP7gL2oCWd/DAGzPDZncGV7dUNNHpaVxHd2LWe2pc5y53h0Hqu3SWzRiPqKqkrYQA=="],
+    "playwright-core": ["playwright-core@1.64.0-alpha-2026-09-15", "", { "bin": { "playwright-core": "cli.js" } }, "sha512-RvwuErtcfINdMlpzrGyI+Bw4ac5/hU3xXVyd+Hj2PXbYEDP45flMDX6n46zkWfkw1JfU0fSqgjC2WqXnk28okw=="],
 
     "postcss": ["postcss@8.5.28", "", { "dependencies": { "nanoid": "^3.3.18", "picocolors": "^1.1.1", "source-map-js": "^1.2.1" } }, "sha512-RRuzqDtt5Y9h3quz5hWhK+TPnsmVs6WwSU6LkJMeY4HstUEDuYTG8UJSdawMRzmzAtV+KEoG8N3Qg2qLy5vM/A=="],
 
