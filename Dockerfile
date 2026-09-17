@@ -9,10 +9,9 @@ RUN --mount=type=bind,source=package.json,target=package.json \
 COPY . .
 ARG DB_TYPE=postgres
 ENV DB_TYPE=$DB_TYPE
-RUN --mount=type=secret,id=database,env=DATABASE_URL \
-  bun test:unit
-RUN --mount=type=secret,id=database,env=DATABASE_URL \
-  bun run build
+ENV DATABASE_URL=postgres://build:build@localhost:5432/build
+RUN bun test:unit
+RUN bun run build
 
 FROM gcr.io/distroless/nodejs26-debian13:nonroot
 WORKDIR /app
