@@ -38,19 +38,6 @@ jobs:
     outputs:
       is_success: ${{ steps.test.outputs.is_success }}
       test_log: ${{ steps.test.outputs.test_log }}
-    services:
-      postgres:
-        image: postgres
-        env:
-          POSTGRES_PASSWORD: postgres
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-        ports:
-          - 5432:5432
-
     steps:
       - name: 📥 Checkout
         uses: actions/checkout@v7
@@ -68,7 +55,7 @@ jobs:
       - name: 🧪 Test app
         id: test
         env:
-          DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
+          DATABASE_URL: postgres://test:test@localhost:5432/test
           DB_TYPE: postgres
           FORCE_COLOR: 0
         run: |
