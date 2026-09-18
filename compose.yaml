@@ -16,7 +16,7 @@ services:
       retries: 10
 
   rustfs:
-    image: rustfs/rustfs
+    image: rustfs/rustfs:1.0.0
     command: server /data --console-address ":9001"
     ports:
       - "9000:9000"

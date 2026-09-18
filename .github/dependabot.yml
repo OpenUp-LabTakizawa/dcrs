@@ -28,6 +28,10 @@ updates:
     directory: "/"
     multi-ecosystem-group: "infrastructure"
 
+  - package-ecosystem: "docker-compose"
+    directory: "/"
+    multi-ecosystem-group: "infrastructure"
+
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
