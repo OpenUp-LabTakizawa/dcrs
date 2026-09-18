@@ -6,27 +6,8 @@ concurrency:
 
 on:
   pull_request:
-    paths:
-      - "app/**"
-      - "public/**"
-      - "test/**"
-      - ".dockerignore"
-      - "bun.lock"
-      - "Dockerfile"
-      - "package.json"
-      - "proxy.ts"
-      - "*config.*"
   push:
-    paths:
-      - "app/**"
-      - "public/**"
-      - "test/**"
-      - ".dockerignore"
-      - "bun.lock"
-      - "Dockerfile"
-      - "package.json"
-      - "proxy.ts"
-      - "*config.*"
+    branches: main
   workflow_dispatch:
 
 permissions:
