@@ -1,4 +1,3 @@
-import "dotenv/config"
 import { defineConfig, devices } from "@playwright/test"
 
 /** Test files that require an authenticated session */
