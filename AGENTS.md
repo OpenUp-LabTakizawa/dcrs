@@ -8,7 +8,7 @@ Users submit certificate images along with personal information, and administrat
 ## Tech Stack
 
 - **Runtime / Package Manager**: Bun (latest)
-- **Framework**: Next.js (canary) with App Router, React 19, TypeScript 6
+- **Framework**: Next.js (canary) with App Router, React 19, TypeScript 7
 - **Styling**: Tailwind CSS v4 + daisyUI v5
 - **Database**: PostgreSQL (Neon Serverless) + Drizzle ORM
 - **Auth**: better-auth (magic link via Resend)
@@ -16,7 +16,7 @@ Users submit certificate images along with personal information, and administrat
 - **Forms**: TanStack Form
 - **Linter / Formatter**: Biome
 - **Testing**: Bun test (unit, happy-dom) + Playwright (e2e) + fast-check (property-based)
-- **Deployment**: Docker (distroless Node.js 24) → AWS Lambda (Lambda Web Adapter)
+- **Deployment**: Docker (distroless Node.js 26) → AWS Lambda (Lambda Web Adapter)
 - **Tool Management**: mise
 
 ## Project Structure
