@@ -36,67 +36,41 @@ git clone https://github.com/OpenUp-LabTakizawa/dcrs
 cd dcrs && bun i
 ```
 
-### 3. Set up environment variables
-
-Skip this step if you are using the [local development environment](#-local-development-environment);
-`mise.toml` already carries defaults for it.
-
-To connect to the remote services (Neon, Vercel Blob, Resend), generate your
-`.env` interactively:
-
-```bash
-bun setup
-```
-
-`.env` takes precedence over the defaults in `mise.toml`, so a checkout
-configured this way keeps pointing at the remote services.
-
-| Variable | Description | Required |
-| --- | --- | --- |
-| `BETTER_AUTH_SECRET` | Secret key for Better Auth session encryption | ✅ |
-| `BETTER_AUTH_URL` | Base URL for Better Auth (e.g. `http://localhost:3000`) | ✅ |
-| `AUTH_RESEND_KEY` | [Resend](https://resend.com/) API key for sending emails | ✅ |
-| `DATABASE_URL` | Neon PostgreSQL connection string | ✅ |
-| `DB_TYPE` | Database driver type: `neon` (default) or `postgres` for standard PostgreSQL | ❌ |
-| `BLOB_READ_WRITE_TOKEN` | [Vercel Blob](https://vercel.com/docs/storage/vercel-blob) read/write token. When set, Vercel Blob is used as the storage backend; otherwise S3 is used | ❌ |
-| `S3_ACCESS_KEY_ID` | AWS S3 access key ID (required when using S3 backend) | ❌ |
-| `S3_SECRET_ACCESS_KEY` | AWS S3 secret access key (required when using S3 backend) | ❌ |
-| `S3_REGION` | S3 region (`AWS_REGION` is also accepted; required when using S3 backend) | ❌ |
-| `S3_BUCKET` | S3 bucket name (uses default value if omitted) | ❌ |
-| `S3_ENDPOINT` | S3-compatible endpoint URL (e.g. `http://localhost:9000` for RustFS). When set, path-style access is enabled | ❌ |
-| `API_URL` | Base URL for the API (default: `http://localhost:3000`) | ❌ |
-
-### 4. Develop the app
+### 3. Develop the app
 
 ```bash
 bun dev
 ```
 
-### 5. Test the app
+The app needs PostgreSQL and S3-compatible storage. Bring them up first with
+the [local development environment](#-local-development-environment), or start
+the `web` daemon, which does both.
+
+### 4. Test the app
 
 ```bash
 bun test:unit
 ```
 
-### 6. E2E Test
+### 5. E2E Test
 
 ```bash
 bun test:e2e
 ```
 
-### 7. Format and Lint the files
+### 6. Format and Lint the files
 
 ```bash
 bun fix
 ```
 
-### 8. Build the app
+### 7. Build the app
 
 ```bash
 bun run build
 ```
 
-### 9. Start the app
+### 8. Start the app
 
 ```bash
 bun start
@@ -129,9 +103,20 @@ dev server up with the stack, start the `web` daemon instead -- it depends on
 mise daemons start web
 ```
 
-No `.env` is needed. The local defaults live in the `[env]` table of
-`mise.toml`, and mise exports them into every shell opened inside the
-repository, so `bun dev` and the database commands pick them up on their own.
+Playwright runs against that daemon with:
+
+```bash
+mise test:e2e
+```
+
+It starts `web` -- and `db` through its `depends` -- reusing whatever already
+runs, then runs `bun test:e2e`. Run `bun test:e2e` directly when the server and
+the database are already up; on its own it spawns a dev server that dies with
+the test run, and in local mode that server talks to a database nobody started.
+
+No `.env` is involved. The values live in the `[env]` table of `mise.toml`,
+and mise exports them into every shell opened inside the repository, so
+`bun dev` and the database commands pick them up on their own.
 That relies on mise's shell integration, which is also what puts `bun` on
 `PATH`; if `mise doctor` reports it as missing, enable it once:
 
@@ -142,21 +127,22 @@ echo 'eval "$(mise activate bash)"' >> ~/.bashrc && exec bash
 See [activate](https://mise.jdx.dev/cli/activate.html) for zsh, fish, and
 friends, or use `mise exec -- <cmd>` for a one-off command.
 
-Values resolve in this order, so each mode keeps working without touching the
-other:
+Values resolve in this order:
 
 | Priority | Source | Used by |
 | --- | --- | --- |
-| 1 | An already-exported variable | CI workflows, one-off overrides |
-| 2 | `.env` | Remote mode (`bun setup`) |
-| 3 | `[env]` in `mise.toml` | Local Docker mode |
+| 1 | `mise.local.toml` | Per-checkout overrides, secrets (gitignored) |
+| 2 | `[env]` in `mise.toml` | The local Docker stack |
 
-Personal overrides go in `mise.local.toml`, which is gitignored.
+The entries are plain values, so mise sets them unconditionally: exporting a
+variable in your shell does not override them, and a `.env` left in the
+checkout is ignored for every key the table defines. Point a checkout somewhere
+else -- a Neon database, a Vercel Blob token -- from `mise.local.toml`.
 
 > **Note:** the defaults include `S3_ENDPOINT=http://localhost:9000` for RustFS.
-> If you use the S3 backend against real AWS instead, set `S3_ENDPOINT=` (empty)
-> in your `.env` alongside the other `S3_*` values, so the SDK falls back to the
-> AWS endpoint. This does not apply when `BLOB_READ_WRITE_TOKEN` is set, since
+> If you use the S3 backend against real AWS instead, set `S3_ENDPOINT = ""`
+> in `mise.local.toml` alongside the other `S3_*` values, so the SDK falls back
+> to the AWS endpoint. This does not apply when `BLOB_READ_WRITE_TOKEN` is set, since
 > Vercel Blob is then used and the `S3_*` values are ignored. `mise dev:up`
 > always targets the local RustFS regardless, since it bootstraps that stack.
 

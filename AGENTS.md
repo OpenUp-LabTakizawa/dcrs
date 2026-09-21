@@ -58,6 +58,7 @@ drizzle/                 # Database migration files
 | Auto-fix (Biome)       | `bun fix`            |
 | Unit tests             | `bun test:unit`      |
 | E2E tests              | `bun test:e2e`       |
+| E2E tests (stack up)   | `mise test:e2e`      |
 | DB migration generate  | `bun run generate`   |
 | DB migration apply     | `bun run migrate`    |
 | Drizzle Studio         | `bun run studio`     |
@@ -117,19 +118,21 @@ drizzle/                 # Database migration files
 
 | Variable               | Description                            |
 | ---------------------- | -------------------------------------- |
-| `DATABASE_URL`         | Neon PostgreSQL connection string      |
+| `DATABASE_URL`         | PostgreSQL connection string           |
 | `AUTH_RESEND_KEY`      | Resend API key (for magic link emails) |
 | `BETTER_AUTH_SECRET`   | better-auth secret key                 |
 | `BETTER_AUTH_URL`      | Application URL                        |
 | `BLOB_READ_WRITE_TOKEN`| Vercel Blob token                      |
 
-Resolved in order: an already-exported variable, then `.env` (remote mode, from
-`bun setup`), then the local Docker defaults in `mise.toml`'s `[env]`. Secrets
-go in `.env` or the gitignored `mise.local.toml`, never in `mise.toml`.
+Resolved in order: `mise.local.toml` (gitignored -- per-checkout overrides and
+secrets), then the local Docker values in `mise.toml`'s `[env]`. Secrets never
+go in `mise.toml`.
 
-Entries in `[env]` must use `{{ env.NAME | default(value='...') }}`. A bare
-`NAME = "value"` overwrites the parent environment, which would replace a CI
-workflow's `env:` block or a remote-mode `.env` with the local defaults.
+Entries in `[env]` are plain values, so mise sets them unconditionally:
+exporting a variable does not override them, and there is no `.env` to read.
+`jdx/mise-action` exports the same table into CI, which is why
+`playwright.yml` runs its service containers on the credentials in
+`compose.yaml` rather than on values of its own.
 
 ## CI/CD
 

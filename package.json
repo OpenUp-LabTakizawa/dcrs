@@ -37,8 +37,7 @@
     "test:report": "playwright show-report",
     "generate": "drizzle-kit generate",
     "migrate": "drizzle-kit migrate",
-    "studio": "drizzle-kit studio",
-    "setup": "bun run mise-tasks/setup-env.ts"
+    "studio": "drizzle-kit studio"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1136.0",

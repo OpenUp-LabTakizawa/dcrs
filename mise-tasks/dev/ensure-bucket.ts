@@ -7,9 +7,8 @@ import { CreateBucketCommand, S3Client } from "@aws-sdk/client-s3"
 //
 // The values come from mise.toml's [env]; the fallbacks keep the script working
 // when it runs without mise's shell integration. An empty value counts as unset,
-// because `mise-tasks/setup-env.ts` writes every optional key even when it is left
-// unanswered, so a `.env` produced for Vercel Blob carries `S3_ACCESS_KEY_ID=`
-// and friends as empty strings.
+// so an `S3_ACCESS_KEY_ID=` inherited from a Vercel Blob deployment falls back
+// rather than authenticating with an empty key.
 function envOr(key: string, fallback: string): string {
   const value = process.env[key]
   return value && value.trim() !== "" ? value : fallback
