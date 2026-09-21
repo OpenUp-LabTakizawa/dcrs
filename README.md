@@ -166,6 +166,30 @@ mise dev:reset
 | RustFS S3 API | 9000 | S3-compatible object storage |
 | RustFS Console | 9001 | Web management console |
 
+## 🚀 Production
+
+Nothing in `mise.toml` reaches a deployment — Vercel builds never read it — so
+these come from the project's environment variables:
+
+| Variable | Description | Required |
+| --- | --- | --- |
+| `DATABASE_URL` | Neon PostgreSQL connection string | ✅ |
+| `BETTER_AUTH_SECRET` | Secret key for Better Auth session encryption | ✅ |
+| `BETTER_AUTH_URL` | Base URL for Better Auth | ✅ |
+| `AUTH_RESEND_KEY` | [Resend](https://resend.com/) API key for sending emails | ✅ |
+| `DB_TYPE` | Database driver type: `neon` (default) or `postgres` for standard PostgreSQL | ❌ |
+| `BLOB_READ_WRITE_TOKEN` | [Vercel Blob](https://vercel.com/docs/storage/vercel-blob) read/write token. When set, Vercel Blob is the storage backend; otherwise S3 is used | ❌ |
+| `S3_ACCESS_KEY_ID` | AWS S3 access key ID (required when using the S3 backend) | ❌ |
+| `S3_SECRET_ACCESS_KEY` | AWS S3 secret access key (required when using the S3 backend) | ❌ |
+| `S3_REGION` | S3 region (`AWS_REGION` is also accepted; required when using the S3 backend) | ❌ |
+| `S3_BUCKET` | S3 bucket name (uses the default value if omitted) | ❌ |
+| `S3_ENDPOINT` | S3-compatible endpoint URL (e.g. `http://localhost:9000` for RustFS). When set, path-style access is enabled | ❌ |
+| `API_URL` | Base URL for the API (default: `http://localhost:3000`) | ❌ |
+
+A local checkout needs none of them: the
+[local development environment](#-local-development-environment) carries its own
+values, and per-checkout overrides go in `mise.local.toml`.
+
 ## 🆚 VSCode
 
 [Visual Studio Code](https://code.visualstudio.com/) is the recommended IDE for working on this project, as it has been configured.
