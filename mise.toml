@@ -36,6 +36,7 @@ daemons = ["web"]
 run = "bun test:e2e"
 
 [tasks.fix]
+description = "Auto-fix with Biome, then rumdl on the markdown files"
 run = ["bun fix --unsafe", "mise fix:md"]
 
 [tasks."fix:md"]
