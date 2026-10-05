@@ -40,7 +40,7 @@
     "studio": "drizzle-kit studio"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.1145.0",
+    "@aws-sdk/client-s3": "^3.1146.0",
     "@heroicons/react": "^2.2.0",
     "@neondatabase/serverless": "^1.2.0",
     "@tanstack/react-form": "^1.33.5",
@@ -67,7 +67,7 @@
     "daisyui": "^5.7.47",
     "drizzle-kit": "^0.31.11",
     "fast-check": "^4.10.2",
-    "postcss": "^8.5.28",
+    "postcss": "^8.5.29",
     "tailwindcss": "^4.3.3",
     "typescript": "^7.0.2"
   },
