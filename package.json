@@ -40,17 +40,17 @@
     "studio": "drizzle-kit studio"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.1151.0",
+    "@aws-sdk/client-s3": "^3.1152.0",
     "@heroicons/react": "^2.2.0",
     "@neondatabase/serverless": "^1.2.0",
     "@tanstack/react-form": "^1.33.5",
     "@vercel/blob": "^2.8.2",
-    "better-auth": "^1.7.7",
+    "better-auth": "^1.7.10",
     "drizzle-orm": "^0.45.4",
     "next": "canary",
     "pg": "^8.23.1",
-    "react": "^19.3.0",
-    "react-dom": "^19.3.0"
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.5.15",
