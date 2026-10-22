@@ -1,39 +1,40 @@
 🍱asset:
-- changed-files:
-  - any-glob-to-any-file: ['**/*.avif', '**/*.ico', '**/*.png', '**/*.svg']
-🐛bug:
-- head-branch: ['^fix', 'fix']
-♻️ci:
-- changed-files:
-  - any-glob-to-any-file: '.github/**/*.yml'
-⚙️config:
-- changed-files:
-  - any-glob-to-any-file: '*config.*'
-dependencies:
-- changed-files:
-  - any-glob-to-any-file: ['bun.lock', 'package.json']
-docker:
-- changed-files:
-  - any-glob-to-any-file: ['.dockerignore', 'compose.yaml', 'Dockerfile']
-📝documentation:
-- changed-files:
-  - any-glob-to-any-file: ['**/*.md', '**/*.mdx', '.rumdl.toml']
-💧drizzle:
-- changed-files:
-  - any-glob-to-any-file: ['app/lib/schema.ts', 'drizzle.config.ts']
-🚀enhancement:
-- all:
   - changed-files:
-    - any-glob-to-any-file: 'app/**'
+      - any-glob-to-any-file: ["**/*.avif", "**/*.ico", "**/*.png", "**/*.svg"]
+🐛bug:
+  - head-branch: ["^fix", "fix"]
+♻️ci:
+  - changed-files:
+      - any-glob-to-any-file: ".github/**/*.yml"
+⚙️config:
+  - changed-files:
+      - any-glob-to-any-file: "*config.*"
+dependencies:
+  - changed-files:
+      - any-glob-to-any-file: ["bun.lock", "package.json"]
+docker:
+  - changed-files:
+      - any-glob-to-any-file: [".dockerignore", "compose.yaml", "Dockerfile"]
+📝documentation:
+  - changed-files:
+      - any-glob-to-any-file: ["**/*.md", "**/*.mdx", ".rumdl.toml"]
+💧drizzle:
+  - changed-files:
+      - any-glob-to-any-file: ["app/lib/schema.ts", "drizzle.config.ts"]
+🚀enhancement:
+  - all:
+      - changed-files:
+          - any-glob-to-any-file: "app/**"
 🪸git:
-- changed-files:
-  - any-glob-to-any-file: ['.gitattributes', '.gitignore']
+  - changed-files:
+      - any-glob-to-any-file: [".gitattributes", ".gitignore"]
 🧰infrastructure:
-- changed-files:
-  - any-glob-to-any-file: ['**/*.toml', '.devcontainer/*', '.editorconfig', 'biome.json']
+  - changed-files:
+      - any-glob-to-any-file:
+          ["**/*.toml", ".devcontainer/*", ".editorconfig", "biome.json"]
 ✅test:
-- changed-files:
-  - any-glob-to-any-file: ['happydom.ts', 'test/**']
+  - changed-files:
+      - any-glob-to-any-file: ["happydom.ts", "test/**"]
 🆚vscode:
-- changed-files:
-  - any-glob-to-any-file: '.vscode/*'
+  - changed-files:
+      - any-glob-to-any-file: ".vscode/*"

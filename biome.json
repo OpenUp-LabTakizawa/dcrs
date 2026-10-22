@@ -38,5 +38,10 @@
     "parser": {
       "tailwindDirectives": true
     }
+  },
+  "markdown": {
+    "formatter": {
+      "enabled": false
+    }
   }
 }
