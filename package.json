@@ -40,7 +40,7 @@
     "studio": "drizzle-kit studio"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.1158.0",
+    "@aws-sdk/client-s3": "^3.1159.0",
     "@heroicons/react": "^2.2.0",
     "@neondatabase/serverless": "^1.2.0",
     "@tanstack/react-form": "^1.33.5",
@@ -53,7 +53,7 @@
     "react-dom": "^19.3.1"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.6.3",
+    "@biomejs/biome": "^2.6.4",
     "@happy-dom/global-registrator": "^20.14.6",
     "@playwright/test": "next",
     "@tailwindcss/postcss": "^4.3.3",
