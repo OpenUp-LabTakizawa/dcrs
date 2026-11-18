@@ -40,12 +40,12 @@
     "studio": "drizzle-kit studio"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.1170.0",
+    "@aws-sdk/client-s3": "^3.1172.0",
     "@heroicons/react": "^2.2.0",
     "@neondatabase/serverless": "^1.2.1",
     "@tanstack/react-form": "^1.33.5",
     "@vercel/blob": "^2.9.0",
-    "better-auth": "^1.7.25",
+    "better-auth": "^1.7.26",
     "drizzle-orm": "^0.45.4",
     "next": "canary",
     "pg": "^8.23.1",
@@ -66,7 +66,7 @@
     "babel-plugin-react-compiler": "^1.0.0",
     "daisyui": "^5.8.1",
     "drizzle-kit": "^0.31.11",
-    "fast-check": "^4.10.2",
+    "fast-check": "^4.10.3",
     "postcss": "^8.5.33",
     "tailwindcss": "^4.3.5",
     "typescript": "^7.0.2"
