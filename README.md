@@ -10,7 +10,6 @@
   <a href="https://tanstack.com/form/"><img src="https://img.shields.io/badge/tanstack%20form-000000?labelColor=000000&logo=tanstack&style=for-the-badge" alt="TanStack Form" /></a>
   <a href="https://tailwindcss.com/"><img src="https://img.shields.io/badge/tailwind%20css-06B6D4?labelColor=000000&logo=tailwindcss&style=for-the-badge" alt="Tailwind CSS" /></a>
   <a href="https://www.typescriptlang.org/"><img src="https://img.shields.io/badge/TypeScript-3178C6?labelColor=000000&logo=typescript&style=for-the-badge" alt="TypeScript" /></a>
-  <a href="https://pr.new/github.com/OpenUp-LabTakizawa/dcrs"><img src="https://img.shields.io/badge/stackblitz-207BEA?labelColor=000000&logo=stackblitz&style=for-the-badge" alt="StackBlitz" /></a>
   <a href="https://github.com/codespaces/new/?repo=OpenUp-LabTakizawa/dcrs"><img src="https://img.shields.io/badge/open-007ACC?label=github%20codespaces&labelColor=000000&style=for-the-badge" alt="GitHub Codespaces" /></a>
   <a href="https://github.com/OpenUp-LabTakizawa/dcrs/blob/main/LICENSE"><img src="https://img.shields.io/github/license/OpenUp-LabTakizawa/dcrs?labelColor=000000&style=for-the-badge" alt="License" /></a>
 
@@ -269,7 +268,6 @@ This software uses the following open source packages:
 - [React](https://react.dev/)
 - [RustFS](https://github.com/rustfs/rustfs)
 - [TanStack Form](https://tanstack.com/form/)
-- [StackBlitz Codeflow](https://stackblitz.com/codeflow/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [TypeScript](https://www.typescriptlang.org/)
 
